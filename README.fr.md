@@ -2,11 +2,25 @@
 
 [English](README.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-Mail AI Assist ajoute à Thunderbird résumés, traduction, suggestions d’étiquettes, réécriture de texte sélectionné et export local. La version 0.12.24 prépare les téléchargements GitHub et les mises à jour ATN.
+Mail AI Assist vous aide à traiter les messages sélectionnés dans Thunderbird : résumés, traduction, suggestions d’étiquettes, reformulation du texte sélectionné pendant la rédaction et export local. L’extension ne parcourt pas spontanément toute votre boîte mail. Les résumés et étiquettes automatiques concernent uniquement les nouveaux messages de la boîte de réception des comptes pour lesquels vous activez explicitement chaque fonction.
 
-## Fonctions
+## Fonctionnalités
 
-La langue des résumés est indépendante. Résumés et traductions sont conservés en cache ; Réessayer les régénère. Les résumés et étiquettes automatiques sont désactivés par défaut et activables par compte pour les nouveaux messages reçus. Limite initiale : 100 tentatives de résumé par compte et par jour. Les étiquettes existantes et alias sont réutilisés. La réécriture nécessite aperçu et confirmation ; aucun envoi automatique.
+- **Résumés :** Retrouvez les points essentiels et les actions à effectuer dans le message sélectionné. La langue du résumé est indépendante de celles de l’interface et de la traduction ; elle suit par défaut la langue du système.
+- **Traduction :** Choisissez les langues source et cible, ou détectez automatiquement la langue source. Configurez Google Cloud Translation, Microsoft Azure Translator ou DeepL avec votre propre clé API. Sans service de traduction configuré, le modèle d’IA sélectionné est utilisé.
+- **Étiquettes et alias :** Réutilisez en priorité les étiquettes Thunderbird existantes pour limiter les doublons proches. Les suggestions manuelles sont modifiables avant confirmation. Associez par exemple `ZUB Helena` et `Helena Ultra` à l’étiquette existante `Helena`. Les règles comparent les noms complets, sans tenir compte de la casse ni des espaces superflus.
+- **Reformulation :** Sélectionnez du texte dans une nouvelle rédaction ou une réponse, examinez l’aperçu, puis confirmez son remplacement. L’extension n’envoie jamais les messages automatiquement.
+- **Export local :** TXT exporte le contenu et permet d’exclure les réponses citées et les transferts. EML conserve le message original complet, son encodage, ses en-têtes, sa mise en forme et ses pièces jointes, sans exclure les citations. L’export ne fait pas appel à l’IA et ne consomme aucun token. Choisissez le dossier et l’application de bureau ; le fichier est sélectionné dans l’explorateur pour être glissé ou joint manuellement à une conversation. Aucune pièce jointe ni aucun envoi automatique. Fermer la fenêtre conserve les fichiers.
+- **Cache persistant :** Les résumés et traductions correspondants sont réutilisés à la réouverture, même après un redémarrage de Thunderbird. Réessayer demande un nouveau résultat et actualise le cache. Les paramètres permettent de consulter sa taille, d’ouvrir son dossier ou de le vider ; les exports se nettoient séparément.
+- **Dix langues d’interface :** anglais, allemand, français, italien, espagnol, portugais, chinois simplifié et traditionnel, japonais et coréen.
+
+## Automatisation facultative des nouveaux messages
+
+Les résumés et étiquettes automatiques sont **désactivés par défaut pour chaque compte**. Activez-les séparément dans le menu de l’assistant IA accessible par clic droit sur le compte. Seuls les nouveaux messages reçus dans la boîte de réception des comptes activés sont traités, sans analyser l’historique ; les messages déjà marqués comme indésirables sont ignorés.
+
+Les résumés automatiques sont conservés en cache pour consultation ultérieure. Les étiquettes automatiques sont appliquées directement selon les étiquettes existantes et les alias, sans confirmation pour chaque message, contrairement aux suggestions manuelles. L’automatisation utilise le fournisseur, le modèle et la langue de sortie choisis, transmet le contenu au service et consomme son quota. La limite des résumés automatiques est de 100 tentatives par compte et par jour par défaut, modifiable dans les paramètres. Les échecs et annulations comptent aussi. Cette limite ne concerne pas les étiquettes automatiques.
+
+Les résumés, traductions et étiquettes traitent l’objet et le corps du message, pas le contenu des pièces jointes. Vérifiez les résultats de l’IA avant de vous y fier.
 
 ## Services et confidentialité
 

@@ -2,11 +2,25 @@
 
 [English](README.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-Mail AI Assist añade resúmenes, traducción, sugerencias de etiquetas, reescritura de texto seleccionado y exportación local a Thunderbird. La versión 0.12.24 prepara descargas GitHub y actualizaciones ATN.
+Mail AI Assist te ayuda con los correos que seleccionas en Thunderbird: resúmenes, traducción, sugerencias de etiquetas, reescritura del texto seleccionado al redactar y exportación local. No analiza por iniciativa propia todo el buzón. Los resúmenes y las etiquetas automáticos solo se generan para mensajes nuevos de la bandeja de entrada de las cuentas donde habilites expresamente cada función.
 
 ## Funciones
 
-Idioma independiente para resúmenes. Resúmenes y traducciones se guardan en caché; Reintentar regenera. La automatización está desactivada por defecto y se habilita por cuenta para nuevos mensajes de entrada. Límite inicial: 100 intentos de resumen por cuenta y día. Reutiliza etiquetas y alias existentes. La reescritura requiere vista previa y confirmación; nunca envía mensajes automáticamente.
+- **Resúmenes:** Extrae los puntos principales y las tareas pendientes del mensaje seleccionado. El idioma del resumen es independiente de los de la interfaz y la traducción; por defecto sigue el idioma del sistema.
+- **Traducción:** Elige los idiomas de origen y destino o detecta automáticamente el de origen. Configura Google Cloud Translation, Microsoft Azure Translator o DeepL con tu propia clave API. Sin un servicio configurado, se usa el modelo de IA seleccionado.
+- **Etiquetas y alias:** Prioriza las etiquetas existentes de Thunderbird para reducir duplicados similares. Revisa y edita las sugerencias manuales antes de confirmarlas. Por ejemplo, asocia `ZUB Helena` y `Helena Ultra` con la etiqueta existente `Helena`. Las reglas comparan nombres completos e ignoran mayúsculas y espacios adicionales.
+- **Reescritura del texto seleccionado:** Selecciona texto al redactar o responder, revisa la vista previa y confirma su sustitución. La extensión nunca envía correos automáticamente.
+- **Exportación local:** TXT exporta el contenido y permite excluir respuestas citadas y reenvíos. EML conserva el mensaje original completo, su codificación, cabeceras, formato y adjuntos, sin filtrar las citas. Exportar no llama a la IA ni consume tokens. Elige la carpeta y la aplicación de escritorio; el archivo queda seleccionado en el explorador para arrastrarlo o adjuntarlo manualmente a una conversación. No se adjunta ni se envía automáticamente. Los archivos se conservan al cerrar el diálogo.
+- **Caché persistente:** Al volver a abrir un resultado se reutilizan los resúmenes y traducciones coincidentes, incluso tras reiniciar Thunderbird. Reintentar solicita un resultado nuevo y actualiza la caché. En los ajustes puedes consultar su tamaño, abrir su carpeta o vaciarla; los archivos exportados se limpian por separado.
+- **Diez idiomas de interfaz:** inglés, alemán, francés, italiano, español, portugués, chino simplificado y tradicional, japonés y coreano.
+
+## Automatización opcional de mensajes nuevos
+
+Los resúmenes y las etiquetas automáticos están **desactivados por defecto en todas las cuentas**. Actívalos por separado desde el menú del asistente IA al hacer clic derecho en una cuenta. Solo se procesan mensajes recién recibidos en la bandeja de entrada de cuentas habilitadas, sin analizar correos históricos; se omiten los ya marcados como correo no deseado.
+
+Los resúmenes automáticos se guardan en caché para consultarlos después. Las etiquetas automáticas se aplican directamente según las etiquetas existentes y los alias, sin confirmar cada mensaje como con las sugerencias manuales. Se usan el proveedor, el modelo y el idioma de salida seleccionados; el contenido se envía al servicio y consume su cuota. El límite predeterminado de resúmenes automáticos es de 100 intentos por cuenta y día, configurable en los ajustes. Los intentos fallidos o cancelados también cuentan. Este límite no se aplica a las etiquetas automáticas.
+
+Los resúmenes, las traducciones y las etiquetas procesan el asunto y el cuerpo del mensaje, no el contenido de los adjuntos. Revisa los resultados de la IA antes de utilizarlos.
 
 ## Proveedores y privacidad
 

@@ -2,11 +2,25 @@
 
 [English](README.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-Mail AI Assist aggiunge a Thunderbird riassunti, traduzione, suggerimenti di etichette, riscrittura del testo selezionato ed esportazione locale. La versione 0.12.24 prepara download GitHub e aggiornamenti ATN.
+Mail AI Assist aiuta a elaborare le email selezionate in Thunderbird: riassunti, traduzioni, suggerimenti di etichette, riscrittura del testo selezionato durante la composizione ed esportazione locale. Non esegue scansioni autonome dell’intera casella. Riassunti ed etichette automatici riguardano solo i nuovi messaggi in arrivo negli account per cui abiliti esplicitamente ciascuna funzione.
 
-## Funzioni
+## Funzionalità
 
-Lingua dei riassunti indipendente. Riassunti e traduzioni persistono nella cache; Riprova li rigenera. Riassunti ed etichette automatici sono disattivati per impostazione predefinita e attivabili per account sui nuovi messaggi in arrivo. Limite iniziale: 100 tentativi di riassunto per account al giorno. Riutilizzo di etichette e alias. La riscrittura richiede anteprima e conferma; nessun invio automatico.
+- **Riassunti:** Estrai i punti principali e le attività da svolgere dal messaggio selezionato. La lingua del riassunto è indipendente da quelle dell’interfaccia e della traduzione; per impostazione predefinita segue il sistema.
+- **Traduzione:** Scegli le lingue di origine e destinazione oppure rileva automaticamente quella di origine. Configura Google Cloud Translation, Microsoft Azure Translator o DeepL con la tua chiave API. Senza un servizio configurato viene usato il modello IA selezionato.
+- **Etichette e alias:** Riutilizza preferibilmente le etichette Thunderbird esistenti per evitare duplicati simili. Modifica i suggerimenti manuali prima di confermarli. Associa, ad esempio, `ZUB Helena` e `Helena Ultra` all’etichetta esistente `Helena`. Le regole confrontano nomi completi ignorando maiuscole, minuscole e spazi superflui.
+- **Riscrittura del testo selezionato:** Seleziona il testo mentre componi o rispondi, controlla l’anteprima e conferma la sostituzione. L’estensione non invia mai email automaticamente.
+- **Esportazione locale:** TXT esporta il contenuto con la possibilità di escludere risposte citate e inoltri. EML conserva il messaggio originale completo, codifica, intestazioni, formattazione e allegati, senza filtrare le citazioni. L’esportazione non usa l’IA né consuma token. Scegli cartella e applicazione desktop; il file viene selezionato nel gestore file per trascinarlo o allegarlo manualmente a una chat. Non viene allegato o inviato automaticamente e rimane disponibile dopo la chiusura della finestra.
+- **Cache persistente:** Riassunti e traduzioni corrispondenti vengono riutilizzati alla riapertura, anche dopo il riavvio di Thunderbird. Riprova richiede un nuovo risultato e aggiorna la cache. Nelle impostazioni puoi vedere le dimensioni, aprire la cartella o svuotarla; i file esportati si eliminano separatamente.
+- **Dieci lingue dell’interfaccia:** inglese, tedesco, francese, italiano, spagnolo, portoghese, cinese semplificato e tradizionale, giapponese e coreano.
+
+## Automazione facoltativa per i nuovi messaggi
+
+Riassunti ed etichette automatici sono **disattivati per impostazione predefinita in tutti gli account**. Abilitali separatamente dal menu dell’assistente IA facendo clic destro sull’account. Vengono elaborati solo i nuovi messaggi ricevuti nella posta in arrivo degli account abilitati, senza scansione della cronologia; i messaggi già contrassegnati come spam vengono ignorati.
+
+I riassunti automatici vengono salvati nella cache per consultarli in seguito. Le etichette automatiche vengono applicate direttamente usando etichette esistenti e alias, senza confermare ogni messaggio come per i suggerimenti manuali. L’automazione usa il fornitore, il modello e la lingua di output scelti, invia il contenuto al servizio e ne consuma la quota. Il limite predefinito per i riassunti automatici è di 100 tentativi per account al giorno, modificabile nelle impostazioni. Contano anche i tentativi falliti o annullati. Il limite non riguarda le etichette automatiche.
+
+Riassunti, traduzioni ed etichette elaborano oggetto e corpo del messaggio, non il contenuto degli allegati. Verifica i risultati dell’IA prima di usarli.
 
 ## Fornitori e privacy
 

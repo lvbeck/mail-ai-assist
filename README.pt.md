@@ -2,11 +2,25 @@
 
 [English](README.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-Mail AI Assist adiciona resumos, tradução, sugestões de etiquetas, reescrita de texto selecionado e exportação local ao Thunderbird. A versão 0.12.24 prepara transferências GitHub e atualizações ATN.
+O Mail AI Assist ajuda a tratar as mensagens que seleciona no Thunderbird: resumos, tradução, sugestões de etiquetas, reformulação do texto selecionado durante a composição e exportação local. Não analisa autonomamente toda a caixa de correio. Os resumos e as etiquetas automáticos aplicam-se apenas às novas mensagens da caixa de entrada das contas onde ativar explicitamente cada função.
 
 ## Funcionalidades
 
-Idioma dos resumos independente. Resumos e traduções ficam em cache persistente; Repetir gera novamente. Automatismos desativados por predefinição e ativáveis por conta para novas mensagens recebidas. Limite inicial: 100 tentativas de resumo por conta e dia. Reutiliza etiquetas e aliases existentes. A reescrita exige pré-visualização e confirmação; nunca envia mensagens automaticamente.
+- **Resumos:** Extraia os pontos principais e as tarefas a realizar da mensagem selecionada. O idioma do resumo é independente dos idiomas da interface e da tradução; por predefinição, segue o sistema.
+- **Tradução:** Escolha os idiomas de origem e destino ou detete automaticamente o idioma de origem. Configure Google Cloud Translation, Microsoft Azure Translator ou DeepL com a sua chave API. Sem um serviço configurado, é utilizado o modelo de IA selecionado.
+- **Etiquetas e aliases:** Dê prioridade às etiquetas existentes do Thunderbird para reduzir duplicados semelhantes. Reveja e edite as sugestões manuais antes de confirmar. Associe, por exemplo, `ZUB Helena` e `Helena Ultra` à etiqueta existente `Helena`. As regras comparam nomes completos e ignoram maiúsculas, minúsculas e espaços adicionais.
+- **Reformulação do texto selecionado:** Selecione texto ao escrever ou responder, reveja a pré-visualização e confirme a substituição. A extensão nunca envia mensagens automaticamente.
+- **Exportação local:** TXT exporta o conteúdo e permite excluir respostas citadas e reencaminhamentos. EML preserva a mensagem original completa, codificação, cabeçalhos, formatação e anexos, sem filtrar citações. A exportação não utiliza IA nem consome tokens. Escolha a pasta e a aplicação de ambiente de trabalho; o ficheiro fica selecionado no explorador para o arrastar ou anexar manualmente a uma conversa. Não é anexado nem enviado automaticamente. Fechar a janela mantém os ficheiros.
+- **Cache persistente:** Os resumos e as traduções correspondentes são reutilizados ao reabrir, mesmo após reiniciar o Thunderbird. Tentar novamente solicita um novo resultado e atualiza a cache. Nas definições pode consultar o tamanho, abrir a pasta ou limpar a cache; os ficheiros exportados são limpos separadamente.
+- **Dez idiomas de interface:** inglês, alemão, francês, italiano, espanhol, português, chinês simplificado e tradicional, japonês e coreano.
+
+## Automatização opcional para novas mensagens
+
+Os resumos e as etiquetas automáticos estão **desativados por predefinição em todas as contas**. Ative cada função separadamente no menu do assistente de IA, clicando com o botão direito numa conta. Só são tratadas novas mensagens recebidas na caixa de entrada das contas ativadas, sem analisar o histórico; mensagens já marcadas como lixo são ignoradas.
+
+Os resumos automáticos ficam em cache para consulta posterior. As etiquetas automáticas são aplicadas diretamente com base nas etiquetas existentes e nos aliases, sem confirmação por mensagem, ao contrário das sugestões manuais. A automatização usa o fornecedor, modelo e idioma de saída selecionados, envia o conteúdo ao serviço e consome a respetiva quota. O limite predefinido de resumos automáticos é de 100 tentativas por conta e por dia, ajustável nas definições. Tentativas falhadas ou canceladas também contam. Este limite não se aplica às etiquetas automáticas.
+
+Os resumos, traduções e etiquetas tratam o assunto e o corpo da mensagem, não o conteúdo dos anexos. Reveja os resultados da IA antes de os utilizar.
 
 ## Fornecedores e privacidade
 
