@@ -1,16 +1,45 @@
 from pathlib import Path
 import json
+import re
+from html import escape
 root=Path.cwd()
 data=json.loads((root/'installer/page-texts.json').read_text(encoding='utf-8'))
 names={'en':'English','de':'Deutsch','fr':'Français','it':'Italiano','es':'Español','pt':'Português (Portugal)','zh-CN':'简体中文','zh-TW':'繁體中文','ja':'日本語','ko':'한국어'}
+# Derive the localized feature overview from the README source of truth.
+def inline(text):
+    text = text.replace('(publication/PRIVACY.md)', '(https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md)')
+    text = escape(text)
+    text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
+    text = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', text)
+    return re.sub(r'\[([^]]+)\]\((https://[^)]+)\)', r'<a href="\2">\1</a>', text)
+
+def overview(language):
+    filename = 'README.md' if language == 'en' else f'README.{language}.md'
+    source = (root / filename).read_text(encoding='utf-8')
+    start = source.index('\n\n', source.index('[English]')) + 2
+    headings = list(re.finditer(r'^## ', source[start:], re.M))
+    source = source[start:start + headings[3].start()].strip()
+    blocks = []
+    for block in source.split('\n\n'):
+        if block.startswith('## '):
+            blocks.append('<h2>' + inline(block[3:]) + '</h2>')
+        elif block.startswith('- '):
+            blocks.append('<ul>' + ''.join('<li>' + inline(line[2:]) + '</li>' for line in block.splitlines()) + '</ul>')
+        else:
+            blocks.append('<p>' + inline(block) + '</p>')
+    return ''.join(blocks)
+
+overviews = {language: overview(language) for language in names}
 options=''.join(f'<option value="{key}">{value}</option>' for key,value in names.items())
 resolver="""function matchLanguage(value){const tag=String(value||'').replaceAll('_','-').toLowerCase();if(tag.startsWith('zh'))return /hant|tw|hk|mo/.test(tag)?'zh-TW':'zh-CN';const base=tag.split('-')[0];return Object.hasOwn(texts,base)?base:'en';}
 const selector=document.getElementById('language');
 selector.value=matchLanguage(navigator.language);
 """
 p=root/'installer/setup-guide.html';s=p.read_text(encoding='utf-8').replace('<label id="languageLabel" for="language"></label>','');start=s.index('<select id="language"');end=s.index('</select>',start)+len('</select>');s=s[:start]+'<label id="languageLabel" for="language"></label><select id="language">'+options+'</select>'+s[end:]
-s=s[:s.index('<script>')]+ '<script>\nconst texts='+json.dumps(data['texts'],ensure_ascii=False)+';\nconst labels='+json.dumps({k:v[5] for k,v in data['download'].items()},ensure_ascii=False)+';\n'+resolver+"""
-function render(){const lang=selector.value;document.documentElement.lang=lang;document.title='Mail AI Assist · '+texts[lang][0];document.getElementById('languageLabel').textContent=labels[lang];['title','intro','download','step2','step3','updates','uninstall'].forEach((id,i)=>document.getElementById(id).textContent=texts[lang][i]);}
+if 'id="featureOverview"' not in s:
+    s=s.replace('<p id="uninstall"></p>', '<p id="uninstall"></p><section id="featureOverview" style="border-top:1px solid #dce2ee;margin-top:28px;padding-top:24px"></section>')
+s=s[:s.index('<script>')]+ '<script>\nconst texts='+json.dumps(data['texts'],ensure_ascii=False)+';\nconst labels='+json.dumps({k:v[5] for k,v in data['download'].items()},ensure_ascii=False)+';\n'+'const overviews='+json.dumps(overviews,ensure_ascii=False)+';\n'+resolver+"""
+function render(){const lang=selector.value;document.getElementById('featureOverview').innerHTML=overviews[lang];document.documentElement.lang=lang;document.title='Mail AI Assist · '+texts[lang][0];document.getElementById('languageLabel').textContent=labels[lang];['title','intro','download','step2','step3','updates','uninstall'].forEach((id,i)=>document.getElementById(id).textContent=texts[lang][i]);}
 selector.addEventListener('change',render);render();
 </script></body></html>
 """

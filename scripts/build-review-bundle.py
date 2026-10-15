@@ -22,6 +22,8 @@ with ZipFile(target, "w", ZIP_DEFLATED) as archive:
         archive.write(item, item.relative_to(root).as_posix())
 for name in ["PRIVACY.md", "REVIEW-NOTES.md", "LISTING.md"]:
     shutil.copy2(root / "publication" / name, output / name)
+for listing in sorted((root / "publication").glob("LISTING.*.md")):
+    shutil.copy2(listing, output / listing.name)
 packages = [output / f"Mail-AI-Assist-{version}-ATN.xpi", target]
 (output / "SHA256SUMS.txt").write_text("".join(hashlib.sha256(item.read_bytes()).hexdigest() + "  " + item.name + "\n" for item in packages), encoding="utf-8")
 print(target)
