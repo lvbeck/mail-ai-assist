@@ -1,0 +1,23 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtemp, mkdir, writeFile, stat, unlink, rmdir } from 'node:fs/promises';
+import { resolve, join } from 'node:path';
+import { removeExportFile, cleanupDesktop } from '../helper/desktop-export.mjs';
+test('cleanup removes only captured export and refuses unexpected contents and paths', async () => {
+  const root = await mkdtemp(resolve('work/cleanup-test-'));
+  const token = '12345678-1234-1234-1234-123456789abc';
+  const folder = join(root, token), file = join(folder, 'mail-12345678.txt');
+  await mkdir(folder); await writeFile(file, 'test');
+  const other = join(folder, 'other.txt'); await writeFile(other, 'keep');
+  await assert.rejects(removeExportFile(root, '../escape', file));
+  await assert.rejects(removeExportFile(root, token, other));
+  assert.ok((await stat(file)).isFile());
+  await assert.rejects(removeExportFile(root, token, file), /desktop_cleanup_failed/);
+  assert.ok((await stat(other)).isFile());
+  await unlink(other);
+  await removeExportFile(root, token, file);
+  await assert.rejects(stat(folder), { code: 'ENOENT' });
+  await removeExportFile(root, token, file);
+  await rmdir(root);
+  await assert.rejects(cleanupDesktop({ token }), /desktop_cleanup_failed/);
+});

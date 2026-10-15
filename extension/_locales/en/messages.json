@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "Mail AI Assist"
+  },
+  "extensionDescription": {
+    "message": "Summarize, translate, tag and compose emails with AI."
+  },
+  "actionLabel": {
+    "message": "Writing Assistant"
+  },
+  "assistantLabel": {
+    "message": "AI Assist"
+  }
+}

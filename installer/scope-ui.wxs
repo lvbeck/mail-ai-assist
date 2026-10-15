@@ -1,0 +1,31 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment><UI Id="MailAIScopeUI">
+    <Dialog Id="MailAIScopeDlg" Width="370" Height="270" Title="[ProductName] Setup">
+      <Control Id="Title" Type="Text" X="20" Y="15" Width="330" Height="25" Transparent="yes" NoPrefix="yes" Text="{\WixUI_Font_Title}Choose who can use Mail AI Assist"/>
+      <Control Id="Description" Type="Text" X="20" Y="45" Width="330" Height="30" Text="You can choose the installation folder on the next page."/>
+      <Control Id="Scope" Type="RadioButtonGroup" Property="INSTALLSCOPE" X="20" Y="85" Width="330" Height="70">
+        <RadioButtonGroup Property="INSTALLSCOPE">
+          <RadioButton Value="user" X="0" Y="0" Width="320" Height="20" Text="Only for me (recommended)"/>
+          <RadioButton Value="machine" X="0" Y="38" Width="320" Height="20" Text="For all users of this computer (administrator required)"/>
+        </RadioButtonGroup>
+      </Control>
+      <Control Id="Note" Type="Text" X="20" Y="170" Width="330" Height="45" Text="Each Windows user keeps their own AI sign-in and API keys. All-user helper updates require administrator approval."/>
+      <Control Id="Line" Type="Line" X="0" Y="234" Width="370" Height="0"/>
+      <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Text="Back"><Publish Event="NewDialog" Value="LicenseAgreementDlg"/></Control>
+      <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="Next">
+        <Publish Property="ALLUSERS" Value="2" Order="1"/>
+        <Publish Property="MSIINSTALLPERUSER" Value="1" Order="2" Condition="INSTALLSCOPE = &quot;user&quot;"/>
+        <Publish Property="MSIINSTALLPERUSER" Value="{}" Order="3" Condition="INSTALLSCOPE = &quot;machine&quot;"/>
+        <Publish Property="INSTALLFOLDER" Value="[LocalAppDataFolder]MailAiAssist\app-msi" Order="4" Condition="INSTALLSCOPE = &quot;user&quot; AND NOT USER_FOLDER AND PREVIOUS_SCOPE &lt;&gt; INSTALLSCOPE"/>
+        <Publish Property="INSTALLFOLDER" Value="[USER_FOLDER]" Order="5" Condition="INSTALLSCOPE = &quot;user&quot; AND USER_FOLDER AND PREVIOUS_SCOPE &lt;&gt; INSTALLSCOPE"/>
+        <Publish Property="INSTALLFOLDER" Value="[ProgramFiles64Folder]MailAiAssist" Order="6" Condition="INSTALLSCOPE = &quot;machine&quot; AND NOT MACHINE_FOLDER AND PREVIOUS_SCOPE &lt;&gt; INSTALLSCOPE"/>
+        <Publish Property="INSTALLFOLDER" Value="[MACHINE_FOLDER]" Order="7" Condition="INSTALLSCOPE = &quot;machine&quot; AND MACHINE_FOLDER AND PREVIOUS_SCOPE &lt;&gt; INSTALLSCOPE"/>
+        <Publish Property="PREVIOUS_SCOPE" Value="[INSTALLSCOPE]" Order="8"/>
+        <Publish Event="NewDialog" Value="InstallDirDlg" Order="9"/>
+      </Control>
+      <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="Cancel"><Publish Event="SpawnDialog" Value="CancelDlg"/></Control>
+    </Dialog>
+    <Publish Dialog="LicenseAgreementDlg" Control="Next" Event="NewDialog" Value="MailAIScopeDlg" Order="10" Condition="LicenseAccepted = &quot;1&quot;"/>
+    <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="MailAIScopeDlg" Order="10"/>
+  </UI></Fragment>
+</Wix>

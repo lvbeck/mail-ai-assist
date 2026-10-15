@@ -1,0 +1,10 @@
+{
+  "version": "0.12.24",
+  "addonId": "mail-ai-assist@lvbeck.github.com",
+  "legacyAddonIds": [
+    "compose-ai@local.invalid"
+  ],
+  "baseUrl": "https://github.com/lvbeck/mail-ai-assist/releases/latest/download/",
+  "upgradeCode": "83ED9914-4DDE-48E6-BDC7-BFD9A0D47862",
+  "githubRepository": "lvbeck/mail-ai-assist"
+}

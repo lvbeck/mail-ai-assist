@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "郵箱 AI 助手"
+  },
+  "extensionDescription": {
+    "message": "使用 AI 摘要、翻譯、新增標籤及輔助撰寫郵件。"
+  },
+  "actionLabel": {
+    "message": "輔助寫作"
+  },
+  "assistantLabel": {
+    "message": "AI 助手"
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "en": {
+    "culture": "en-US",
+    "lcid": 1033,
+    "codepage": 1252,
+    "strings": {
+      "SetupTitle": "[ProductName] Setup",
+      "ScopeTitle": "Choose who can use Mail AI Assist",
+      "ScopeDescription": "You can choose the installation folder on the next page.",
+      "ScopeUser": "Only for me (recommended)",
+      "ScopeMachine": "For all users of this computer (administrator required)",
+      "ScopeNote": "Each Windows user keeps their own AI sign-in and API keys. All-user helper updates require administrator approval.",
+      "Back": "Back",
+      "Next": "Next",
+      "Cancel": "Cancel",
+      "Downgrade": "A newer version of Mail AI Assist is already installed.",
+      "Windows64": "Windows 64-bit is required.",
+      "OtherScope": "An installation in the other scope already exists. Uninstall it through Windows Settings first, then run this installer again. Saved sign-in data will be retained.",
+      "GuideShortcut": "Mail AI Assist - Setup guide",
+      "OpenGuide": "Open the installation guide",
+      "Description": "Mail AI Assist for Thunderbird (Windows x64)"
+    }
+  },
+  "de": {
+    "culture": "de-DE",
+    "lcid": 1031,
+    "codepage": 1252,
+    "strings": {
+      "SetupTitle": "[ProductName] installieren",
+      "ScopeTitle": "Benutzer für Mail AI Assist auswählen",
+      "ScopeDescription": "Im nächsten Schritt können Sie den Installationsordner auswählen.",
+      "ScopeUser": "Nur für mich (empfohlen)",
+      "ScopeMachine": "Für alle Benutzer dieses Computers (Administratorrechte erforderlich)",
+      "ScopeNote": "Jeder Windows-Benutzer behält eigene KI-Zugangsdaten und API-Schlüssel. Updates für alle Benutzer benötigen Administratorrechte.",
+      "Back": "Zurück",
+      "Next": "Weiter",
+      "Cancel": "Abbrechen",
+      "Downgrade": "Eine neuere Version von Mail AI Assist ist bereits installiert.",
+      "Windows64": "Windows mit 64 Bit ist erforderlich.",
+      "OtherScope": "Es besteht bereits eine Installation für einen anderen Benutzerkreis. Deinstallieren Sie diese zuerst über die Windows-Einstellungen. Gespeicherte Zugangsdaten bleiben erhalten.",
+      "GuideShortcut": "Mail AI Assist - Installationsanleitung",
+      "OpenGuide": "Installationsanleitung öffnen",
+      "Description": "Mail AI Assist für Thunderbird (Windows x64)"
+    }
+  },
+  "fr": {
+    "culture": "fr-FR",
+    "lcid": 1036,
+    "codepage": 1252,
+    "strings": {
+      "SetupTitle": "Installation de [ProductName]",
+      "ScopeTitle": "Choisir les utilisateurs de Mail AI Assist",
+      "ScopeDescription": "Vous pourrez choisir le dossier d’installation à l’étape suivante.",
+      "ScopeUser": "Uniquement pour moi (recommandé)",
+      "ScopeMachine": "Pour tous les utilisateurs (droits administrateur requis)",
+      "ScopeNote": "Chaque utilisateur Windows conserve ses identifiants IA et clés API. Les mises à jour pour tous les utilisateurs nécessitent une autorisation administrateur.",
+      "Back": "Précédent",
+      "Next": "Suivant",
+      "Cancel": "Annuler",
+      "Downgrade": "Une version plus récente de Mail AI Assist est déjà installée.",
+      "Windows64": "Windows 64 bits est requis.",
+      "OtherScope": "Une installation pour un autre groupe d’utilisateurs existe déjà. Désinstallez-la dans les paramètres Windows, puis relancez l’installation. Les identifiants seront conservés.",
+      "GuideShortcut": "Mail AI Assist - Guide d’installation",
+      "OpenGuide": "Ouvrir le guide d’installation",
+      "Description": "Mail AI Assist pour Thunderbird (Windows x64)"
+    }
+  },
+  "it": {
+    "culture": "it-IT",
+    "lcid": 1040,
+    "codepage": 1252,
+    "strings": {
+      "SetupTitle": "Installazione di [ProductName]",
+      "ScopeTitle": "Scegli chi può usare Mail AI Assist",
+      "ScopeDescription": "Potrai scegliere la cartella di installazione nella pagina successiva.",
+      "ScopeUser": "Solo per me (consigliato)",
+      "ScopeMachine": "Per tutti gli utenti (richiede diritti di amministratore)",
+      "ScopeNote": "Ogni utente Windows conserva le proprie credenziali IA e chiavi API. Gli aggiornamenti per tutti gli utenti richiedono l’approvazione dell’amministratore.",
+      "Back": "Indietro",
+      "Next": "Avanti",
+      "Cancel": "Annulla",
+      "Downgrade": "È già installata una versione più recente di Mail AI Assist.",
+      "Windows64": "È necessario Windows a 64 bit.",
+      "OtherScope": "Esiste già un’installazione per un altro gruppo di utenti. Disinstallala dalle impostazioni di Windows, poi riavvia l’installazione. Le credenziali verranno conservate.",
+      "GuideShortcut": "Mail AI Assist - Guida di installazione",
+      "OpenGuide": "Apri la guida di installazione",
+      "Description": "Mail AI Assist per Thunderbird (Windows x64)"
+    }
+  },
+  "es": {
+    "culture": "es-ES",
+    "lcid": 3082,
+    "codepage": 1252,
+    "strings": {
+      "SetupTitle": "Instalación de [ProductName]",
+      "ScopeTitle": "Elige quién puede usar Mail AI Assist",
+      "ScopeDescription": "Podrás elegir la carpeta de instalación en la siguiente página.",
+      "ScopeUser": "Solo para mí (recomendado)",
+      "ScopeMachine": "Para todos los usuarios (requiere permisos de administrador)",
+      "ScopeNote": "Cada usuario de Windows conserva sus credenciales de IA y claves API. Las actualizaciones para todos los usuarios requieren autorización de administrador.",
+      "Back": "Atrás",
+      "Next": "Siguiente",
+      "Cancel": "Cancelar",
+      "Downgrade": "Ya está instalada una versión más reciente de Mail AI Assist.",
+      "Windows64": "Se requiere Windows de 64 bits.",
+      "OtherScope": "Ya existe una instalación para otro grupo de usuarios. Desinstálala desde Configuración de Windows y vuelve a ejecutar el instalador. Se conservarán las credenciales.",
+      "GuideShortcut": "Mail AI Assist - Guía de instalación",
+      "OpenGuide": "Abrir la guía de instalación",
+      "Description": "Mail AI Assist para Thunderbird (Windows x64)"
+    }
+  },
+  "pt": {
+    "culture": "pt-PT",
+    "lcid": 2070,
+    "codepage": 1252,
+    "strings": {
+      "SetupTitle": "Instalação de [ProductName]",
+      "ScopeTitle": "Escolha quem pode usar o Mail AI Assist",
+      "ScopeDescription": "Pode escolher a pasta de instalação na página seguinte.",
+      "ScopeUser": "Apenas para mim (recomendado)",
+      "ScopeMachine": "Para todos os utilizadores (requer direitos de administrador)",
+      "ScopeNote": "Cada utilizador Windows mantém as suas credenciais IA e chaves API. As atualizações para todos os utilizadores exigem aprovação de administrador.",
+      "Back": "Anterior",
+      "Next": "Seguinte",
+      "Cancel": "Cancelar",
+      "Downgrade": "Já está instalada uma versão mais recente do Mail AI Assist.",
+      "Windows64": "É necessário Windows de 64 bits.",
+      "OtherScope": "Já existe uma instalação para outro grupo de utilizadores. Desinstale-a nas Definições do Windows e volte a executar o instalador. As credenciais serão mantidas.",
+      "GuideShortcut": "Mail AI Assist - Guia de instalação",
+      "OpenGuide": "Abrir o guia de instalação",
+      "Description": "Mail AI Assist para Thunderbird (Windows x64)"
+    }
+  },
+  "zh-CN": {
+    "culture": "zh-CN",
+    "lcid": 2052,
+    "codepage": 936,
+    "strings": {
+      "SetupTitle": "[ProductName] 安装",
+      "ScopeTitle": "选择 Mail AI Assist 的使用范围",
+      "ScopeDescription": "下一步可以选择安装目录。",
+      "ScopeUser": "仅为我安装（推荐）",
+      "ScopeMachine": "为此计算机的所有用户安装（需要管理员权限）",
+      "ScopeNote": "每个 Windows 用户分别保存自己的 AI 登录信息和 API Key。所有用户模式的更新需要管理员授权。",
+      "Back": "上一步",
+      "Next": "下一步",
+      "Cancel": "取消",
+      "Downgrade": "已安装更新版本的 Mail AI Assist。",
+      "Windows64": "需要 64 位 Windows。",
+      "OtherScope": "已存在其他安装范围的版本。请先在 Windows 设置中卸载，再运行安装程序。已保存的登录信息将保留。",
+      "GuideShortcut": "Mail AI Assist - 安装说明",
+      "OpenGuide": "打开安装说明",
+      "Description": "适用于 Thunderbird 的 Mail AI Assist（Windows x64）"
+    }
+  },
+  "zh-TW": {
+    "culture": "zh-TW",
+    "lcid": 1028,
+    "codepage": 950,
+    "strings": {
+      "SetupTitle": "[ProductName] 安裝",
+      "ScopeTitle": "選擇 Mail AI Assist 的使用範圍",
+      "ScopeDescription": "下一步可以選擇安裝目錄。",
+      "ScopeUser": "僅為我安裝（建議）",
+      "ScopeMachine": "為此電腦的所有使用者安裝（需要管理員權限）",
+      "ScopeNote": "每個 Windows 使用者分別儲存自己的 AI 登入資訊和 API Key。所有使用者模式的更新需要管理員授權。",
+      "Back": "上一步",
+      "Next": "下一步",
+      "Cancel": "取消",
+      "Downgrade": "已安裝更新版本的 Mail AI Assist。",
+      "Windows64": "需要 64 位元 Windows。",
+      "OtherScope": "已存在其他安裝範圍的版本。請先在 Windows 設定中解除安裝，再執行安裝程式。已儲存的登入資訊將保留。",
+      "GuideShortcut": "Mail AI Assist - 安裝說明",
+      "OpenGuide": "開啟安裝說明",
+      "Description": "適用於 Thunderbird 的 Mail AI Assist（Windows x64）"
+    }
+  },
+  "ja": {
+    "culture": "ja-JP",
+    "lcid": 1041,
+    "codepage": 932,
+    "strings": {
+      "SetupTitle": "[ProductName] セットアップ",
+      "ScopeTitle": "Mail AI Assist の利用範囲を選択",
+      "ScopeDescription": "次の画面でインストール先を選択できます。",
+      "ScopeUser": "自分のみ（推奨）",
+      "ScopeMachine": "このコンピューターの全ユーザー（管理者権限が必要）",
+      "ScopeNote": "Windows ユーザーごとに AI のログイン情報と API キーを保存します。全ユーザー向けヘルパーの更新には管理者権限が必要です。",
+      "Back": "戻る",
+      "Next": "次へ",
+      "Cancel": "キャンセル",
+      "Downgrade": "新しいバージョンの Mail AI Assist がインストールされています。",
+      "Windows64": "64 ビット版 Windows が必要です。",
+      "OtherScope": "別の利用範囲のインストールが存在します。先に Windows の設定でアンインストールしてから再実行してください。保存済みの認証情報は保持されます。",
+      "GuideShortcut": "Mail AI Assist - セットアップガイド",
+      "OpenGuide": "セットアップガイドを開く",
+      "Description": "Thunderbird 用 Mail AI Assist（Windows x64）"
+    }
+  },
+  "ko": {
+    "culture": "ko-KR",
+    "lcid": 1042,
+    "codepage": 949,
+    "strings": {
+      "SetupTitle": "[ProductName] 설치",
+      "ScopeTitle": "Mail AI Assist 사용 범위 선택",
+      "ScopeDescription": "다음 화면에서 설치 폴더를 선택할 수 있습니다.",
+      "ScopeUser": "나만 사용(권장)",
+      "ScopeMachine": "이 컴퓨터의 모든 사용자(관리자 권한 필요)",
+      "ScopeNote": "Windows 사용자마다 AI 로그인 정보와 API 키를 따로 보관합니다. 모든 사용자용 도우미 업데이트에는 관리자 권한이 필요합니다.",
+      "Back": "뒤로",
+      "Next": "다음",
+      "Cancel": "취소",
+      "Downgrade": "최신 버전의 Mail AI Assist가 이미 설치되어 있습니다.",
+      "Windows64": "64비트 Windows가 필요합니다.",
+      "OtherScope": "다른 사용 범위의 설치가 이미 있습니다. Windows 설정에서 먼저 제거한 후 설치 프로그램을 다시 실행하세요. 저장된 인증 정보는 유지됩니다.",
+      "GuideShortcut": "Mail AI Assist - 설치 안내서",
+      "OpenGuide": "설치 안내서 열기",
+      "Description": "Thunderbird용 Mail AI Assist(Windows x64)"
+    }
+  }
+}

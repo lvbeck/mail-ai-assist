@@ -1,0 +1,17 @@
+{
+  "name": "mail-ai-assist",
+  "version": "0.12.24",
+  "private": true,
+  "description": "Thunderbird email assistant and Windows native messaging helper",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node scripts/test.mjs",
+    "icons": "node installer/build-icons.cjs"
+  },
+  "devDependencies": {
+    "sharp": "0.35.5"
+  }
+}

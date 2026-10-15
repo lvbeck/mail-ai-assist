@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "Mail AI Assist"
+  },
+  "extensionDescription": {
+    "message": "AI でメールの要約、翻訳、タグ付け、作成を支援します。"
+  },
+  "actionLabel": {
+    "message": "文章作成アシスタント"
+  },
+  "assistantLabel": {
+    "message": "AI アシスタント"
+  }
+}

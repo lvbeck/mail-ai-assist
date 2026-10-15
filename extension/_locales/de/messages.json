@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "Mail-KI-Assistent"
+  },
+  "extensionDescription": {
+    "message": "E-Mails mit KI zusammenfassen, übersetzen, verschlagworten und verfassen."
+  },
+  "actionLabel": {
+    "message": "Schreibhilfe"
+  },
+  "assistantLabel": {
+    "message": "KI-Assistent"
+  }
+}

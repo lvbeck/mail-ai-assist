@@ -1,0 +1,18 @@
+import { readFile, readdir, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { verifyRelease, verifyPackage, releaseAssetUrl } from '../helper/update-core.mjs';
+const config = JSON.parse(await readFile('work/msi-stage/msi-install.json', 'utf8'));
+const root = 'dist/server-upload';
+const release = verifyRelease(JSON.parse(await readFile(root + '/helper-updates.json', 'utf8')), config);
+verifyPackage(await readFile(`${root}/releases/${release.version}/Mail-AI-Assist-${release.version}-x64.msi`), release);
+const updates = JSON.parse(await readFile(root + '/updates.json', 'utf8'));
+if (Object.keys(updates.addons).join() !== config.addonId) throw new Error('invalid_addon_id');
+const nativeManifest = JSON.parse(await readFile('work/msi-stage/native-host.json', 'utf8'));
+if (nativeManifest.allowed_extensions.join() !== [config.addonId, ...(config.legacyAddonIds || [])].join()) throw new Error('invalid_native_allowlist');
+const update = updates.addons[config.addonId].updates[0];
+if (update.version !== config.version || update.update_link !== releaseAssetUrl(config, config.version, `Mail-AI-Assist-${config.version}.xpi`)) throw new Error('invalid_xpi_update');
+const bytes = await readFile(`${root}/releases/${config.version}/Mail-AI-Assist-${config.version}.xpi`);
+if (update.update_hash !== 'sha256:' + createHash('sha256').update(bytes).digest('hex')) throw new Error('invalid_xpi_hash');
+const filenames = await readdir(`${root}/releases/${config.version}`);
+if (filenames.length !== 2 || filenames.some(name => !/\.(msi|xpi)$/.test(name))) throw new Error('unexpected_release_files');
+console.log('PASS: fixed URLs, release versions, RSA signature, MSI size/hash, XPI SHA-256 and public file list.');

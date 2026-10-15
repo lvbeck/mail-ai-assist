@@ -1,0 +1,23 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <Binary Id="MailAILanguageAction" SourceFile="work/language-action.dll"/>
+    <CustomAction Id="InitializeLanguage" BinaryRef="MailAILanguageAction" DllEntry="InitializeLanguage" Execute="immediate" Return="check"/>
+    <CustomAction Id="ApplyLanguage" BinaryRef="MailAILanguageAction" DllEntry="ApplyLanguage" Execute="immediate" Return="check"/>
+    <Property Id="MAILAILANGUAGE" Secure="yes"/>
+    <UI Id="MailAILanguageUI">
+      <TextStyle Id="MailAISelectorFont" FaceName="Segoe UI" Size="10"/>
+      <Dialog Id="MailAISelectorDlg" Width="370" Height="270" Title="Mail AI Assist">
+        <Control Id="Title" Type="Text" X="24" Y="24" Width="320" Height="30" Text="{\MailAISelectorFont}[MAILAI_SELECTOR_TITLE]"/>
+        <Control Id="Language" Type="ListBox" Property="MAILAILANGUAGE" X="24" Y="65" Width="322" Height="145" Sorted="no" Sunken="yes"><ListBox Property="MAILAILANGUAGE"><ListItem Value="en" Text="[MAILAI_LANG_NAME_0]"/><ListItem Value="de" Text="[MAILAI_LANG_NAME_1]"/><ListItem Value="fr" Text="[MAILAI_LANG_NAME_2]"/><ListItem Value="it" Text="[MAILAI_LANG_NAME_3]"/><ListItem Value="es" Text="[MAILAI_LANG_NAME_4]"/><ListItem Value="pt" Text="[MAILAI_LANG_NAME_5]"/><ListItem Value="zh-CN" Text="[MAILAI_LANG_NAME_6]"/><ListItem Value="zh-TW" Text="[MAILAI_LANG_NAME_7]"/><ListItem Value="ja" Text="[MAILAI_LANG_NAME_8]"/><ListItem Value="ko" Text="[MAILAI_LANG_NAME_9]"/></ListBox></Control>
+        <Control Id="Divider" Type="Line" X="24" Y="222" Width="322" Height="0"/>
+        <Control Id="Next" Type="PushButton" X="220" Y="235" Width="65" Height="22" Default="yes" Text="[MAILAI_SELECTOR_NEXT]"><Publish Event="EndDialog" Value="Return"/></Control>
+        <Control Id="Cancel" Type="PushButton" X="293" Y="235" Width="65" Height="22" Cancel="yes" Text="[MAILAI_SELECTOR_CANCEL]"><Publish Event="EndDialog" Value="Exit"/></Control>
+      </Dialog>
+    </UI>
+    <InstallUISequence>
+      <Custom Action="InitializeLanguage" After="SetINSTALLSCOPE"/>
+      <Show Dialog="MailAISelectorDlg" After="InitializeLanguage" Condition="UILevel &gt;= 5"/>
+      <Custom Action="ApplyLanguage" After="MailAISelectorDlg"/>
+    </InstallUISequence>
+  </Fragment>
+</Wix>

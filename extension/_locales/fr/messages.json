@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "Assistant IA de messagerie"
+  },
+  "extensionDescription": {
+    "message": "Résumez, traduisez, étiquetez et rédigez vos e-mails avec l’IA."
+  },
+  "actionLabel": {
+    "message": "Aide à la rédaction"
+  },
+  "assistantLabel": {
+    "message": "Assistant IA"
+  }
+}

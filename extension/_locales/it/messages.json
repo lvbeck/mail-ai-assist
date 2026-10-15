@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "Assistente IA per la posta"
+  },
+  "extensionDescription": {
+    "message": "Riassumi, traduci, etichetta e scrivi e-mail con l’IA."
+  },
+  "actionLabel": {
+    "message": "Assistente di scrittura"
+  },
+  "assistantLabel": {
+    "message": "Assistente IA"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "Mail AI Assist"
+  },
+  "extensionDescription": {
+    "message": "AI로 메일 요약, 번역, 태그 지정 및 작성을 돕습니다."
+  },
+  "actionLabel": {
+    "message": "글쓰기 도우미"
+  },
+  "assistantLabel": {
+    "message": "AI 도우미"
+  }
+}

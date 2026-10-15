@@ -1,0 +1,21 @@
+button[id]:not(:has(img))::before { content: ""; display: inline-block; width: 1.15em; height: 1.15em; margin-inline-end: .5em; vertical-align: -.2em; background: currentColor; mask: var(--button-icon) center / contain no-repeat; }
+#settings { --button-icon: url("settings.svg"); }
+#close { --button-icon: url("button-login.svg"); }
+#retry, #cacheRefresh { --button-icon: url("button-retry.svg"); }
+#confirmTags, #saveKey, #apply { --button-icon: url("button-check.svg"); }
+#undo { --button-icon: url("button-undo.svg"); }
+#prepare { --button-icon: url("send.svg"); }
+#reveal, #cacheOpen { --button-icon: url("button-folder.svg"); }
+#copyPath { --button-icon: url("button-copy.svg"); }
+#signIn, #signOut { --button-icon: url("button-login.svg"); }
+#removeKey, #cacheClear { --button-icon: url("button-trash.svg"); }
+#installHelperUpdate { --button-icon: url("button-download.svg"); }
+#generate { --button-icon: url("button-edit.svg"); }
+
+#cancel { --button-icon: url("button-stop.svg"); }
+#translationSave { --button-icon: url("button-check.svg"); }
+#translationRemove { --button-icon: url("button-trash.svg"); }
+
+#aliasSave { --button-icon: url("button-check.svg"); }
+#aliasRemove { --button-icon: url("button-trash.svg"); }
+#aliasRefresh { --button-icon: url("button-retry.svg"); }

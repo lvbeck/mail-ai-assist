@@ -1,0 +1,186 @@
+{
+  "texts": {
+    "en": [
+      "Complete setup",
+      "The local helper has been installed in the selected scope and folder. Please follow the steps below to complete the add-on installation:",
+      "Save the Thunderbird add-on.",
+      "Open Thunderbird. In Thunderbird, open Add-ons and Themes → Extensions → gear menu → Install Add-on From File. Select Mail-AI-Assist.xpi and confirm its permissions. You can also find this file next to this guide.",
+      "Open AI Assist → Settings. Sign in with your own account or enter your API key, then choose a model.",
+      "Automatic updates: Thunderbird checks for add-on updates according to its settings. When you use the assistant, the helper checks at most once a day. Current-user helper updates install after Thunderbird closes. For all-user installations, open AI Assist settings and click Install helper update, then close Thunderbird and approve the administrator prompt; no email content or login credentials are sent to the update server.",
+      "Uninstall the helper through Windows Installed apps and remove the add-on separately in Thunderbird. Saved credentials are retained; sign out or remove API keys first if you want to clear them."
+    ],
+    "de": [
+      "Einrichtung abschließen",
+      "Das lokale Hilfsprogramm wurde für den gewählten Benutzerkreis im ausgewählten Ordner installiert. Bitte führen Sie die folgenden Schritte aus, um die Installation des Add-ons abzuschließen:",
+      "Thunderbird-Add-on speichern.",
+      "Öffnen Sie Thunderbird. Öffnen Sie in Thunderbird Add-ons und Themes → Erweiterungen → Zahnradmenü → Add-on aus Datei installieren. Wählen Sie Mail-AI-Assist.xpi und bestätigen Sie die Berechtigungen. Die Datei liegt auch neben dieser Anleitung.",
+      "Öffnen Sie KI-Assistent → Einstellungen. Melden Sie sich mit Ihrem eigenen Konto an oder geben Sie Ihren API-Schlüssel ein und wählen Sie ein Modell.",
+      "Automatische Updates: Thunderbird prüft Add-on-Updates gemäß seinen Einstellungen. Bei Nutzung des Assistenten prüft das Hilfsprogramm höchstens einmal täglich auf Updates. Updates für den aktuellen Benutzer werden nach dem Schließen von Thunderbird installiert. Bei Installation für alle Benutzer klicken Sie in den KI-Assistent-Einstellungen auf Hilfsprogramm-Update installieren, schließen Thunderbird und bestätigen die Administratorabfrage. E-Mail-Inhalte und Zugangsdaten werden nicht an den Updateserver gesendet.",
+      "Deinstallieren Sie das Hilfsprogramm über die installierten Windows-Apps und entfernen Sie das Add-on separat in Thunderbird. Zugangsdaten bleiben erhalten. Melden Sie sich vorher ab bzw. entfernen Sie API-Schlüssel, um diese zu löschen."
+    ],
+    "zh-CN": [
+      "完成安装",
+      "本地辅助程序已按所选安装范围和路径安装，请按下列步骤完成插件安装：",
+      "保存 Thunderbird 插件。",
+      "请打开 Thunderbird，在 Thunderbird 中打开“附加组件和主题 → 扩展 → 齿轮菜单 → 从文件安装附加组件”，选择 Mail-AI-Assist.xpi 并确认权限。此文件也位于本说明所在目录。",
+      "打开“AI 助手 → 设置”，登录自己的账户或填写 API Key，再选择模型。",
+      "自动更新：Thunderbird 根据自身设置检查插件更新。使用助手时，辅助程序每天最多检查一次更新，当前用户模式在验证通过后等待 Thunderbird 关闭再安装；所有用户模式需在 AI 助手设置中点击“安装辅助程序更新”，关闭 Thunderbird 后确认管理员授权。更新服务器不会收到邮件正文或登录凭据。",
+      "在 Windows 已安装的应用中卸载辅助程序，并在 Thunderbird 中单独移除插件。卸载保留登录凭据；如需清除，请先在插件设置中退出登录、移除 API Key。"
+    ],
+    "zh-TW": [
+      "完成安裝",
+      "本機輔助程式已依所選安裝範圍及路徑安裝，請依照下列步驟完成附加元件安裝：",
+      "儲存 Thunderbird 附加元件。",
+      "請開啟 Thunderbird，在 Thunderbird 開啟「附加元件與佈景主題 → 擴充套件 → 齒輪選單 → 從檔案安裝附加元件」，選取 Mail-AI-Assist.xpi 並確認權限。此檔案也位於本說明所在目錄。",
+      "開啟「AI 助手 → 設定」，登入自己的帳戶或填寫 API Key，再選擇模型。",
+      "自動更新：Thunderbird 根據自身設定檢查附加元件更新。使用助手時，輔助程式每天最多檢查一次更新，目前使用者模式在驗證通過後等待 Thunderbird 關閉再安裝；所有使用者模式需在 AI 助手設定中點擊「安裝輔助程式更新」，關閉 Thunderbird 後確認管理員授權。更新伺服器不會收到郵件正文或登入憑據。",
+      "在 Windows 已安裝的應用程式中解除安裝輔助程式，並在 Thunderbird 中單獨移除附加元件。解除安裝保留登入憑據；如需清除，請先在設定中登出、移除 API Key。"
+    ],
+    "fr": [
+      "Terminer l’installation",
+      "L’assistant local a été installé pour les utilisateurs et dans le dossier choisis. Veuillez suivre les étapes ci-dessous pour terminer l’installation du module complémentaire :",
+      "Enregistrer le module Thunderbird.",
+      "Ouvrez Thunderbird. Dans Thunderbird, ouvrez Modules complémentaires et thèmes → Extensions → menu engrenage → Installer un module depuis un fichier. Sélectionnez Mail-AI-Assist.xpi et confirmez les autorisations. Ce fichier se trouve aussi à côté de ce guide.",
+      "Ouvrez Assistant IA → Paramètres. Connectez votre compte ou saisissez votre clé API, puis choisissez un modèle.",
+      "Mises à jour automatiques : Thunderbird recherche les mises à jour du module selon ses paramètres. Lorsque vous utilisez l’assistant, le programme local vérifie les mises à jour au maximum une fois par jour. Les mises à jour pour l’utilisateur actuel s’installent après la fermeture de Thunderbird. Pour une installation pour tous les utilisateurs, cliquez sur Installer la mise à jour de l’assistant local dans les paramètres, fermez Thunderbird et approuvez la demande administrateur. Aucun contenu d’e-mail ni identifiant n’est envoyé au serveur de mises à jour.",
+      "Désinstallez l’assistant local dans les applications installées de Windows et retirez le module séparément dans Thunderbird. Les identifiants sont conservés ; déconnectez-vous ou retirez les clés API au préalable pour les effacer."
+    ],
+    "it": [
+      "Completa l’installazione",
+      "Il programma di supporto locale è stato installato per gli utenti e nella cartella selezionati. Segui i passaggi riportati di seguito per completare l’installazione del componente aggiuntivo:",
+      "Salva il componente aggiuntivo Thunderbird.",
+      "Apri Thunderbird. In Thunderbird, apri Componenti aggiuntivi e temi → Estensioni → menu ingranaggio → Installa componente aggiuntivo da file. Seleziona Mail-AI-Assist.xpi e conferma i permessi. Il file si trova anche accanto a questa guida.",
+      "Apri Assistente IA → Impostazioni. Accedi con il tuo account o inserisci la chiave API, poi scegli un modello.",
+      "Aggiornamenti automatici: Thunderbird controlla gli aggiornamenti del componente secondo le proprie impostazioni. Quando usi l’assistente, il programma locale controlla al massimo una volta al giorno. Gli aggiornamenti per l’utente corrente si installano dopo la chiusura di Thunderbird. Per installazioni per tutti gli utenti, fai clic su Installa aggiornamento del programma di supporto nelle impostazioni, chiudi Thunderbird e approva la richiesta di amministratore. Il server di aggiornamento non riceve contenuti delle e-mail né credenziali.",
+      "Disinstalla il programma di supporto dalle app installate di Windows e rimuovi separatamente il componente da Thunderbird. Le credenziali vengono conservate; esci dall’account o rimuovi prima le chiavi API per cancellarle."
+    ],
+    "es": [
+      "Completar la instalación",
+      "El programa auxiliar local se ha instalado para los usuarios y en la carpeta seleccionados. Sigue los pasos que se indican a continuación para completar la instalación del complemento:",
+      "Guardar el complemento de Thunderbird.",
+      "Abre Thunderbird. En Thunderbird, abre Complementos y temas → Extensiones → menú del engranaje → Instalar complemento desde archivo. Selecciona Mail-AI-Assist.xpi y confirma sus permisos. El archivo también se encuentra junto a esta guía.",
+      "Abre Asistente IA → Configuración. Inicia sesión con tu cuenta o introduce tu clave API y elige un modelo.",
+      "Actualizaciones automáticas: Thunderbird busca actualizaciones del complemento según su configuración. Al usar el asistente, el programa auxiliar las comprueba como máximo una vez al día. Las actualizaciones para el usuario actual se instalan al cerrar Thunderbird. Para instalaciones para todos los usuarios, pulsa Instalar actualización del programa auxiliar en Configuración, cierra Thunderbird y aprueba la solicitud de administrador. No se envían contenidos de correo ni credenciales al servidor de actualizaciones.",
+      "Desinstala el programa auxiliar desde las aplicaciones instaladas de Windows y elimina el complemento por separado en Thunderbird. Las credenciales se conservan; cierra sesión o elimina las claves API antes si quieres borrarlas."
+    ],
+    "pt": [
+      "Concluir a instalação",
+      "O programa auxiliar local foi instalado para os utilizadores e na pasta selecionados. Siga os passos abaixo para concluir a instalação do extra:",
+      "Guardar o extra do Thunderbird.",
+      "Abra o Thunderbird. No Thunderbird, abra Extras e temas → Extensões → menu da roda dentada → Instalar extra a partir de ficheiro. Selecione Mail-AI-Assist.xpi e confirme as permissões. O ficheiro também está junto deste guia.",
+      "Abra Assistente IA → Definições. Inicie sessão com a sua conta ou introduza a chave API e escolha um modelo.",
+      "Atualizações automáticas: o Thunderbird verifica as atualizações do extra de acordo com as suas definições. Ao usar o assistente, o programa auxiliar verifica no máximo uma vez por dia. As atualizações para o utilizador atual são instaladas após fechar o Thunderbird. Nas instalações para todos os utilizadores, clique em Instalar atualização do programa auxiliar nas Definições, feche o Thunderbird e aprove o pedido de administrador. Não são enviados conteúdos de e-mail nem credenciais ao servidor de atualizações.",
+      "Desinstale o programa auxiliar nas aplicações instaladas do Windows e remova o extra separadamente no Thunderbird. As credenciais são mantidas; termine sessão ou remova as chaves API antes, se as quiser eliminar."
+    ],
+    "ja": [
+      "セットアップを完了",
+      "ローカルヘルパーを選択した範囲とフォルダーにインストールしました。次の手順でアドオンの設定を完了してください。",
+      "Thunderbird アドオンを保存します。",
+      "Thunderbird を開き、「アドオンとテーマ → 拡張機能 → 歯車メニュー → ファイルからアドオンをインストール」で Mail-AI-Assist.xpi を選択し、権限を確認してください。このファイルは本ガイドと同じフォルダーにもあります。",
+      "「AI アシスタント → 設定」を開き、ご自身のアカウントでログインするか API キーを入力し、モデルを選択してください。",
+      "自動更新：Thunderbird は設定に従ってアドオンの更新を確認します。ヘルパーは利用時に 1 日 1 回まで更新を確認します。現在のユーザー向け更新は Thunderbird 終了後にインストールします。全ユーザー向けの場合は AI アシスタントの設定で「ヘルパーの更新をインストール」をクリックし、Thunderbird を終了して管理者権限を許可してください。更新サーバーにメール内容や認証情報は送信しません。",
+      "Windows の「インストールされているアプリ」からヘルパーを削除し、Thunderbird 内でアドオンを別途削除してください。保存した認証情報は保持します。削除したい場合は先にログアウトするか API キーを削除してください。"
+    ],
+    "ko": [
+      "설정 완료",
+      "선택한 범위와 폴더에 로컬 도우미를 설치했습니다. 다음 단계에 따라 부가 기능 설정을 완료하세요.",
+      "Thunderbird 부가 기능을 저장하세요.",
+      "Thunderbird에서 부가 기능 및 테마 → 확장 기능 → 톱니바퀴 메뉴 → 파일에서 부가 기능 설치를 열고 Mail-AI-Assist.xpi를 선택한 후 권한을 확인하세요. 이 파일은 이 안내서와 같은 폴더에도 있습니다.",
+      "AI 도우미 → 설정을 열고 본인 계정으로 로그인하거나 API 키를 입력한 후 모델을 선택하세요.",
+      "자동 업데이트: Thunderbird는 설정에 따라 부가 기능 업데이트를 확인합니다. 도우미는 사용 시 하루에 최대 한 번 업데이트를 확인합니다. 현재 사용자용 업데이트는 Thunderbird 종료 후 설치됩니다. 모든 사용자용 설치는 AI 도우미 설정에서 도우미 업데이트 설치를 클릭하고 Thunderbird를 종료한 후 관리자 권한을 승인하세요. 메일 내용이나 로그인 정보는 업데이트 서버로 전송하지 않습니다.",
+      "Windows의 설치된 앱에서 도우미를 제거하고 Thunderbird에서 부가 기능을 별도로 제거하세요. 저장된 인증 정보는 유지됩니다. 지우려면 먼저 로그아웃하거나 API 키를 제거하세요."
+    ]
+  },
+  "download": {
+    "en": [
+      "Summarize, translate, tag and rewrite emails in Thunderbird.",
+      "Download for Windows x64",
+      "The MSI installs the local helper. Follow the setup guide to install the Thunderbird add-on and connect your own AI account.",
+      "Download the Thunderbird add-on separately",
+      "Independent, unofficial software. AI output may contain errors; review it before use.",
+      "Language",
+      "MIT License"
+    ],
+    "de": [
+      "E-Mails in Thunderbird zusammenfassen, übersetzen, verschlagworten und umformulieren.",
+      "Für Windows x64 herunterladen",
+      "Die MSI installiert das lokale Hilfsprogramm. Folgen Sie der Anleitung, um das Thunderbird-Add-on zu installieren und Ihr eigenes KI-Konto zu verbinden.",
+      "Thunderbird-Add-on separat herunterladen",
+      "Unabhängige, inoffizielle Software. KI-Ergebnisse können Fehler enthalten; prüfen Sie diese vor der Verwendung.",
+      "Sprache",
+      "MIT-Lizenz"
+    ],
+    "zh-CN": [
+      "在 Thunderbird 中摘要、翻译、添加标签和改写邮件。",
+      "下载 Windows x64 安装包",
+      "MSI 安装本地辅助程序。请按安装说明安装 Thunderbird 插件，再连接自己的 AI 账户。",
+      "单独下载 Thunderbird 插件",
+      "独立开发的非官方软件。AI 输出可能包含错误，使用前请核对。",
+      "语言",
+      "MIT 许可证"
+    ],
+    "zh-TW": [
+      "在 Thunderbird 中摘要、翻譯、新增標籤和改寫郵件。",
+      "下載 Windows x64 安裝套件",
+      "MSI 安裝本機輔助程式。請依安裝說明安裝 Thunderbird 附加元件，再連接自己的 AI 帳戶。",
+      "單獨下載 Thunderbird 附加元件",
+      "獨立開發的非官方軟體。AI 輸出可能包含錯誤，使用前請核對。",
+      "語言",
+      "MIT 授權條款"
+    ],
+    "fr": [
+      "Résumez, traduisez, étiquetez et réécrivez les e-mails dans Thunderbird.",
+      "Télécharger pour Windows x64",
+      "Le MSI installe l’assistant local. Suivez le guide pour installer le module Thunderbird et connecter votre propre compte IA.",
+      "Télécharger le module Thunderbird séparément",
+      "Logiciel indépendant et non officiel. Les résultats de l’IA peuvent contenir des erreurs ; vérifiez-les avant utilisation.",
+      "Langue",
+      "Licence MIT"
+    ],
+    "it": [
+      "Riassumi, traduci, etichetta e riscrivi le e-mail in Thunderbird.",
+      "Scarica per Windows x64",
+      "Il file MSI installa il programma di supporto locale. Segui la guida per installare il componente Thunderbird e collegare il tuo account IA.",
+      "Scarica separatamente il componente Thunderbird",
+      "Software indipendente e non ufficiale. I risultati dell’IA possono contenere errori; controllali prima dell’uso.",
+      "Lingua",
+      "Licenza MIT"
+    ],
+    "es": [
+      "Resume, traduce, etiqueta y reescribe correos en Thunderbird.",
+      "Descargar para Windows x64",
+      "El MSI instala el programa auxiliar local. Sigue la guía para instalar el complemento de Thunderbird y conectar tu propia cuenta de IA.",
+      "Descargar el complemento de Thunderbird por separado",
+      "Software independiente y no oficial. Los resultados de la IA pueden contener errores; revísalos antes de usarlos.",
+      "Idioma",
+      "Licencia MIT"
+    ],
+    "pt": [
+      "Resuma, traduza, etiquete e reescreva e-mails no Thunderbird.",
+      "Transferir para Windows x64",
+      "O MSI instala o programa auxiliar local. Siga o guia para instalar o extra do Thunderbird e ligar a sua própria conta de IA.",
+      "Transferir o extra do Thunderbird separadamente",
+      "Software independente e não oficial. Os resultados da IA podem conter erros; reveja-os antes de utilizar.",
+      "Idioma",
+      "Licença MIT"
+    ],
+    "ja": [
+      "Thunderbird でメールの要約、翻訳、タグ付け、書き換えを行います。",
+      "Windows x64 版をダウンロード",
+      "MSI はローカルヘルパーをインストールします。セットアップガイドに従って Thunderbird アドオンをインストールし、ご自身の AI アカウントに接続してください。",
+      "Thunderbird アドオンを個別にダウンロード",
+      "独立開発の非公式ソフトウェアです。AI の出力には誤りが含まれる場合があります。使用前に確認してください。",
+      "言語",
+      "MIT ライセンス"
+    ],
+    "ko": [
+      "Thunderbird에서 메일을 요약, 번역하고 태그를 지정하며 재작성합니다.",
+      "Windows x64용 다운로드",
+      "MSI는 로컬 도우미를 설치합니다. 설정 안내서에 따라 Thunderbird 부가 기능을 설치하고 본인의 AI 계정에 연결하세요.",
+      "Thunderbird 부가 기능 별도 다운로드",
+      "독립적으로 개발된 비공식 소프트웨어입니다. AI 결과에 오류가 있을 수 있으므로 사용 전에 확인하세요.",
+      "언어",
+      "MIT 라이선스"
+    ]
+  }
+}

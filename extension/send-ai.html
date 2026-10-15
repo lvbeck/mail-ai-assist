@@ -1,0 +1,11 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Mail AI Assist</title><link rel="stylesheet" href="rewrite.css"><link rel="stylesheet" href="send-ai.css"><link rel="stylesheet" href="button-icons.css"></head>
+<body data-page="send"><header><img src="icon.svg" alt=""><div><h1>导出邮件</h1></div></header>
+<fieldset id="choices"><legend>文件格式</legend><div class="row"><label><input type="radio" name="format" value="txt" checked> TXT</label><label><input type="radio" name="format" value="eml"> EML</label></div><label class="check"><input type="checkbox" id="quotes"> <span>包含引用回复和转发内容</span></label></fieldset>
+<p class="note">TXT 导出正文，可排除引用；EML 保留完整原始邮件及附件，不过滤引用。</p>
+<label for="preview">内容预览</label><textarea id="preview" readonly></textarea>
+<p class="note">文件附加时可能立即上传。项目和聊天由你手动选择，程序不会发送消息。</p>
+<p id="status" role="status" aria-live="polite"></p><input id="filePath" readonly hidden aria-label="Exported file path">
+<p class="note">导出文件保留在本机，可在使用后自行删除。</p>
+<div class="actions"><button id="settings">设置</button><button id="prepare" disabled>生成文件并打开应用</button><button id="reveal" hidden>在文件夹中显示</button><button id="copyPath" hidden>复制文件路径</button><button id="close">关闭</button></div>
+<script src="translations.js"></script><script src="localization.js"></script><script src="send-ai.js"></script></body></html>
