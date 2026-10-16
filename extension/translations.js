@@ -1,5 +1,9 @@
 globalThis.ComposeTranslations = {
   "zh-CN": {
+    "GitHub 项目": "GitHub 项目",
+    "支持开发": "支持开发",
+    "如果这个插件对你有帮助，欢迎支持它的开发。": "如果这个插件对你有帮助，欢迎支持它的开发。",
+    "自愿赞助，不影响任何功能使用。": "自愿赞助，不影响任何功能使用。",
     "更改导出目录": "更改导出目录",
     "无法更改导出目录，请检查文件夹写入权限及本地辅助程序版本。": "无法更改导出目录，请检查文件夹写入权限及本地辅助程序版本。",
     "缓存": "缓存",
@@ -275,6 +279,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "请安装新版辅助程序 MSI，然后重启 Thunderbird。"
   },
   "en": {
+    "GitHub 项目": "GitHub project",
+    "支持开发": "Support development",
+    "如果这个插件对你有帮助，欢迎支持它的开发。": "If this add-on helps you, consider supporting its development.",
+    "自愿赞助，不影响任何功能使用。": "Donations are optional and do not affect access to any features.",
     "更改导出目录": "Change export directory",
     "无法更改导出目录，请检查文件夹写入权限及本地辅助程序版本。": "Unable to change the export directory. Check folder write permissions and the local helper version.",
     "缓存": "Cache",
@@ -550,6 +558,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Install the latest helper MSI, then restart Thunderbird."
   },
   "de": {
+    "GitHub 项目": "GitHub-Projekt",
+    "支持开发": "Entwicklung unterstützen",
+    "如果这个插件对你有帮助，欢迎支持它的开发。": "Wenn Ihnen dieses Add-on hilft, unterstützen Sie gerne seine Entwicklung.",
+    "自愿赞助，不影响任何功能使用。": "Spenden sind freiwillig und haben keinen Einfluss auf die Nutzung der Funktionen.",
     "更改导出目录": "Exportordner ändern",
     "无法更改导出目录，请检查文件夹写入权限及本地辅助程序版本。": "Der Exportordner konnte nicht geändert werden. Prüfen Sie die Schreibrechte und die Version des lokalen Hilfsprogramms.",
     "缓存": "Cache",
@@ -825,6 +837,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Installieren Sie das aktuelle Hilfsprogramm-MSI und starten Sie Thunderbird neu."
   },
   "zh-TW": {
+    "GitHub 项目": "GitHub 專案",
+    "支持开发": "支持開發",
+    "如果这个插件对你有帮助，欢迎支持它的开发。": "如果這個附加元件對你有幫助，歡迎支持它的開發。",
+    "自愿赞助，不影响任何功能使用。": "自願贊助，不影響任何功能使用。",
     "更改导出目录": "更改匯出目錄",
     "无法更改导出目录，请检查文件夹写入权限及本地辅助程序版本。": "無法更改匯出目錄，請檢查資料夾寫入權限及本機輔助程式版本。",
     "缓存": "快取",
@@ -1100,6 +1116,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "請安裝新版輔助程式 MSI，然後重新啟動 Thunderbird。"
   },
   "fr": {
+    "GitHub 项目": "Projet GitHub",
+    "支持开发": "Soutenir le développement",
+    "如果这个插件对你有帮助，欢迎支持它的开发。": "Si ce module vous est utile, vous pouvez soutenir son développement.",
+    "自愿赞助，不影响任何功能使用。": "Les dons sont facultatifs et ne conditionnent l’accès à aucune fonctionnalité.",
     "更改导出目录": "Changer le dossier d’exportation",
     "无法更改导出目录，请检查文件夹写入权限及本地辅助程序版本。": "Impossible de changer le dossier d’exportation. Vérifiez les droits d’écriture et la version de l’assistant local.",
     "缓存": "Cache",
@@ -1375,6 +1395,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Installez le dernier MSI de l’assistant, puis redémarrez Thunderbird."
   },
   "it": {
+    "GitHub 项目": "Progetto GitHub",
+    "支持开发": "Sostieni lo sviluppo",
+    "如果这个插件对你有帮助，欢迎支持它的开发。": "Se questo componente aggiuntivo ti è utile, puoi sostenerne lo sviluppo.",
+    "自愿赞助，不影响任何功能使用。": "Le donazioni sono facoltative e non influiscono sull’accesso alle funzionalità.",
     "更改导出目录": "Cambia cartella di esportazione",
     "无法更改导出目录，请检查文件夹写入权限及本地辅助程序版本。": "Impossibile cambiare la cartella di esportazione. Verifica i permessi di scrittura e la versione dell’assistente locale.",
     "缓存": "Cache",
@@ -1650,6 +1674,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Installa il MSI più recente del programma locale, poi riavvia Thunderbird."
   },
   "es": {
+    "GitHub 项目": "Proyecto en GitHub",
+    "支持开发": "Apoya el desarrollo",
+    "如果这个插件对你有帮助，欢迎支持它的开发。": "Si este complemento te resulta útil, puedes apoyar su desarrollo.",
+    "自愿赞助，不影响任何功能使用。": "Las donaciones son voluntarias y no afectan al acceso a ninguna función.",
     "更改导出目录": "Cambiar carpeta de exportación",
     "无法更改导出目录，请检查文件夹写入权限及本地辅助程序版本。": "No se puede cambiar la carpeta de exportación. Comprueba los permisos de escritura y la versión del asistente local.",
     "缓存": "Caché",
@@ -1925,6 +1953,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Instala el MSI más reciente del asistente y reinicia Thunderbird."
   },
   "pt": {
+    "GitHub 项目": "Projeto no GitHub",
+    "支持开发": "Apoiar o desenvolvimento",
+    "如果这个插件对你有帮助，欢迎支持它的开发。": "Se este extra lhe for útil, pode apoiar o seu desenvolvimento.",
+    "自愿赞助，不影响任何功能使用。": "Os donativos são voluntários e não afetam o acesso a nenhuma funcionalidade.",
     "更改导出目录": "Alterar pasta de exportação",
     "无法更改导出目录，请检查文件夹写入权限及本地辅助程序版本。": "Não foi possível alterar a pasta de exportação. Verifique as permissões de escrita e a versão do assistente local.",
     "缓存": "Cache",
@@ -2200,6 +2232,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Instale o MSI mais recente do assistente e reinicie o Thunderbird."
   },
   "ja": {
+    "GitHub 项目": "GitHub プロジェクト",
+    "支持开发": "開発を支援",
+    "如果这个插件对你有帮助，欢迎支持它的开发。": "このアドオンが役に立ったら、開発へのご支援をご検討ください。",
+    "自愿赞助，不影响任何功能使用。": "寄付は任意です。すべての機能は寄付の有無にかかわらず利用できます。",
     "更改导出目录": "エクスポート先を変更",
     "无法更改导出目录，请检查文件夹写入权限及本地辅助程序版本。": "エクスポート先を変更できません。フォルダーの書き込み権限とローカルヘルパーのバージョンを確認してください。",
     "缓存": "キャッシュ",
@@ -2475,6 +2511,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "最新のヘルパー MSI をインストールし、Thunderbird を再起動してください。"
   },
   "ko": {
+    "GitHub 项目": "GitHub 프로젝트",
+    "支持开发": "개발 후원",
+    "如果这个插件对你有帮助，欢迎支持它的开发。": "이 부가 기능이 도움이 되었다면 개발을 후원해 주세요.",
+    "自愿赞助，不影响任何功能使用。": "후원은 선택 사항이며 모든 기능 이용에 영향을 주지 않습니다.",
     "更改导出目录": "내보내기 폴더 변경",
     "无法更改导出目录，请检查文件夹写入权限及本地辅助程序版本。": "내보내기 폴더를 변경할 수 없습니다. 폴더 쓰기 권한과 로컬 도우미 버전을 확인하세요.",
     "缓存": "캐시",

@@ -62,4 +62,4 @@ node installer/verify-release.mjs
 
 ## 发布
 
-将 dist/github-release/v0.12.24/ 内的文件分别作为 Release 附件上传，不要只上传 ZIP。ATN XPI 单独提交，选择 On this site。阅读[审核说明](publication/REVIEW-NOTES.md)、[商店介绍](publication/LISTING.md)和[发布流程](publication/GITHUB-RELEASE.md)。脚本不会自动推送、上传或安装。私钥、凭据、邮件和缓存不得入库；.gitignore 不会移除已提交秘密。MIT，见 [LICENSE](LICENSE)。
+将 dist/github-release/v0.12.25/ 内的文件分别作为 Release 附件上传，不要只上传 ZIP。ATN XPI 单独提交，选择 On this site。阅读[审核说明](publication/REVIEW-NOTES.md)、[商店介绍](publication/LISTING.md)和[发布流程](publication/GITHUB-RELEASE.md)。脚本不会自动推送、上传或安装。私钥、凭据、邮件和缓存不得入库；.gitignore 不会移除已提交秘密。MIT，见 [LICENSE](LICENSE)。

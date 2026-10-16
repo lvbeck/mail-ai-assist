@@ -62,4 +62,4 @@ node installer/verify-release.mjs
 
 ## Publicación
 
-Adjunta por separado los archivos de dist/github-release/v0.12.24/ a la Release, no solo un ZIP. Envía el XPI ATN con On this site. Consulta [revisión](publication/REVIEW-NOTES.md), [descripción](publication/LISTING.md), [procedimiento](publication/GITHUB-RELEASE.md). Los scripts no hacen push, subidas ni instalaciones automáticas. No incluyas claves, credenciales, correo ni caché; .gitignore no elimina secretos ya confirmados. MIT: [LICENSE](LICENSE).
+Adjunta por separado los archivos de dist/github-release/v0.12.25/ a la Release, no solo un ZIP. Envía el XPI ATN con On this site. Consulta [revisión](publication/REVIEW-NOTES.md), [descripción](publication/LISTING.md), [procedimiento](publication/GITHUB-RELEASE.md). Los scripts no hacen push, subidas ni instalaciones automáticas. No incluyas claves, credenciales, correo ni caché; .gitignore no elimina secretos ya confirmados. MIT: [LICENSE](LICENSE).

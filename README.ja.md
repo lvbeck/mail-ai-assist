@@ -62,4 +62,4 @@ node installer/verify-release.mjs
 
 ## 公開
 
-単一の ZIP ではなく、dist/github-release/v0.12.24/ 内の各ファイルをリリースアセットとしてアップロードしてください。ATN XPI は「On this site」を選んで別途提出します。[審査担当者向け説明](publication/REVIEW-NOTES.md)、[掲載情報](publication/LISTING.md)、[リリース手順](publication/GITHUB-RELEASE.md)を確認してください。スクリプトは自動で push、アップロード、インストールを行いません。鍵、認証情報、メール、キャッシュを Git に含めないでください。.gitignore はすでにコミットされた機密情報を削除しません。MIT ライセンス：[LICENSE](LICENSE)。
+単一の ZIP ではなく、dist/github-release/v0.12.25/ 内の各ファイルをリリースアセットとしてアップロードしてください。ATN XPI は「On this site」を選んで別途提出します。[審査担当者向け説明](publication/REVIEW-NOTES.md)、[掲載情報](publication/LISTING.md)、[リリース手順](publication/GITHUB-RELEASE.md)を確認してください。スクリプトは自動で push、アップロード、インストールを行いません。鍵、認証情報、メール、キャッシュを Git に含めないでください。.gitignore はすでにコミットされた機密情報を削除しません。MIT ライセンス：[LICENSE](LICENSE)。

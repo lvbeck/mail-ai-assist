@@ -85,3 +85,20 @@ html:has(.settings-page) { background: #f5f7fc; }
 .settings-page #helperReload { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
 .settings-page #helperReload img { display: block; flex-shrink: 0; width: 18px; height: 18px; }
 @media (prefers-color-scheme: dark) { .settings-page #helperReload img { filter: brightness(0) invert(1); } }
+
+/* About links and voluntary support. */
+.settings-page .about-links { margin: 24px 0 20px; gap: 24px; }
+.settings-page .about-links a { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+.settings-page .about-links a:hover { text-decoration: underline; }
+.settings-page .about-links img { flex-shrink: 0; filter: invert(36%) sepia(71%) saturate(1132%) hue-rotate(219deg); }
+.settings-page .about-support { border-top: 1px solid var(--line); padding-top: 4px; margin-top: 20px; }
+.settings-page .about-support h2 { color: #233047; }
+.settings-page .coffee-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; max-width: 100%; box-sizing: border-box; padding: 12px 20px; border-radius: 10px; background: #6259d9; color: #fff; font-weight: 600; text-decoration: none; line-height: 1.5; }
+.settings-page .coffee-button:hover { background: #5047bf; }
+.settings-page .coffee-button img { display: block; flex-shrink: 0; filter: brightness(0) invert(1); }
+.settings-page .support-disclaimer { font-size: 13px; margin-bottom: 0; }
+@media (prefers-color-scheme: dark) {
+  .settings-page .about-support h2 { color: #e2e7f2; }
+  .settings-page .about-links img { filter: brightness(0) saturate(100%) invert(78%) sepia(24%) saturate(1300%) hue-rotate(204deg); }
+  .settings-page .coffee-button:hover { background: #7469eb; }
+}

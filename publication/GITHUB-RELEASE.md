@@ -2,10 +2,10 @@
 
 Repository: https://github.com/lvbeck/mail-ai-assist
 
-Prepared version: 0.12.24. Nothing is uploaded by the build scripts.
+Prepared version: 0.12.25. Nothing is uploaded by the build scripts.
 
 1. Build the MSI with the existing DPAPI signing key, then run finalize-release.py and verify-release.mjs. Build the ATN XPI and supplemental review archive. Keep existing installers untouched.
-2. After separate authorization to publish, create a public, non-prerelease GitHub release tagged v0.12.24. Upload the individual files from dist/github-release/v0.12.24/, especially Mail-AI-Assist-0.12.24-x64.msi and helper-updates.json. Do not upload only a ZIP: the updater requests named assets directly. The XPI may be offered for manual installation but ATN handles extension updates.
+2. After separate authorization to publish, create a public, non-prerelease GitHub release tagged v0.12.25. Upload the individual files from dist/github-release/v0.12.25/, especially Mail-AI-Assist-0.12.25-x64.msi and helper-updates.json. Do not upload only a ZIP: the updater requests named assets directly. The XPI may be offered for manual installation but ATN handles extension updates.
 3. Mark the release Latest only when all assets are present. Later stable releases must likewise include a correctly signed helper-updates.json referencing their versioned MSI. Do not mark documentation-only or incomplete releases Latest.
 4. Check https://github.com/lvbeck/mail-ai-assist/releases/latest/download/helper-updates.json and the versioned MSI URL, including redirects, from an unauthenticated client. Verify the downloaded MSI hash against the signed manifest. Current package checks do not prove these unpublished URLs work.
 5. Submit the ATN XPI separately using On this site, paste the full privacy policy, and supply reviewer notes/testing access as needed. The manifest ID is unchanged and update_url is absent, including in the MSI-bundled XPI.

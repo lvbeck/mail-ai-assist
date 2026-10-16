@@ -62,4 +62,4 @@ node installer/verify-release.mjs
 
 ## 게시
 
-단일 ZIP이 아니라 dist/github-release/v0.12.24/ 안의 파일들을 각각 릴리스 자산으로 업로드하세요. ATN XPI는 'On this site'를 선택하여 별도로 제출합니다. [검토자 안내](publication/REVIEW-NOTES.md), [등록 정보](publication/LISTING.md), [릴리스 절차](publication/GITHUB-RELEASE.md)를 확인하세요. 스크립트는 자동으로 푸시, 업로드 또는 설치하지 않습니다. 키, 인증 정보, 메일 및 캐시를 Git에 포함하지 마세요. .gitignore는 이미 커밋된 비밀 정보를 제거하지 않습니다. MIT 라이선스: [LICENSE](LICENSE).
+단일 ZIP이 아니라 dist/github-release/v0.12.25/ 안의 파일들을 각각 릴리스 자산으로 업로드하세요. ATN XPI는 'On this site'를 선택하여 별도로 제출합니다. [검토자 안내](publication/REVIEW-NOTES.md), [등록 정보](publication/LISTING.md), [릴리스 절차](publication/GITHUB-RELEASE.md)를 확인하세요. 스크립트는 자동으로 푸시, 업로드 또는 설치하지 않습니다. 키, 인증 정보, 메일 및 캐시를 Git에 포함하지 마세요. .gitignore는 이미 커밋된 비밀 정보를 제거하지 않습니다. MIT 라이선스: [LICENSE](LICENSE).

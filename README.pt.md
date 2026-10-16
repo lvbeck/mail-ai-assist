@@ -62,4 +62,4 @@ node installer/verify-release.mjs
 
 ## Publicação
 
-Anexe separadamente os ficheiros de dist/github-release/v0.12.24/ à Release, não apenas um ZIP. Submeta o XPI ATN com On this site. Consulte [revisão](publication/REVIEW-NOTES.md), [descrição](publication/LISTING.md), [procedimento](publication/GITHUB-RELEASE.md). Os scripts não fazem push, carregamentos nem instalações automáticas. Não versione chaves, credenciais, correio ou cache; .gitignore não remove segredos já registados. MIT: [LICENSE](LICENSE).
+Anexe separadamente os ficheiros de dist/github-release/v0.12.25/ à Release, não apenas um ZIP. Submeta o XPI ATN com On this site. Consulte [revisão](publication/REVIEW-NOTES.md), [descrição](publication/LISTING.md), [procedimento](publication/GITHUB-RELEASE.md). Os scripts não fazem push, carregamentos nem instalações automáticas. Não versione chaves, credenciais, correio ou cache; .gitignore não remove segredos já registados. MIT: [LICENSE](LICENSE).
