@@ -5,18 +5,18 @@ import { mkdir, readFile, writeFile, rename, open, unlink } from 'node:fs/promis
 import { join } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
 import { AppError, AUTH_ORIGIN, API_ORIGIN, APP_NAME, challenge, validateCallback, verifyIdToken } from './core.mjs';
-import { protect, unprotect, openBrowser } from './windows.mjs';
+import { protect, unprotect, openBrowser } from './platform-crypto.mjs';
+import { dataDirectory } from './platform.mjs';
 
 function stateDirectory() {
-  if (!process.env.LOCALAPPDATA) throw new AppError('storage_unavailable');
-  return join(process.env.LOCALAPPDATA, 'MailAiAssist');
+  return dataDirectory();
 }
 async function loadState() {
   let raw;
   try { raw = await readFile(join(stateDirectory(), 'state.json'), 'utf8'); }
   catch (error) { if (error.code === 'ENOENT') return null; throw new AppError('storage_unavailable'); }
   try { return JSON.parse(await unprotect(raw)); }
-  catch { throw new AppError('credential_storage_unavailable', 'The saved sign-in cannot be decrypted by this Windows account.'); }
+  catch { throw new AppError('credential_storage_unavailable', 'The saved sign-in cannot be decrypted by this operating-system account.'); }
 }
 async function saveState(state) {
   const root = stateDirectory();

@@ -36,3 +36,8 @@ __pycache__/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# macOS installers and notarization output.
+*.pkg
+*.dmg
+*.dSYM/

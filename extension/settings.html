@@ -6,8 +6,8 @@
 
 <section class="settings-group helper-setup">
 <h2>本地辅助程序安装</h2><p>需要单独安装 Windows x64 辅助程序（MSI）。下载后手动安装，重启 Thunderbird，再登录或填写 API Key。</p><p class="note">Thunderbird 管理插件更新；辅助程序仍使用独立更新机制。已安装本插件时，无需再次安装 MSI 中附带的 XPI。</p>
-<div class="row"><a class="helper-download" href="https://github.com/lvbeck/mail-ai-assist/releases/latest" target="_blank" rel="noreferrer noopener"><img src="button-download.svg" width="18" height="18" alt="">下载辅助程序（Windows x64）</a><button id="helperReload" type="button"><img src="button-refresh.svg" width="18" height="18" alt="">安装后重新加载设置</button><a href="privacy.html" target="_blank" rel="noreferrer noopener">隐私政策</a></div>
-<p class="note">使用 AI 功能时，相关邮件内容会通过本地辅助程序发送到所选服务商，可能消耗额度。自动摘要和标签默认关闭；可按账户启用。缓存和导出保留在本机。</p></section>
+<div class="row"><a class="helper-download" href="https://github.com/lvbeck/mail-ai-assist/releases/latest" target="_blank" rel="noreferrer noopener"><img src="button-download.svg" width="18" height="18" alt="">下载辅助程序（Windows x64）</a><a class="helper-download" href="https://github.com/lvbeck/mail-ai-assist/releases/latest" target="_blank" rel="noreferrer noopener"><img src="button-download.svg" width="18" height="18" alt="">下载辅助程序（macOS · Apple Silicon）</a><a class="helper-download" href="https://github.com/lvbeck/mail-ai-assist/releases/latest" target="_blank" rel="noreferrer noopener"><img src="button-download.svg" width="18" height="18" alt="">下载辅助程序（macOS · Intel）</a><button id="helperReload" type="button"><img src="button-refresh.svg" width="18" height="18" alt="">安装后重新加载设置</button><a href="privacy.html" target="_blank" rel="noreferrer noopener">隐私政策</a></div>
+<p class="note">macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。</p><p class="note">使用 AI 功能时，相关邮件内容会通过本地辅助程序发送到所选服务商，可能消耗额度。自动摘要和标签默认关闭；可按账户启用。缓存和导出保留在本机。</p></section>
 <section class="settings-group provider-setting">
 <h2>模型与登录</h2><div class="provider-model-row"><div>
 <label for="provider">模型提供商</label><select id="provider"><option value="chatgpt">ChatGPT 订阅</option><option value="gemini">Gemini API</option><option value="claude">Claude API</option></select>

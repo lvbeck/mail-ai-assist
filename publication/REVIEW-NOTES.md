@@ -1,29 +1,26 @@
-# ATN reviewer notes — Mail AI Assist 0.12.25
+# ATN reviewer notes — Mail AI Assist 0.12.26
 
 ## Package and update channels
 
-Submit Mail-AI-Assist-0.12.25-ATN.xpi using "On this site". Its ID is mail-ai-assist@lvbeck.github.com. It has no update_url. Source files are readable JavaScript/HTML/CSS; no JavaScript bundler, minifier or transpiler is used. The XPI itself contains the reviewable extension code. Its root contains manifest.json, not an enclosing project folder. No Experiment APIs are included.
+Submit Mail-AI-Assist-0.12.26-ATN.xpi using "On this site". Its ID is mail-ai-assist@lvbeck.github.com. It has no update_url. Source files are readable JavaScript/HTML/CSS; no JavaScript bundler, minifier or transpiler is used. The XPI itself contains the reviewable extension code. Its root contains manifest.json, not an enclosing project folder. No Experiment APIs are included.
 
-The helper MSI is rebuilt as 0.12.25 for GitHub-hosted updates. RSA signature, package hash and installation-scope controls remain in place. GitHub HTTPS redirects are restricted to this repository and release-assets.githubusercontent.com, with a finite hop limit. Existing helpers require a one-time manual MSI upgrade because their installed update address and redirect policy do not change remotely. The MSI-bundled XPI also omits update_url; ATN remains the extension update channel. No native message protocol changes are introduced.
+Windows retains its existing MSI installation and signed update mechanism. macOS uses separate macos-arm64 and macos-x64 PKGs and signed update manifests. Exact versioned URLs, bounded GitHub redirects, RSA signatures, package size and SHA-256 remain checked. ATN remains the XPI update channel.
 
-## Required Windows helper
+## Native helper availability for 0.12.26
 
-The AI, translation, cache and export workflows require the Windows x64 helper, registered as local.mail_ai_assist. NativeMessaging is essential; the extension has no executable binary inside it.
+This is a local, unpublished 0.12.26 build. The common XPI adds macOS settings guidance and visible download entries for Apple Silicon and Intel, and retains Windows support. The separate helper source includes macOS Keychain, Finder, PKG and architecture-specific signed updates. No new extension permissions or Experiment APIs are used.
 
-Download page: https://github.com/lvbeck/mail-ai-assist/releases/latest
+Download landing page: https://github.com/lvbeck/mail-ai-assist/releases/latest
 
-Matching installer: https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.25/Mail-AI-Assist-0.12.25-x64.msi
+Do not assume a matching 0.12.26 MSI or macOS PKG is published yet. Before submission, the publisher must provide matching, tested helper installers and update this availability note. A Windows-built XPI does not prove that macOS signing, notarization, Keychain, installation or UI behavior has been tested. Mac installer compilation requires Apple's macOS toolchain; see installer/macos/README.md. The XPI contains no native executable.
 
-GitHub release v0.12.25 is published as a public, non-prerelease release:
-https://github.com/lvbeck/mail-ai-assist/releases/tag/v0.12.25
+## Source archive and npm lockfile
 
-The release includes the matching Windows x64 MSI, the standard-distribution XPI, the signed helper update manifest and SHA-256 checksums:
+The XPI JavaScript/HTML/CSS is readable as packaged. XPI packaging copies source files and adjusts manifest metadata only; it does not transpile, bundle or minify executable code. The extension does not ship npm runtime libraries. The optional sharp development dependency is used only to regenerate existing icon assets; it is not needed to reproduce the XPI.
 
-- Installer: https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.25/Mail-AI-Assist-0.12.25-x64.msi
-- Signed helper update manifest: https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.25/helper-updates.json
-- Checksums: https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.25/SHA256SUMS.txt
+Following https://webextension-api.thunderbird.net/en/mv3/guides/sourceCodeSubmission.html, do not specify a mandatory transformed-code source archive for this copy-only XPI unless the reviewer requests one. The optional supplemental archive provides native helper context. It now includes package.json and package-lock.json, pinning the icon tooling. Source-archive submission may trigger a full build review.
 
-The submitted extension package is Mail-AI-Assist-0.12.25-ATN.xpi, built for the ATN channel. Native helper source and installer build instructions are supplied in the supplemental review archive; credentials, the private signing key and the Node executable are excluded. An official signed helper release needs the existing publisher key; reproducing the ATN XPI does not.
+The lockfile was generated with Node.js 22.22.0 and npm 10.9.4. For optional icon regeneration, run npm ci followed by npm run icons from the root. XPI reproduction itself needs only Python 3.10+ and the supplied extension assets. Private keys, Node executables, node_modules, build outputs and test fixtures are excluded. Apple signing/notarization is only needed for distributing the native PKG, not for reproducing the XPI.
 
 ## Reproduce the XPI
 
@@ -56,7 +53,11 @@ The script copies extension assets verbatim and replaces only the archived manif
 - nativeMessaging: local helper communication for credentials, providers, export, cache and updates.
 - clipboardWrite: copy an exported file path when requested.
 
-## Changes in 0.12.25
+## Changes in 0.12.26
+
+Added macOS platform adapters and dual-architecture native-helper build support; added localized platform guidance and both Mac download entries. Added the npm lockfile and clarified optional source-archive submission. Mac distribution still requires signed installers and real-device verification.
+
+### Retained About changes from 0.12.25
 
 Organized About into one settings card with Add-on information, License, Disclaimer and Support development subsections. Added GitHub and local privacy-policy links and a voluntary Buy Me a Coffee support button at the bottom of About. Support text is localized in all ten interface languages. The donation link opens only after a user click; no remote donation script or embedded payment widget is loaded. Donations do not unlock or restrict features. No permissions, AI processing or native messaging protocol changes were introduced.
 

@@ -28,7 +28,15 @@ Autorisation ChatGPT, Gemini API et Claude API sont pris en charge. La traductio
 
 ## Installation et export
 
-Assistant Windows x64 requis : télécharger le MSI depuis [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases), installer et redémarrer Thunderbird. Installer l’extension via ATN après publication, ou manuellement depuis le XPI. Minimum déclaré : Thunderbird 128 ; tester les versions utilisées. Ces liens ne signifient pas qu’une publication existe déjà. TXT peut exclure les citations ; EML conserve le message original et les pièces jointes. Dossier d’export configurable ; fichiers affichés pour ajout manuel et conservés à la fermeture. Nettoyage disponible dans les paramètres.
+Windows et macOS utilisent le même XPI Thunderbird, avec un assistant installé séparément pour chaque système.
+
+- Windows x64 : installer le MSI.
+- macOS Apple Silicon : compiler/installer le PKG arm64.
+- macOS Intel : compiler/installer le PKG x64.
+
+Redémarrer Thunderbird après installation. Les téléchargements publics sont sur [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases). La version 0.12.26 ajoute le code macOS ; les PKG signés et les tests sur Mac réels restent à réaliser. Aucun paquet Mac public n’est encore disponible.
+
+Installer l’extension via ATN après publication, ou manuellement depuis le XPI. Minimum déclaré : Thunderbird 128 ; tester les versions utilisées. Ces liens ne signifient pas qu’une publication existe déjà. TXT peut exclure les citations ; EML conserve le message original et les pièces jointes. Dossier d’export configurable ; fichiers affichés pour ajout manuel et conservés à la fermeture. Nettoyage disponible dans les paramètres.
 
 ## Mises à jour et migration
 
@@ -62,4 +70,8 @@ node installer/verify-release.mjs
 
 ## Publication
 
-Joindre séparément les fichiers de dist/github-release/v0.12.25/ à la Release, pas seulement un ZIP. Soumettre le XPI ATN avec On this site. Voir [notes de revue](publication/REVIEW-NOTES.md), [description](publication/LISTING.md), [procédure](publication/GITHUB-RELEASE.md). Aucun push, téléversement ou installation automatique. Ne pas versionner clés, identifiants, courriels ou caches ; .gitignore ne supprime pas les secrets déjà commités. MIT : [LICENSE](LICENSE).
+Joindre séparément les fichiers de dist/github-release/v0.12.26/ à la Release, pas seulement un ZIP. Soumettre le XPI ATN avec On this site. Voir [notes de revue](publication/REVIEW-NOTES.md), [description](publication/LISTING.md), [procédure](publication/GITHUB-RELEASE.md). Aucun push, téléversement ou installation automatique. Ne pas versionner clés, identifiants, courriels ou caches ; .gitignore ne supprime pas les secrets déjà commités. MIT : [LICENSE](LICENSE).
+
+## Prise en charge macOS (0.12.26, non publiée)
+
+Le code source inclut un assistant Apple Silicon (arm64) et Intel (x64) : identifiants protégés par le trousseau, sélection des exports dans Finder et mises à jour PKG signées distinctes. Le MSI Windows et son mécanisme de mise à jour sont conservés. macOS nécessite un assistant compilé séparément ; le XPI seul ne suffit pas. La signature, la notarisation et les tests sur de vrais Mac restent nécessaires avant publication. Voir [la compilation et les tests macOS](installer/macos/README.md).

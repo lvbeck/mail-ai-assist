@@ -1,8 +1,8 @@
 {
   "name": "mail-ai-assist",
-  "version": "0.12.25",
+  "version": "0.12.26",
   "private": true,
-  "description": "Thunderbird email assistant and Windows native messaging helper",
+  "description": "AI summaries, translation, tag suggestions, selected-text rewriting and local email export for Thunderbird, with Windows and macOS (Apple Silicon and Intel) native helpers.",
   "license": "MIT",
   "engines": {
     "node": ">=22"

@@ -4,9 +4,10 @@ import { join, dirname, isAbsolute, resolve, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 import { AppError } from './core.mjs';
+import { dataDirectory, validateDesktopApplication } from './platform.mjs';
 const sessions = new Map();
 const directory = dirname(fileURLToPath(import.meta.url));
-function exportSettingsFile() { return join(process.env.LOCALAPPDATA, 'MailAiAssist', 'export-settings.json'); }
+function exportSettingsFile() { return join(dataDirectory(), 'export-settings.json'); }
 export async function desktopExportDirectory() {
   try {
     const saved = JSON.parse(await readFile(exportSettingsFile(), 'utf8'));
@@ -14,7 +15,7 @@ export async function desktopExportDirectory() {
     return saved.path;
   } catch (error) {
     if (error.code !== 'ENOENT') throw new AppError('desktop_failed');
-    return join(process.env.LOCALAPPDATA, 'MailAiAssist', 'Exports');
+    return join(dataDirectory(), 'Exports');
   }
 }
 export async function saveDesktopExportDirectory(path) {
@@ -57,6 +58,7 @@ export function parseDesktopResult(output, exitCode) {
 }
 async function runDesktop(input, signal) {
   signal?.throwIfAborted();
+  if (process.platform === 'darwin') return (await import('./macos.mjs')).runMacNative(input, signal);
   const shell = join(process.env.SystemRoot || 'C:\\Windows', 'System32/WindowsPowerShell/v1.0/powershell.exe');
   return new Promise((resolve, reject) => {
     const child = spawn(shell, ['-NoLogo', '-NoProfile', '-STA', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', join(directory, 'desktop-attach.ps1')], { windowsHide: true, stdio: ['pipe', 'pipe', 'ignore'] });
@@ -91,7 +93,7 @@ async function startExport(message, extension) {
 }
 export async function prepareDesktop(message, signal) {
   if (!['chatgpt', 'codex', 'custom'].includes(message.target)) throw new AppError('desktop_invalid');
-  if (message.target === 'custom' && (typeof message.executable !== 'string' || !isAbsolute(message.executable) || !/\.exe$/i.test(message.executable) || !(await stat(message.executable)).isFile())) throw new AppError('desktop_invalid');
+  if (message.target === 'custom') await validateDesktopApplication(message.executable);
   const content = serializeMail(message.mail, message.format);
   const session = await startExport(message, 'txt');
   const { token } = session;
@@ -142,7 +144,7 @@ export async function cleanupDesktop(message) {
 
 export async function beginEml(message) {
   if (!['chatgpt', 'codex', 'custom'].includes(message.target) || !Number.isSafeInteger(message.size) || message.size < 1) throw new AppError('desktop_invalid');
-  if (message.target === 'custom' && (typeof message.executable !== 'string' || !isAbsolute(message.executable) || !/\.exe$/i.test(message.executable) || !(await stat(message.executable)).isFile())) throw new AppError('desktop_invalid');
+  if (message.target === 'custom') await validateDesktopApplication(message.executable);
   const session = await startExport(message, 'eml');
   await writeFile(session.temporary, Buffer.alloc(0), { flag: 'wx' });
   sessions.set(session.token, { ...session, size: message.size, received: 0 });

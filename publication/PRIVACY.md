@@ -1,11 +1,11 @@
 # Mail AI Assist Privacy Policy
 
-Effective date: 15 October 2026
+Effective date: 16 October 2026
 Developer and contact: Jin Lu, it@live.cn
 
 ## What this extension does
 
-Mail AI Assist provides email summaries, translation, tag suggestions, selected-text rewriting and local email export in Thunderbird. These functions use a separately installed Windows x64 native helper. The extension does not send messages automatically. AI results can be inaccurate and should be checked before use.
+Mail AI Assist provides email summaries, translation, tag suggestions, selected-text rewriting and local email export in Thunderbird. These functions use a separately installed native helper for the operating system. The extension does not send messages automatically. AI results can be inaccurate and should be checked before use.
 
 ## Information processed and recipients
 
@@ -31,8 +31,12 @@ Uninstalling the add-on or helper does not necessarily remove retained credentia
 
 The ATN edition uses Thunderbird's add-on update service for extension updates. The helper retains its independent updater: while used, it checks the configured GitHub Releases download service at most once per day, validates signed update metadata and downloaded packages, and installs according to the existing installation scope and authorization flow. These requests reveal normal connection information and the requested update resource/version to the hosting server, but do not contain email bodies or provider credentials. Download and service links are only opened when you choose them; the external site may process its own connection data and cookies.
 
-Mail AI Assist contains no advertising or analytics telemetry. Email content is not sent to the GitHub update hosting for AI processing. Local processing and file retention still expose data to anyone with sufficient access to your Windows account or files.
+Mail AI Assist contains no advertising or analytics telemetry. Email content is not sent to the GitHub update hosting for AI processing. Local processing and file retention still expose data to anyone with sufficient access to your operating-system account or files.
 
 ## Questions and changes
 
 Contact it@live.cn with privacy questions. Do not include private mail, passwords or API keys in public issue reports. Future changes to data handling will be reflected in this policy and the add-on release information.
+
+## macOS storage and updates
+
+On macOS, credentials are AES-256-GCM encrypted under ~/Library/Application Support/MailAiAssist using an encryption key stored in the user's Keychain. Cache and default exports use the Cache and Exports subfolders and remain readable local files. Keychain access may require user approval. Windows DPAPI credentials are not migrated. The Mac updater uses separate signed architecture-specific feeds and opens macOS Installer only after the user requests installation; it does not install silently. Removing credentials does not remove the shared Keychain encryption key used for other providers.

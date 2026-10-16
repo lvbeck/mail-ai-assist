@@ -28,7 +28,15 @@ ChatGPT 認証、Gemini API、Claude API を選択できます。翻訳は Googl
 
 ## インストールとエクスポート
 
-Windows x64 ヘルパーが必要です。[GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases) から MSI をダウンロードしてインストールし、Thunderbird を再起動してください。アドオンは ATN で公開後にインストールするか、アドオンマネージャーからローカル XPI を手動でインストールします。manifest の最低対応バージョンは Thunderbird 128 です。実際に使用するバージョンで動作確認してください。これらのリンクは ATN や GitHub での公開済み状態を保証しません。TXT は引用を除外して本文を出力でき、EML は元のメールと添付ファイルを保持します。エクスポート先は設定で選択できます。ファイルは手動添付のためにフォルダー内で表示され、ウィンドウを閉じても残ります。設定で本アドオンが管理するエクスポートを消去できます。
+Windows と macOS で同じ Thunderbird XPI を使用し、OS に対応するヘルパーを別途インストールします。
+
+- Windows x64：MSI をインストール。
+- macOS Apple Silicon：arm64 PKG をビルドしてインストール。
+- macOS Intel：x64 PKG をビルドしてインストール。
+
+インストール後に Thunderbird を再起動してください。公開ダウンロードは [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases) にあります。0.12.26 で macOS ソース対応を追加しましたが、署名付き PKG と実機検証は未完了で、Mac パッケージはまだ公開されていません。
+
+アドオンは ATN で公開後にインストールするか、アドオンマネージャーからローカル XPI を手動でインストールします。manifest の最低対応バージョンは Thunderbird 128 です。実際に使用するバージョンで動作確認してください。これらのリンクは ATN や GitHub での公開済み状態を保証しません。TXT は引用を除外して本文を出力でき、EML は元のメールと添付ファイルを保持します。エクスポート先は設定で選択できます。ファイルは手動添付のためにフォルダー内で表示され、ウィンドウを閉じても残ります。設定で本アドオンが管理するエクスポートを消去できます。
 
 ## 更新と移行
 
@@ -62,4 +70,8 @@ node installer/verify-release.mjs
 
 ## 公開
 
-単一の ZIP ではなく、dist/github-release/v0.12.25/ 内の各ファイルをリリースアセットとしてアップロードしてください。ATN XPI は「On this site」を選んで別途提出します。[審査担当者向け説明](publication/REVIEW-NOTES.md)、[掲載情報](publication/LISTING.md)、[リリース手順](publication/GITHUB-RELEASE.md)を確認してください。スクリプトは自動で push、アップロード、インストールを行いません。鍵、認証情報、メール、キャッシュを Git に含めないでください。.gitignore はすでにコミットされた機密情報を削除しません。MIT ライセンス：[LICENSE](LICENSE)。
+単一の ZIP ではなく、dist/github-release/v0.12.26/ 内の各ファイルをリリースアセットとしてアップロードしてください。ATN XPI は「On this site」を選んで別途提出します。[審査担当者向け説明](publication/REVIEW-NOTES.md)、[掲載情報](publication/LISTING.md)、[リリース手順](publication/GITHUB-RELEASE.md)を確認してください。スクリプトは自動で push、アップロード、インストールを行いません。鍵、認証情報、メール、キャッシュを Git に含めないでください。.gitignore はすでにコミットされた機密情報を削除しません。MIT ライセンス：[LICENSE](LICENSE)。
+
+## macOS 対応（0.12.26、未公開）
+
+ソースには Apple Silicon（arm64）と Intel（x64）のヘルパー対応を追加しました。キーチェーンによる資格情報保護、Finder でのエクスポート選択、独立した署名付き PKG 更新に対応します。Windows MSI と更新方式は維持します。macOS ではヘルパーの別途ビルドが必要で、XPI だけでは動作しません。公開前に PKG の署名・公証と実機検証が必要です。[macOS ビルドとテスト手順](installer/macos/README.md)を参照してください。

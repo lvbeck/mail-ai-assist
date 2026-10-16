@@ -24,14 +24,21 @@ export function releaseAssetUrl(config, version, filename) {
   }
   return `${config.baseUrl}releases/${version}/${filename}`;
 }
+export function releaseFilename(config, version) {
+  versionParts(version);
+  const platform = config.platform || 'windows-x64';
+  if (platform === 'windows-x64') return `Mail-AI-Assist-${version}-x64${installerSuffix(config)}.msi`;
+  if (['macos-arm64', 'macos-x64'].includes(platform)) return `Mail-AI-Assist-${version}-${platform}.pkg`;
+  throw new Error('wrong_product');
+}
 export function verifyRelease(envelope, config) {
   if (envelope?.algorithm !== 'RSA-SHA256' || typeof envelope.payload !== 'string' || typeof envelope.signature !== 'string' || envelope.payload.length > 24000) throw new Error('invalid_manifest');
   const payload = Buffer.from(envelope.payload, 'base64');
   if (!verify('RSA-SHA256', payload, config.publicKey, Buffer.from(envelope.signature, 'base64'))) throw new Error('invalid_signature');
   const release = JSON.parse(payload.toString('utf8'));
   versionParts(release.version);
-  if (release.product !== 'mail-ai-assist-helper' || release.platform !== 'windows-x64' || release.schema !== 1) throw new Error('wrong_product');
-  if (release.url !== releaseAssetUrl(config, release.version, `Mail-AI-Assist-${release.version}-x64${installerSuffix(config)}.msi`)) throw new Error('invalid_download_url');
+  if (release.product !== 'mail-ai-assist-helper' || release.platform !== (config.platform || 'windows-x64') || release.schema !== 1) throw new Error('wrong_product');
+  if (release.url !== releaseAssetUrl(config, release.version, releaseFilename(config, release.version))) throw new Error('invalid_download_url');
   if (!/^[a-f0-9]{64}$/.test(release.sha256) || !Number.isSafeInteger(release.size) || release.size < 1 || release.size > 200 * 1024 * 1024) throw new Error('invalid_package');
   return release;
 }

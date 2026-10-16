@@ -28,7 +28,15 @@ ChatGPT 인증, Gemini API 또는 Claude API를 선택할 수 있습니다. 번�
 
 ## 설치 및 내보내기
 
-Windows x64 도우미가 필요합니다. [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases)에서 MSI를 다운로드하여 설치하고 Thunderbird를 다시 시작하세요. 부가 기능은 ATN에 게시된 후 설치하거나, 부가 기능 관리자에서 로컬 XPI를 직접 설치할 수 있습니다. manifest의 최소 버전은 Thunderbird 128입니다. 실제 사용하는 버전에서 테스트하세요. 이 링크가 ATN 또는 GitHub에 이미 게시되었음을 의미하지는 않습니다. TXT는 인용문을 제외하여 본문을 내보낼 수 있고 EML은 원본 메일과 첨부 파일을 유지합니다. 설정에서 내보내기 폴더를 선택할 수 있습니다. 수동 첨부를 위해 폴더에서 파일을 표시하며 창을 닫아도 유지됩니다. 설정에서 이 부가 기능이 관리하는 내보낸 파일을 지울 수 있습니다.
+Windows와 macOS에서 동일한 Thunderbird XPI를 사용하고 운영체제에 맞는 도우미를 별도로 설치합니다.
+
+- Windows x64: MSI 설치.
+- macOS Apple Silicon: arm64 PKG 빌드 및 설치.
+- macOS Intel: x64 PKG 빌드 및 설치.
+
+설치 후 Thunderbird를 다시 시작하세요. 공개 다운로드는 [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases)에 있습니다. 0.12.26에 macOS 소스 지원을 추가했지만 서명된 PKG와 실제 Mac 검증은 아직 완료되지 않았으며 Mac 패키지는 아직 공개되지 않았습니다.
+
+부가 기능은 ATN에 게시된 후 설치하거나, 부가 기능 관리자에서 로컬 XPI를 직접 설치할 수 있습니다. manifest의 최소 버전은 Thunderbird 128입니다. 실제 사용하는 버전에서 테스트하세요. 이 링크가 ATN 또는 GitHub에 이미 게시되었음을 의미하지는 않습니다. TXT는 인용문을 제외하여 본문을 내보낼 수 있고 EML은 원본 메일과 첨부 파일을 유지합니다. 설정에서 내보내기 폴더를 선택할 수 있습니다. 수동 첨부를 위해 폴더에서 파일을 표시하며 창을 닫아도 유지됩니다. 설정에서 이 부가 기능이 관리하는 내보낸 파일을 지울 수 있습니다.
 
 ## 업데이트 및 이전
 
@@ -62,4 +70,8 @@ node installer/verify-release.mjs
 
 ## 게시
 
-단일 ZIP이 아니라 dist/github-release/v0.12.25/ 안의 파일들을 각각 릴리스 자산으로 업로드하세요. ATN XPI는 'On this site'를 선택하여 별도로 제출합니다. [검토자 안내](publication/REVIEW-NOTES.md), [등록 정보](publication/LISTING.md), [릴리스 절차](publication/GITHUB-RELEASE.md)를 확인하세요. 스크립트는 자동으로 푸시, 업로드 또는 설치하지 않습니다. 키, 인증 정보, 메일 및 캐시를 Git에 포함하지 마세요. .gitignore는 이미 커밋된 비밀 정보를 제거하지 않습니다. MIT 라이선스: [LICENSE](LICENSE).
+단일 ZIP이 아니라 dist/github-release/v0.12.26/ 안의 파일들을 각각 릴리스 자산으로 업로드하세요. ATN XPI는 'On this site'를 선택하여 별도로 제출합니다. [검토자 안내](publication/REVIEW-NOTES.md), [등록 정보](publication/LISTING.md), [릴리스 절차](publication/GITHUB-RELEASE.md)를 확인하세요. 스크립트는 자동으로 푸시, 업로드 또는 설치하지 않습니다. 키, 인증 정보, 메일 및 캐시를 Git에 포함하지 마세요. .gitignore는 이미 커밋된 비밀 정보를 제거하지 않습니다. MIT 라이선스: [LICENSE](LICENSE).
+
+## macOS 지원(0.12.26, 아직 미출시)
+
+소스에 Apple Silicon(arm64) 및 Intel(x64) 도우미 지원을 추가했습니다. 키체인 자격 증명 보호, Finder에서 내보낸 파일 선택, 별도의 서명된 PKG 업데이트를 지원합니다. Windows MSI 및 업데이트 방식은 유지됩니다. macOS는 도우미를 별도로 빌드해야 하며 XPI만으로는 작동하지 않습니다. 공개 전에 PKG 서명·공증 및 실제 Mac 검증이 필요합니다. [macOS 빌드 및 테스트 안내](installer/macos/README.md)를 참조하세요.

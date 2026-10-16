@@ -1,6 +1,8 @@
 (() => {
   const locales = ['en', 'de', 'fr', 'it', 'es', 'pt', 'zh-CN', 'zh-TW', 'ja', 'ko'];
   let locale = 'en';
+  let platform = '';
+  const macKeys = {"需要单独安装 Windows x64 辅助程序（MSI）。下载后手动安装，重启 Thunderbird，再登录或填写 API Key。": "macHelperSetup", "本地辅助程序未连接。请在设置页下载并安装 Windows x64 MSI，然后重启 Thunderbird。": "macHelperUnavailable", "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "macHelperUpgrade", "应用程序路径（.exe）": "macApplicationPath", "Thunderbird 管理插件更新；辅助程序仍使用独立更新机制。已安装本插件时，无需再次安装 MSI 中附带的 XPI。": "macUpdateChannel", "辅助程序更新已下载。点击安装后，请关闭 Thunderbird，再确认管理员授权。": "macUpdateReady", "请关闭 Thunderbird，随后确认管理员授权以安装更新。": "macUpdateInstall"};
   let initialization;
   let automaticLocale = 'en';
   let staticText = [];
@@ -21,6 +23,7 @@
     return locales.includes(preference) ? preference : matchLocale(thunderbird) || system.map(matchLocale).find(Boolean) || 'en';
   }
   function t(key, values = {}) {
+    if (platform === 'mac') key = macKeys[key] || key;
     let text = globalThis.ComposeTranslations[locale]?.[key] || globalThis.ComposeTranslations.en[key] || key;
     for (const [name, value] of Object.entries(values)) text = text.replaceAll(`{${name}}`, String(value));
     return text;
@@ -45,6 +48,7 @@
     return initialization ||= initializePage();
   }
   async function initializePage() {
+    try { platform = (await messenger.runtime.getPlatformInfo()).os; } catch { /* Keep the existing Windows copy when unavailable. */ }
     const saved = await messenger.storage.local.get(['uiLanguage', 'outputLanguage']);
     let thunderbird;
     let system = navigator.languages || [navigator.language];

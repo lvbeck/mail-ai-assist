@@ -3,7 +3,8 @@ import { join } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
 import { openDesktopFolder } from './desktop-export.mjs';
 import { validateResultText } from './core.mjs';
-const root = () => join(process.env.LOCALAPPDATA, 'MailAiAssist', 'Cache');
+import { dataDirectory } from './platform.mjs';
+const root = () => join(dataDirectory(), 'Cache');
 const validGeneration = value => /^[0-9a-f-]{36}$/.test(value);
 async function generation() {
   await mkdir(root(), { recursive: true });

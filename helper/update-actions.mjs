@@ -7,6 +7,7 @@ import { verifyRelease, verifyPackage, newerVersion } from './update-core.mjs';
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const cache = () => join(process.env.LOCALAPPDATA, 'MailAiAssist', 'updates');
 export async function helperUpdateStatus() {
+  if (process.platform === 'darwin') return (await import('./mac-update.mjs')).macUpdateStatus();
   try {
     if ((await getInstallation(root))?.scope !== 'machine') return { available: false, waiting: false };
     const status = JSON.parse((await readFile(join(cache(), 'status.json'), 'utf8')).replace(/^\uFEFF/, ''));
@@ -16,6 +17,7 @@ export async function helperUpdateStatus() {
   } catch { return { available: false, waiting: false }; }
 }
 export async function installHelperUpdate() {
+  if (process.platform === 'darwin') return (await import('./mac-update.mjs')).installMacUpdate();
   const installation = await getInstallation(root);
   if (installation?.scope !== 'machine') throw new Error('No machine update is available.');
   const config = JSON.parse(await readFile(join(root, 'msi-install.json'), 'utf8'));

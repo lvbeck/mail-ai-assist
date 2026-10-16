@@ -4,7 +4,8 @@ import { mkdir, readFile, writeFile, rename, unlink } from 'node:fs/promises';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { AppError, buildRequest, boundedJson, validateResultText } from './core.mjs';
-import { protect, unprotect } from './windows.mjs';
+import { protect, unprotect } from './platform-crypto.mjs';
+import { dataDirectory } from './platform.mjs';
 import { withSessionLock } from './auth.mjs';
 
 export function validateProvider(value = 'chatgpt') {
@@ -16,8 +17,7 @@ function apiProvider(value) {
   if (value === 'chatgpt') throw new AppError('invalid_provider');
 }
 function directory() {
-  if (!process.env.LOCALAPPDATA) throw new AppError('storage_unavailable');
-  return join(process.env.LOCALAPPDATA, 'MailAiAssist');
+  return dataDirectory();
 }
 async function loadKeys() {
   let raw;

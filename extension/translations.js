@@ -2830,3 +2830,160 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "최신 도우미 MSI를 설치하고 Thunderbird를 다시 시작하세요."
   }
 };
+
+// Platform-specific copy; Windows strings remain unchanged.
+for (const [locale, messages] of Object.entries({
+  "en": {
+    "macHelperSetup": "Install the macOS helper (PKG) matching your Mac: Apple Silicon or Intel. Restart Thunderbird, then sign in or enter an API key.",
+    "macHelperDownload": "Download helper (macOS)",
+    "macHelperUnavailable": "Local helper unavailable. Install the matching macOS PKG from Settings, then restart Thunderbird.",
+    "macHelperUpgrade": "Install the latest macOS helper PKG, then restart Thunderbird.",
+    "macApplicationPath": "Application path (.app)",
+    "macUpdateChannel": "Thunderbird manages add-on updates. The helper uses a separate signed update channel. Install the add-on only once.",
+    "macUpdateReady": "A helper update is ready. Click Install to open macOS Installer; close Thunderbird before completing installation.",
+    "macUpdateInstall": "Complete the update in macOS Installer, approve authorization if requested, then restart Thunderbird."
+  },
+  "zh-CN": {
+    "macHelperSetup": "请单独安装与你的 Mac 匹配的 macOS 辅助程序（PKG）：Apple Silicon 或 Intel。重启 Thunderbird 后再登录或填写 API Key。",
+    "macHelperDownload": "下载辅助程序（macOS）",
+    "macHelperUnavailable": "本地辅助程序未连接。请在设置页下载并安装匹配的 macOS PKG，然后重启 Thunderbird。",
+    "macHelperUpgrade": "请安装最新版 macOS 辅助程序 PKG，然后重启 Thunderbird。",
+    "macApplicationPath": "应用程序路径（.app）",
+    "macUpdateChannel": "Thunderbird 管理插件更新；辅助程序使用独立的签名更新渠道。插件只需安装一次。",
+    "macUpdateReady": "辅助程序更新已就绪。点击安装以打开 macOS 安装器；完成安装前请关闭 Thunderbird。",
+    "macUpdateInstall": "请在 macOS 安装器中完成更新，按提示授权，然后重启 Thunderbird。"
+  },
+  "zh-TW": {
+    "macHelperSetup": "請另外安裝與你的 Mac 相符的 macOS 輔助程式（PKG）：Apple Silicon 或 Intel。重新啟動 Thunderbird 後再登入或填入 API Key。",
+    "macHelperDownload": "下載輔助程式（macOS）",
+    "macHelperUnavailable": "本機輔助程式未連線。請在設定頁下載並安裝相符的 macOS PKG，然後重新啟動 Thunderbird。",
+    "macHelperUpgrade": "請安裝最新版 macOS 輔助程式 PKG，然後重新啟動 Thunderbird。",
+    "macApplicationPath": "應用程式路徑（.app）",
+    "macUpdateChannel": "Thunderbird 管理附加元件更新；輔助程式使用獨立的簽章更新管道。附加元件只需安裝一次。",
+    "macUpdateReady": "輔助程式更新已就緒。按下安裝以開啟 macOS 安裝程式；完成安裝前請關閉 Thunderbird。",
+    "macUpdateInstall": "請在 macOS 安裝程式中完成更新，依提示授權，然後重新啟動 Thunderbird。"
+  },
+  "de": {
+    "macHelperSetup": "Installieren Sie das macOS-Hilfsprogramm (PKG) passend zu Ihrem Mac: Apple Silicon oder Intel. Starten Sie Thunderbird neu und melden Sie sich an oder geben Sie einen API-Schlüssel ein.",
+    "macHelperDownload": "Hilfsprogramm herunterladen (macOS)",
+    "macHelperUnavailable": "Lokales Hilfsprogramm nicht verfügbar. Installieren Sie das passende macOS-PKG über die Einstellungen und starten Sie Thunderbird neu.",
+    "macHelperUpgrade": "Installieren Sie das aktuelle macOS-Hilfsprogramm als PKG und starten Sie Thunderbird neu.",
+    "macApplicationPath": "Anwendungspfad (.app)",
+    "macUpdateChannel": "Thunderbird verwaltet Add-on-Updates. Das Hilfsprogramm verwendet einen separaten signierten Updatekanal. Installieren Sie das Add-on nur einmal.",
+    "macUpdateReady": "Ein Update ist bereit. Klicken Sie auf Installieren, um das macOS-Installationsprogramm zu öffnen. Schließen Sie Thunderbird vor Abschluss der Installation.",
+    "macUpdateInstall": "Schließen Sie das Update im macOS-Installationsprogramm ab, bestätigen Sie bei Bedarf die Berechtigung und starten Sie Thunderbird neu."
+  },
+  "fr": {
+    "macHelperSetup": "Installez l’assistant macOS (PKG) adapté à votre Mac : Apple Silicon ou Intel. Redémarrez Thunderbird, puis connectez-vous ou saisissez une clé API.",
+    "macHelperDownload": "Télécharger l’assistant (macOS)",
+    "macHelperUnavailable": "Assistant local indisponible. Installez le PKG macOS adapté depuis les paramètres, puis redémarrez Thunderbird.",
+    "macHelperUpgrade": "Installez le dernier PKG de l’assistant macOS, puis redémarrez Thunderbird.",
+    "macApplicationPath": "Chemin de l’application (.app)",
+    "macUpdateChannel": "Thunderbird gère les mises à jour du module. L’assistant utilise un canal de mise à jour signé distinct. Installez le module une seule fois.",
+    "macUpdateReady": "Une mise à jour est prête. Cliquez sur Installer pour ouvrir le programme d’installation macOS ; fermez Thunderbird avant de terminer.",
+    "macUpdateInstall": "Terminez la mise à jour dans le programme d’installation macOS, autorisez-la si nécessaire, puis redémarrez Thunderbird."
+  },
+  "it": {
+    "macHelperSetup": "Installa il programma ausiliario macOS (PKG) adatto al tuo Mac: Apple Silicon o Intel. Riavvia Thunderbird, quindi accedi o inserisci una chiave API.",
+    "macHelperDownload": "Scarica il programma ausiliario (macOS)",
+    "macHelperUnavailable": "Programma ausiliario locale non disponibile. Installa il PKG macOS corretto dalle impostazioni, quindi riavvia Thunderbird.",
+    "macHelperUpgrade": "Installa il PKG più recente del programma ausiliario macOS, quindi riavvia Thunderbird.",
+    "macApplicationPath": "Percorso applicazione (.app)",
+    "macUpdateChannel": "Thunderbird gestisce gli aggiornamenti del componente aggiuntivo. Il programma ausiliario usa un canale firmato separato. Installa il componente aggiuntivo una sola volta.",
+    "macUpdateReady": "Un aggiornamento è pronto. Fai clic su Installa per aprire Installer di macOS; chiudi Thunderbird prima di completare l’installazione.",
+    "macUpdateInstall": "Completa l’aggiornamento in Installer di macOS, autorizzalo se richiesto e riavvia Thunderbird."
+  },
+  "es": {
+    "macHelperSetup": "Instala el programa auxiliar de macOS (PKG) adecuado para tu Mac: Apple Silicon o Intel. Reinicia Thunderbird e inicia sesión o introduce una clave API.",
+    "macHelperDownload": "Descargar auxiliar (macOS)",
+    "macHelperUnavailable": "Auxiliar local no disponible. Instala el PKG de macOS adecuado desde Configuración y reinicia Thunderbird.",
+    "macHelperUpgrade": "Instala el PKG más reciente del auxiliar de macOS y reinicia Thunderbird.",
+    "macApplicationPath": "Ruta de la aplicación (.app)",
+    "macUpdateChannel": "Thunderbird gestiona las actualizaciones del complemento. El auxiliar usa un canal firmado independiente. Instala el complemento una sola vez.",
+    "macUpdateReady": "Hay una actualización lista. Pulsa Instalar para abrir el instalador de macOS; cierra Thunderbird antes de finalizar.",
+    "macUpdateInstall": "Completa la actualización en el instalador de macOS, autoriza si se solicita y reinicia Thunderbird."
+  },
+  "pt": {
+    "macHelperSetup": "Instale o auxiliar macOS (PKG) adequado ao seu Mac: Apple Silicon ou Intel. Reinicie o Thunderbird e inicie sessão ou introduza uma chave API.",
+    "macHelperDownload": "Transferir auxiliar (macOS)",
+    "macHelperUnavailable": "Auxiliar local indisponível. Instale o PKG macOS adequado nas Definições e reinicie o Thunderbird.",
+    "macHelperUpgrade": "Instale o PKG mais recente do auxiliar macOS e reinicie o Thunderbird.",
+    "macApplicationPath": "Caminho da aplicação (.app)",
+    "macUpdateChannel": "O Thunderbird gere as atualizações do extra. O auxiliar utiliza um canal assinado separado. Instale o extra apenas uma vez.",
+    "macUpdateReady": "Está pronta uma atualização. Clique em Instalar para abrir o instalador macOS; feche o Thunderbird antes de concluir.",
+    "macUpdateInstall": "Conclua a atualização no instalador macOS, autorize se solicitado e reinicie o Thunderbird."
+  },
+  "ja": {
+    "macHelperSetup": "お使いの Mac に合う macOS ヘルパー（PKG）を別途インストールしてください：Apple Silicon または Intel。Thunderbird を再起動してからログインするか API キーを入力してください。",
+    "macHelperDownload": "ヘルパーをダウンロード（macOS）",
+    "macHelperUnavailable": "ローカルヘルパーに接続できません。設定から対応する macOS PKG をインストールし、Thunderbird を再起動してください。",
+    "macHelperUpgrade": "最新版の macOS ヘルパー PKG をインストールし、Thunderbird を再起動してください。",
+    "macApplicationPath": "アプリケーションのパス（.app）",
+    "macUpdateChannel": "アドオンの更新は Thunderbird が管理します。ヘルパーには別の署名付き更新経路があります。アドオンのインストールは一度だけで十分です。",
+    "macUpdateReady": "ヘルパーの更新が準備できました。「インストール」で macOS インストーラを開きます。完了前に Thunderbird を終了してください。",
+    "macUpdateInstall": "macOS インストーラで更新を完了し、必要な許可を与えてから Thunderbird を再起動してください。"
+  },
+  "ko": {
+    "macHelperSetup": "Mac에 맞는 macOS 도우미(PKG)를 별도로 설치하세요: Apple Silicon 또는 Intel. Thunderbird를 다시 시작한 후 로그인하거나 API 키를 입력하세요.",
+    "macHelperDownload": "도우미 다운로드(macOS)",
+    "macHelperUnavailable": "로컬 도우미에 연결할 수 없습니다. 설정에서 알맞은 macOS PKG를 설치한 후 Thunderbird를 다시 시작하세요.",
+    "macHelperUpgrade": "최신 macOS 도우미 PKG를 설치한 후 Thunderbird를 다시 시작하세요.",
+    "macApplicationPath": "애플리케이션 경로(.app)",
+    "macUpdateChannel": "Thunderbird가 부가 기능 업데이트를 관리합니다. 도우미는 별도의 서명된 업데이트 채널을 사용합니다. 부가 기능은 한 번만 설치하세요.",
+    "macUpdateReady": "도우미 업데이트가 준비되었습니다. 설치를 눌러 macOS 설치 프로그램을 열고, 완료하기 전에 Thunderbird를 종료하세요.",
+    "macUpdateInstall": "macOS 설치 프로그램에서 업데이트를 완료하고 요청 시 권한을 승인한 후 Thunderbird를 다시 시작하세요."
+  }
+})) Object.assign(globalThis.ComposeTranslations[locale], messages);
+
+for (const [locale, messages] of Object.entries({
+  "en": {
+    "下载辅助程序（macOS · Apple Silicon）": "Download helper (macOS · Apple Silicon)",
+    "下载辅助程序（macOS · Intel）": "Download helper (macOS · Intel)",
+    "macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。": "macOS installers are not yet published; download links currently open GitHub Releases."
+  },
+  "zh-CN": {
+    "下载辅助程序（macOS · Apple Silicon）": "下载辅助程序（macOS · Apple Silicon）",
+    "下载辅助程序（macOS · Intel）": "下载辅助程序（macOS · Intel）",
+    "macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。": "macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。"
+  },
+  "zh-TW": {
+    "下载辅助程序（macOS · Apple Silicon）": "下載輔助程式（macOS · Apple Silicon）",
+    "下载辅助程序（macOS · Intel）": "下載輔助程式（macOS · Intel）",
+    "macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。": "macOS 安裝套件尚未發布；下載入口暫時開啟 GitHub 發布頁。"
+  },
+  "de": {
+    "下载辅助程序（macOS · Apple Silicon）": "Hilfsprogramm herunterladen (macOS · Apple Silicon)",
+    "下载辅助程序（macOS · Intel）": "Hilfsprogramm herunterladen (macOS · Intel)",
+    "macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。": "macOS-Installationspakete sind noch nicht veröffentlicht; die Downloadlinks öffnen derzeit GitHub Releases."
+  },
+  "fr": {
+    "下载辅助程序（macOS · Apple Silicon）": "Télécharger l’assistant (macOS · Apple Silicon)",
+    "下载辅助程序（macOS · Intel）": "Télécharger l’assistant (macOS · Intel)",
+    "macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。": "Les programmes d’installation macOS ne sont pas encore publiés ; les liens ouvrent actuellement GitHub Releases."
+  },
+  "it": {
+    "下载辅助程序（macOS · Apple Silicon）": "Scarica il programma ausiliario (macOS · Apple Silicon)",
+    "下载辅助程序（macOS · Intel）": "Scarica il programma ausiliario (macOS · Intel)",
+    "macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。": "Gli installer macOS non sono ancora pubblicati; i collegamenti aprono attualmente GitHub Releases."
+  },
+  "es": {
+    "下载辅助程序（macOS · Apple Silicon）": "Descargar auxiliar (macOS · Apple Silicon)",
+    "下载辅助程序（macOS · Intel）": "Descargar auxiliar (macOS · Intel)",
+    "macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。": "Los instaladores de macOS aún no están publicados; los enlaces abren por ahora GitHub Releases."
+  },
+  "pt": {
+    "下载辅助程序（macOS · Apple Silicon）": "Transferir auxiliar (macOS · Apple Silicon)",
+    "下载辅助程序（macOS · Intel）": "Transferir auxiliar (macOS · Intel)",
+    "macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。": "Os instaladores macOS ainda não foram publicados; as ligações abrem atualmente o GitHub Releases."
+  },
+  "ja": {
+    "下载辅助程序（macOS · Apple Silicon）": "ヘルパーをダウンロード（macOS · Apple Silicon）",
+    "下载辅助程序（macOS · Intel）": "ヘルパーをダウンロード（macOS · Intel）",
+    "macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。": "macOS インストーラは未公開です。ダウンロードリンクは現在 GitHub Releases を開きます。"
+  },
+  "ko": {
+    "下载辅助程序（macOS · Apple Silicon）": "도우미 다운로드(macOS · Apple Silicon)",
+    "下载辅助程序（macOS · Intel）": "도우미 다운로드(macOS · Intel)",
+    "macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。": "macOS 설치 파일은 아직 게시되지 않았습니다. 다운로드 링크는 현재 GitHub Releases를 엽니다."
+  }
+})) Object.assign(globalThis.ComposeTranslations[locale], messages);

@@ -28,7 +28,15 @@ Mail AI Assist 為 Thunderbird 中使用者選取的郵件提供摘要、翻譯�
 
 ## 安裝與匯出
 
-需要 Windows x64 輔助程式。從 [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases) 下載 MSI，安裝後重新啟動 Thunderbird。擴充套件上架 ATN 後可從商店安裝，也可於附加元件管理員手動安裝本機 XPI。manifest 最低版本為 Thunderbird 128，部署前需測試實際版本；連結不表示已發布。TXT 可排除引用；EML 保留原始郵件及附件。設定可選匯出目錄，匯出後選取檔案供手動附加。關閉視窗不刪除檔案，可在設定清理本擴充套件的匯出。
+Windows 與 macOS 使用相同的 Thunderbird XPI，另外安裝適合作業系統的輔助程式。
+
+- Windows x64：安裝 MSI。
+- macOS Apple Silicon：建置並安裝 arm64 PKG。
+- macOS Intel：建置並安裝 x64 PKG。
+
+安裝輔助程式後重新啟動 Thunderbird。公開下載位於 [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases)。0.12.26 新增 macOS 原始碼支援；簽章 PKG 與 Mac 實機驗證尚未完成，目前還沒有公開的 Mac 安裝套件。
+
+擴充套件上架 ATN 後可從商店安裝，也可於附加元件管理員手動安裝本機 XPI。manifest 最低版本為 Thunderbird 128，部署前需測試實際版本；連結不表示已發布。TXT 可排除引用；EML 保留原始郵件及附件。設定可選匯出目錄，匯出後選取檔案供手動附加。關閉視窗不刪除檔案，可在設定清理本擴充套件的匯出。
 
 ## 更新與遷移
 
@@ -62,4 +70,8 @@ node installer/verify-release.mjs
 
 ## 發布
 
-將 dist/github-release/v0.12.25/ 內檔案逐一上傳為 Release 附件，不要只上傳 ZIP。ATN XPI 另外提交並選 On this site。參閱[審核說明](publication/REVIEW-NOTES.md)、[商店介紹](publication/LISTING.md)、[發布流程](publication/GITHUB-RELEASE.md)。腳本不會自動推送、上傳或安裝。私鑰、憑證、郵件與快取不得入庫；.gitignore 不會移除已提交秘密。MIT，見 [LICENSE](LICENSE)。
+將 dist/github-release/v0.12.26/ 內檔案逐一上傳為 Release 附件，不要只上傳 ZIP。ATN XPI 另外提交並選 On this site。參閱[審核說明](publication/REVIEW-NOTES.md)、[商店介紹](publication/LISTING.md)、[發布流程](publication/GITHUB-RELEASE.md)。腳本不會自動推送、上傳或安裝。私鑰、憑證、郵件與快取不得入庫；.gitignore 不會移除已提交秘密。MIT，見 [LICENSE](LICENSE)。
+
+## macOS 支援（0.12.26，尚未發布）
+
+原始碼已加入 Apple Silicon（arm64）與 Intel（x64）輔助程式支援：Keychain 憑據保護、Finder 選取匯出檔案及獨立簽章 PKG 更新。現有 Windows MSI 與更新流程保留。macOS 需要另行建置輔助程式，只有 XPI 無法執行。公開提供 Mac 版前仍須完成 PKG 簽章、公證及 Mac 實機驗證。參閱 [macOS 建置與測試說明](installer/macos/README.md)。

@@ -28,7 +28,15 @@ Choose ChatGPT authorization, Gemini API or Claude API. Translation supports Goo
 
 ## Install and export
 
-Windows x64 helper required. Download the MSI from [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases), install it and restart Thunderbird. Install the extension through ATN when published, or install the local XPI from Thunderbird’s add-on manager. The manifest minimum is Thunderbird 128; test the actual versions you deploy. No ATN listing or GitHub release is implied by these links. TXT exports selected content with optional quote removal; EML preserves the raw message and attachments. Choose an export folder in Settings. Files are revealed for manual attachment and remain after closing; Settings can clear managed exports.
+Use the same Thunderbird XPI on Windows and macOS, with a separately installed helper for your operating system.
+
+- Windows x64: install the MSI.
+- macOS Apple Silicon: build/install the arm64 PKG.
+- macOS Intel: build/install the x64 PKG.
+
+Restart Thunderbird after installing the helper. Public downloads are on [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases). macOS source support is new in 0.12.26; signed PKGs and real-Mac validation are pending, so Mac packages are not yet publicly available.
+
+Install the extension through ATN when published, or install the local XPI from Thunderbird’s add-on manager. The manifest minimum is Thunderbird 128; test the actual versions you deploy. No ATN listing or GitHub release is implied by these links. TXT exports selected content with optional quote removal; EML preserves the raw message and attachments. Choose an export folder in Settings. Files are revealed for manual attachment and remain after closing; Settings can clear managed exports.
 
 ## Updates and migration
 
@@ -36,7 +44,7 @@ ATN manages extension updates; GitHub Releases hosts the helper MSI and signed h
 
 ## Development
 
-Source: extension/ (add-on), helper/ (native host), tests/, installer/, scripts/, publication/. dist/ contains artifacts and work/ temporary files; neither is committed. Use Node.js 22+ and Python 3.10+. No npm dependencies are required for tests or XPI packaging. Install npm dependencies only to regenerate icons (npm install; npm run icons).
+Source: extension/ (add-on), helper/ (native host), tests/, installer/, scripts/, publication/. dist/ contains artifacts and work/ temporary files; neither is committed. Use Node.js 22+ and Python 3.10+. No npm dependencies are required for tests or XPI packaging. Install npm dependencies only to regenerate icons (npm ci; npm run icons).
 
 ```powershell
 node scripts/test.mjs
@@ -62,4 +70,8 @@ node installer/verify-release.mjs
 
 ## Publishing
 
-Upload the contents of dist/github-release/v0.12.25/ as release assets, not as a single ZIP. Submit the ATN XPI separately using “On this site”. Review [reviewer notes](publication/REVIEW-NOTES.md), [listing](publication/LISTING.md) and [release procedure](publication/GITHUB-RELEASE.md). The scripts never push, upload or install automatically. Keep keys, credentials, mail and caches out of Git. .gitignore does not remove already committed secrets. MIT: see [LICENSE](LICENSE).
+Upload the contents of dist/github-release/v0.12.26/ as release assets, not as a single ZIP. Submit the ATN XPI separately using “On this site”. Review [reviewer notes](publication/REVIEW-NOTES.md), [listing](publication/LISTING.md) and [release procedure](publication/GITHUB-RELEASE.md). The scripts never push, upload or install automatically. Keep keys, credentials, mail and caches out of Git. .gitignore does not remove already committed secrets. MIT: see [LICENSE](LICENSE).
+
+## macOS support (0.12.26, not yet released)
+
+The source includes Apple Silicon (arm64) and Intel (x64) helper support: Keychain-protected credentials, Finder export selection and separate signed PKG updates. The existing Windows MSI/update flow is retained. macOS requires a separately built helper; an XPI alone is not sufficient. Signed/notarized PKGs and real Mac validation are still required before public macOS availability. See [macOS build and test instructions](installer/macos/README.md).
