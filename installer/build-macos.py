@@ -6,6 +6,8 @@ import platform
 import shutil
 import subprocess
 import tempfile
+import sys
+from zipfile import ZipFile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -51,6 +53,15 @@ def main():
     shutil.copy2(node, app / 'runtime/node')
     shutil.copy2(license_file, app / 'runtime/NODE-LICENSE.txt')
     shutil.copy2(ROOT / 'LICENSE', app / 'LICENSE.txt')
+    # Package the same readable XPI as the standalone add-on download.
+    subprocess.run([sys.executable, str(ROOT / 'scripts/build-pages.py')], cwd=ROOT, check=True)
+    subprocess.run([sys.executable, str(ROOT / 'scripts/build-xpi.py')], cwd=ROOT, check=True)
+    xpi = ROOT / 'dist' / f'Mail-AI-Assist-{version}.xpi'
+    with ZipFile(xpi) as archive:
+        manifest = json.loads(archive.read('manifest.json'))
+        if manifest['version'] != version or manifest['browser_specific_settings']['gecko']['id'] != config['addonId']:
+            raise RuntimeError('Bundled XPI identity does not match the helper.')
+    shutil.copy2(xpi, app / 'Mail-AI-Assist.xpi')
     shutil.copy2(ROOT / 'installer/macos/setup-guide.html', app / 'setup-guide.html')
     (app / 'helper/launch.sh').chmod(0o755)
     (app / 'runtime/node').chmod(0o755)
@@ -86,6 +97,20 @@ fi
 exit 0
 ''', encoding='utf-8')
     preinstall.chmod(0o755)
+    postinstall = scripts / 'postinstall'
+    postinstall.write_text("""#!/bin/sh
+# Open the local guide as the desktop user, never as the privileged installer.
+guide='/Library/Application Support/MailAiAssist/setup-guide.html'
+console_user=$(/usr/bin/stat -f '%Su' /dev/console 2>/dev/null) || exit 0
+case "$console_user" in ''|root|loginwindow|_mbsetupuser) exit 0 ;; esac
+console_uid=$(/usr/bin/id -u "$console_user" 2>/dev/null) || exit 0
+if [ "$console_uid" -ge 501 ] && [ -f "$guide" ]; then
+    /bin/launchctl asuser "$console_uid" /usr/bin/sudo -u "$console_user" /usr/bin/open "$guide" >/dev/null 2>&1 || true
+fi
+exit 0
+""", encoding='utf-8')
+    postinstall.chmod(0o755)
+
     if not args.unsigned:
         subprocess.run(['codesign', '--force', '--timestamp', '--options', 'runtime', '--sign', args.app_sign_identity,
                         '--identifier', 'cn.live.it.mail-ai-assist.macos', str(native)], check=True)

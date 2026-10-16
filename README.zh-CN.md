@@ -30,13 +30,18 @@ Mail AI Assist 为 Thunderbird 中用户选中的邮件提供摘要、翻译、�
 
 Windows 和 macOS 使用同一个 Thunderbird XPI，另外安装适合操作系统的辅助程序。
 
-- Windows x64：安装 MSI。
-- macOS Apple Silicon：构建并安装 arm64 PKG。
-- macOS Intel：构建并安装 x64 PKG。
+### 下载 · v0.12.26
 
-安装辅助程序后重启 Thunderbird。公开下载位于 [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases)。0.12.26 新增 macOS 源码支持；签名 PKG 和 Mac 实机验证尚未完成，因此目前还没有公开的 Mac 安装包。
+- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-x64.msi)
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
+- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26.xpi)
 
-扩展发布到 ATN 后可从商店安装；也可在附加组件管理器中手动安装本地 XPI。manifest 最低版本为 Thunderbird 128，部署前需测试实际版本；这些链接不表示已经发布。TXT 可排除引用内容；EML 保留原始邮件及附件。在设置中选择导出目录，导出后选中文件供手动附加。关闭窗口不删除文件，可在设置中清理本插件导出。
+下载下方与你的系统匹配的辅助程序和 Thunderbird XPI。安装辅助程序后，在 Thunderbird → 附加组件和主题 → 扩展 → 齿轮菜单 → 从文件安装附加组件中选择 XPI，然后重启 Thunderbird。
+
+macOS 13+ 安装包未进行 Apple 签名和公证。Mac 实机的完整安装、登录及 Thunderbird 联动测试尚未完成，macOS 自动更新尚未启用。
+
+扩展发布到 ATN 后可从商店安装；也可在附加组件管理器中手动安装本地 XPI。manifest 最低版本为 Thunderbird 128，部署前需测试实际版本。TXT 可排除引用内容；EML 保留原始邮件及附件。在设置中选择导出目录，导出后选中文件供手动附加。关闭窗口不删除文件，可在设置中清理本插件导出。
 
 ## 更新与迁移
 
@@ -72,6 +77,10 @@ node installer/verify-release.mjs
 
 将 dist/github-release/v0.12.26/ 内的文件分别作为 Release 附件上传，不要只上传 ZIP。ATN XPI 单独提交，选择 On this site。阅读[审核说明](publication/REVIEW-NOTES.md)、[商店介绍](publication/LISTING.md)和[发布流程](publication/GITHUB-RELEASE.md)。脚本不会自动推送、上传或安装。私钥、凭据、邮件和缓存不得入库；.gitignore 不会移除已提交秘密。MIT，见 [LICENSE](LICENSE)。
 
-## macOS 支持（0.12.26，尚未发布）
+## macOS 支持 · 0.12.26
 
-源码已加入 Apple Silicon（arm64）和 Intel（x64）辅助程序支持：Keychain 凭据保护、Finder 选中导出文件和独立签名 PKG 更新。现有 Windows MSI 与更新流程保留。macOS 需要单独构建辅助程序，只有 XPI 不足以运行。公开提供 Mac 版前仍须完成 PKG 签名、公证及 Mac 实机验证。参见 [macOS 构建和测试说明](installer/macos/README.md)。
+Mac 安装包将 Mail-AI-Assist.xpi 和 setup-guide.html 放在 /Library/Application Support/MailAiAssist。安装完成后会尽可能为当前登录的桌面用户打开指南；若未打开，请在 Finder 中打开此目录。在 Thunderbird 中手动安装 XPI 并确认权限。
+
+macOS 13+ 安装包未进行 Apple 签名和公证。Mac 实机的完整安装、登录及 Thunderbird 联动测试尚未完成，macOS 自动更新尚未启用。
+
+[macOS 构建和测试说明](installer/macos/README.md)

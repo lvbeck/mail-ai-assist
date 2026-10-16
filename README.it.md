@@ -30,13 +30,18 @@ Supporta autorizzazione ChatGPT, Gemini API e Claude API. Per tradurre: Google C
 
 Windows e macOS usano lo stesso XPI Thunderbird e un programma ausiliario installato separatamente per il sistema operativo.
 
-- Windows x64: installa MSI.
-- macOS Apple Silicon: compila/installa PKG arm64.
-- macOS Intel: compila/installa PKG x64.
+### Download · v0.12.26
 
-Riavvia Thunderbird dopo l’installazione. I download pubblici sono su [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases). La versione 0.12.26 aggiunge il codice macOS; PKG firmati e test su Mac reali sono ancora da completare. I pacchetti Mac non sono ancora pubblici.
+- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-x64.msi)
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
+- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26.xpi)
 
-Installa l’estensione da ATN dopo la pubblicazione o manualmente tramite XPI. Minimo dichiarato: Thunderbird 128; verifica le versioni effettive. I collegamenti non implicano una pubblicazione già avvenuta. TXT può escludere citazioni; EML conserva originale e allegati. Cartella configurabile, file mostrati per aggiunta manuale e conservati alla chiusura. Pulizia disponibile nelle impostazioni.
+Scarica qui sotto il programma ausiliario per il tuo sistema e il file XPI di Thunderbird. Installa il programma ausiliario, poi il file XPI da Thunderbird → Componenti aggiuntivi e temi → Estensioni → menu ingranaggio → Installa componente aggiuntivo da file. Riavvia Thunderbird.
+
+I PKG per macOS 13+ non sono firmati né autenticati tramite notarizzazione. I test completi di installazione, accesso e integrazione con Thunderbird su Mac reali sono ancora da eseguire. Gli aggiornamenti automatici macOS non sono attivi.
+
+Installa l’estensione da ATN dopo la pubblicazione o manualmente tramite XPI. Minimo dichiarato: Thunderbird 128; verifica le versioni effettive. TXT può escludere citazioni; EML conserva originale e allegati. Cartella configurabile, file mostrati per aggiunta manuale e conservati alla chiusura. Pulizia disponibile nelle impostazioni.
 
 ## Aggiornamenti e migrazione
 
@@ -72,6 +77,10 @@ node installer/verify-release.mjs
 
 Carica separatamente i file di dist/github-release/v0.12.26/ come allegati della Release, non solo un ZIP. Invia lo XPI ATN con On this site. Vedi [revisione](publication/REVIEW-NOTES.md), [descrizione](publication/LISTING.md), [procedura](publication/GITHUB-RELEASE.md). Gli script non inviano, pubblicano o installano automaticamente. Non versionare chiavi, credenziali, posta o cache; .gitignore non elimina segreti già registrati. MIT: [LICENSE](LICENSE).
 
-## Supporto macOS (0.12.26, non ancora pubblicato)
+## Supporto macOS · 0.12.26
 
-Il codice include il supporto per Apple Silicon (arm64) e Intel (x64): credenziali protette dal Portachiavi, selezione degli export nel Finder e aggiornamenti PKG firmati separati. MSI e aggiornamenti Windows restano invariati. macOS richiede un programma ausiliario compilato separatamente; il solo XPI non basta. Firma, notarizzazione e test su Mac reali sono ancora necessari prima della pubblicazione. Vedi [compilazione e test macOS](installer/macos/README.md).
+I pacchetti Mac includono Mail-AI-Assist.xpi accanto a setup-guide.html in /Library/Application Support/MailAiAssist. Dopo l’installazione, la guida si apre quando possibile per l’utente connesso al desktop. Altrimenti apri questa cartella nel Finder. Installa manualmente il file XPI in Thunderbird e conferma le autorizzazioni.
+
+I PKG per macOS 13+ non sono firmati né autenticati tramite notarizzazione. I test completi di installazione, accesso e integrazione con Thunderbird su Mac reali sono ancora da eseguire. Gli aggiornamenti automatici macOS non sono attivi.
+
+[compilazione e test macOS](installer/macos/README.md)

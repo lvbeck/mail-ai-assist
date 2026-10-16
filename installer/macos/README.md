@@ -50,7 +50,7 @@ node installer/sign-macos-release.mjs arm64 /path/to/update-public-key.pem
 node installer/sign-macos-release.mjs x64 /path/to/update-public-key.pem
 ```
 
-This produces per-architecture signed manifests and SHA256SUMS files alongside the PKGs. Publish them only after explicit release approval. Do not overwrite Windows update assets. No macOS installer is currently available in the public release; the settings download links intentionally point to the release page rather than nonexistent PKG URLs.
+This produces per-architecture signed manifests and SHA256SUMS files alongside the PKGs. Publish them only after explicit release approval. Do not overwrite Windows update assets. Unsigned test PKGs for both architectures are available in v0.12.26. They are not Developer ID signed or notarized, and no macOS update manifest is published. Rebuilt PKGs include Mail-AI-Assist.xpi next to setup-guide.html and attempt to open the guide for the logged-in desktop user after installation. Install the XPI manually in Thunderbird and approve its permissions.
 
 ## Acceptance checks on real Macs
 

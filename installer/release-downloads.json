@@ -1,0 +1,93 @@
+{
+  "baseUrl": "https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/",
+  "links": [
+    [
+      "Windows x64 · MSI",
+      "Mail-AI-Assist-0.12.26-x64.msi"
+    ],
+    [
+      "macOS Apple Silicon (arm64) · PKG",
+      "Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg"
+    ],
+    [
+      "macOS Intel (x64) · PKG",
+      "Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg"
+    ],
+    [
+      "Thunderbird · XPI",
+      "Mail-AI-Assist-0.12.26.xpi"
+    ]
+  ],
+  "languages": {
+    "en": [
+      "Downloads · v0.12.26",
+      "Download the helper matching your operating system and the Thunderbird XPI below. Install the helper, then install the XPI from Thunderbird → Add-ons and Themes → Extensions → gear menu → Install Add-on From File. Restart Thunderbird.",
+      "The macOS 13+ PKGs are unsigned and not notarized. Full installation, sign-in and Thunderbird integration testing on real Macs is still pending. macOS automatic updates are not active.",
+      "macOS support · 0.12.26",
+      "Mac packages include Mail-AI-Assist.xpi next to setup-guide.html in /Library/Application Support/MailAiAssist. After installation, the guide opens for the logged-in desktop user when possible. If it does not open, open this folder in Finder. Install the XPI manually in Thunderbird and confirm its permissions."
+    ],
+    "de": [
+      "Downloads · v0.12.26",
+      "Laden Sie das Hilfsprogramm für Ihr Betriebssystem und die Thunderbird-XPI unten herunter. Installieren Sie das Hilfsprogramm und dann die XPI über Thunderbird → Add-ons und Themes → Erweiterungen → Zahnradmenü → Add-on aus Datei installieren. Starten Sie Thunderbird neu.",
+      "Die PKGs für macOS 13+ sind nicht signiert oder notarisiert. Vollständige Tests von Installation, Anmeldung und Thunderbird-Integration auf echten Macs stehen noch aus. Automatische macOS-Updates sind nicht aktiv.",
+      "macOS-Unterstützung · 0.12.26",
+      "Mac-Pakete enthalten Mail-AI-Assist.xpi neben setup-guide.html unter /Library/Application Support/MailAiAssist. Nach der Installation öffnet sich die Anleitung nach Möglichkeit für den angemeldeten Desktop-Benutzer. Andernfalls öffnen Sie diesen Ordner im Finder. Installieren Sie die XPI manuell in Thunderbird und bestätigen Sie die Berechtigungen."
+    ],
+    "fr": [
+      "Téléchargements · v0.12.26",
+      "Téléchargez ci-dessous l’assistant adapté à votre système et le XPI Thunderbird. Installez l’assistant, puis le XPI via Thunderbird → Modules complémentaires et thèmes → Extensions → menu engrenage → Installer un module depuis un fichier. Redémarrez Thunderbird.",
+      "Les PKG pour macOS 13+ ne sont ni signés ni notariés. Les tests complets d’installation, de connexion et d’intégration Thunderbird sur de vrais Mac restent à effectuer. Les mises à jour automatiques macOS ne sont pas actives.",
+      "Prise en charge de macOS · 0.12.26",
+      "Les paquets Mac contiennent Mail-AI-Assist.xpi à côté de setup-guide.html dans /Library/Application Support/MailAiAssist. Après l’installation, le guide s’ouvre si possible pour l’utilisateur connecté au bureau. Sinon, ouvrez ce dossier dans Finder. Installez le XPI manuellement dans Thunderbird et confirmez ses autorisations."
+    ],
+    "it": [
+      "Download · v0.12.26",
+      "Scarica qui sotto il programma ausiliario per il tuo sistema e il file XPI di Thunderbird. Installa il programma ausiliario, poi il file XPI da Thunderbird → Componenti aggiuntivi e temi → Estensioni → menu ingranaggio → Installa componente aggiuntivo da file. Riavvia Thunderbird.",
+      "I PKG per macOS 13+ non sono firmati né autenticati tramite notarizzazione. I test completi di installazione, accesso e integrazione con Thunderbird su Mac reali sono ancora da eseguire. Gli aggiornamenti automatici macOS non sono attivi.",
+      "Supporto macOS · 0.12.26",
+      "I pacchetti Mac includono Mail-AI-Assist.xpi accanto a setup-guide.html in /Library/Application Support/MailAiAssist. Dopo l’installazione, la guida si apre quando possibile per l’utente connesso al desktop. Altrimenti apri questa cartella nel Finder. Installa manualmente il file XPI in Thunderbird e conferma le autorizzazioni."
+    ],
+    "es": [
+      "Descargas · v0.12.26",
+      "Descarga abajo el auxiliar para tu sistema y el XPI de Thunderbird. Instala el auxiliar y después el XPI desde Thunderbird → Complementos y temas → Extensiones → menú del engranaje → Instalar complemento desde archivo. Reinicia Thunderbird.",
+      "Los PKG para macOS 13+ no están firmados ni notarizados. Las pruebas completas de instalación, inicio de sesión e integración con Thunderbird en Mac reales siguen pendientes. Las actualizaciones automáticas de macOS no están activas.",
+      "Compatibilidad con macOS · 0.12.26",
+      "Los paquetes Mac incluyen Mail-AI-Assist.xpi junto a setup-guide.html en /Library/Application Support/MailAiAssist. Tras la instalación, la guía se abre para el usuario del escritorio cuando es posible. Si no se abre, abre esta carpeta en Finder. Instala el XPI manualmente en Thunderbird y confirma sus permisos."
+    ],
+    "pt": [
+      "Transferências · v0.12.26",
+      "Transfira abaixo o auxiliar para o seu sistema e o XPI do Thunderbird. Instale o auxiliar e depois o XPI em Thunderbird → Extras e temas → Extensões → menu da engrenagem → Instalar extra a partir de ficheiro. Reinicie o Thunderbird.",
+      "Os PKG para macOS 13+ não estão assinados nem notarizados. Os testes completos de instalação, início de sessão e integração com Thunderbird em Macs reais ainda estão pendentes. As atualizações automáticas do macOS não estão ativas.",
+      "Suporte macOS · 0.12.26",
+      "Os pacotes Mac incluem Mail-AI-Assist.xpi junto de setup-guide.html em /Library/Application Support/MailAiAssist. Após a instalação, o guia abre para o utilizador do ambiente de trabalho sempre que possível. Caso contrário, abra esta pasta no Finder. Instale o XPI manualmente no Thunderbird e confirme as permissões."
+    ],
+    "zh-CN": [
+      "下载 · v0.12.26",
+      "下载下方与你的系统匹配的辅助程序和 Thunderbird XPI。安装辅助程序后，在 Thunderbird → 附加组件和主题 → 扩展 → 齿轮菜单 → 从文件安装附加组件中选择 XPI，然后重启 Thunderbird。",
+      "macOS 13+ 安装包未进行 Apple 签名和公证。Mac 实机的完整安装、登录及 Thunderbird 联动测试尚未完成，macOS 自动更新尚未启用。",
+      "macOS 支持 · 0.12.26",
+      "Mac 安装包将 Mail-AI-Assist.xpi 和 setup-guide.html 放在 /Library/Application Support/MailAiAssist。安装完成后会尽可能为当前登录的桌面用户打开指南；若未打开，请在 Finder 中打开此目录。在 Thunderbird 中手动安装 XPI 并确认权限。"
+    ],
+    "zh-TW": [
+      "下載 · v0.12.26",
+      "下載下方與你的系統相符的輔助程式和 Thunderbird XPI。安裝輔助程式後，在 Thunderbird → 附加元件與佈景主題 → 擴充套件 → 齒輪選單 → 從檔案安裝附加元件中選擇 XPI，然後重新啟動 Thunderbird。",
+      "macOS 13+ 安裝套件尚未進行 Apple 簽章和公證。Mac 實機的完整安裝、登入及 Thunderbird 整合測試尚未完成，macOS 自動更新尚未啟用。",
+      "macOS 支援 · 0.12.26",
+      "Mac 安裝套件將 Mail-AI-Assist.xpi 和 setup-guide.html 放在 /Library/Application Support/MailAiAssist。安裝完成後會盡可能為目前登入的桌面使用者開啟指南；若未開啟，請在 Finder 中開啟此目錄。在 Thunderbird 中手動安裝 XPI 並確認權限。"
+    ],
+    "ja": [
+      "ダウンロード · v0.12.26",
+      "以下からお使いの OS に対応するヘルパーと Thunderbird XPI をダウンロードしてください。ヘルパーをインストール後、Thunderbird → アドオンとテーマ → 拡張機能 → 歯車メニュー → ファイルからアドオンをインストールで XPI を選択し、Thunderbird を再起動してください。",
+      "macOS 13 以降向け PKG は Apple の署名・公証を受けていません。実機でのインストール、ログイン、Thunderbird 連携の総合テストは未完了です。macOS の自動更新は有効になっていません。",
+      "macOS 対応 · 0.12.26",
+      "Mac パッケージは /Library/Application Support/MailAiAssist に Mail-AI-Assist.xpi と setup-guide.html を配置します。インストール後、可能な場合はログイン中のデスクトップユーザー向けにガイドを開きます。開かない場合は Finder でこのフォルダーを開いてください。Thunderbird で XPI を手動インストールし、権限を確認してください。"
+    ],
+    "ko": [
+      "다운로드 · v0.12.26",
+      "아래에서 운영체제에 맞는 도우미와 Thunderbird XPI를 다운로드하세요. 도우미를 설치한 다음 Thunderbird → 부가 기능 및 테마 → 확장 기능 → 톱니바퀴 메뉴 → 파일에서 부가 기능 설치에서 XPI를 선택하고 Thunderbird를 다시 시작하세요.",
+      "macOS 13 이상용 PKG는 Apple 서명 및 공증을 받지 않았습니다. 실제 Mac에서의 전체 설치, 로그인 및 Thunderbird 연동 테스트는 아직 완료되지 않았습니다. macOS 자동 업데이트는 활성화되지 않았습니다.",
+      "macOS 지원 · 0.12.26",
+      "Mac 패키지는 /Library/Application Support/MailAiAssist에 Mail-AI-Assist.xpi와 setup-guide.html을 설치합니다. 설치 후 가능한 경우 로그인한 데스크톱 사용자를 위해 안내서를 엽니다. 열리지 않으면 Finder에서 이 폴더를 여세요. Thunderbird에서 XPI를 수동 설치하고 권한을 확인하세요."
+    ]
+  }
+}

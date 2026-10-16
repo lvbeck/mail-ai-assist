@@ -9,7 +9,7 @@ root = Path(__file__).resolve().parent.parent
 version = json.loads((root / "publication/atn.json").read_text(encoding="utf-8"))["version"]
 output = root / "dist/atn"
 output.mkdir(parents=True, exist_ok=True)
-inputs = [root / name for name in ["README.md", "LICENSE", "package.json", "package-lock.json", "scripts/build-xpi.py", "scripts/build-review-bundle.py"]]
+inputs = [root / name for name in ["README.md", "LICENSE", "package.json", "package-lock.json", "installer/macos/update-public-key.txt", "scripts/build-xpi.py", "scripts/build-review-bundle.py"]]
 inputs.extend(root.glob("README.*.md"))
 allowed = {".js", ".mjs", ".cjs", ".json", ".html", ".css", ".svg", ".png", ".ico", ".bmp", ".py", ".ps1", ".cmd", ".cpp", ".wxs", ".rtf", ".md", ".swift", ".sh", ".plist"}
 for folder in ["extension", "helper", "installer", "publication"]:

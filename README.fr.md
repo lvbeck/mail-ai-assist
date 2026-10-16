@@ -30,13 +30,18 @@ Autorisation ChatGPT, Gemini API et Claude API sont pris en charge. La traductio
 
 Windows et macOS utilisent le même XPI Thunderbird, avec un assistant installé séparément pour chaque système.
 
-- Windows x64 : installer le MSI.
-- macOS Apple Silicon : compiler/installer le PKG arm64.
-- macOS Intel : compiler/installer le PKG x64.
+### Téléchargements · v0.12.26
 
-Redémarrer Thunderbird après installation. Les téléchargements publics sont sur [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases). La version 0.12.26 ajoute le code macOS ; les PKG signés et les tests sur Mac réels restent à réaliser. Aucun paquet Mac public n’est encore disponible.
+- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-x64.msi)
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
+- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26.xpi)
 
-Installer l’extension via ATN après publication, ou manuellement depuis le XPI. Minimum déclaré : Thunderbird 128 ; tester les versions utilisées. Ces liens ne signifient pas qu’une publication existe déjà. TXT peut exclure les citations ; EML conserve le message original et les pièces jointes. Dossier d’export configurable ; fichiers affichés pour ajout manuel et conservés à la fermeture. Nettoyage disponible dans les paramètres.
+Téléchargez ci-dessous l’assistant adapté à votre système et le XPI Thunderbird. Installez l’assistant, puis le XPI via Thunderbird → Modules complémentaires et thèmes → Extensions → menu engrenage → Installer un module depuis un fichier. Redémarrez Thunderbird.
+
+Les PKG pour macOS 13+ ne sont ni signés ni notariés. Les tests complets d’installation, de connexion et d’intégration Thunderbird sur de vrais Mac restent à effectuer. Les mises à jour automatiques macOS ne sont pas actives.
+
+Installer l’extension via ATN après publication, ou manuellement depuis le XPI. Minimum déclaré : Thunderbird 128 ; tester les versions utilisées. TXT peut exclure les citations ; EML conserve le message original et les pièces jointes. Dossier d’export configurable ; fichiers affichés pour ajout manuel et conservés à la fermeture. Nettoyage disponible dans les paramètres.
 
 ## Mises à jour et migration
 
@@ -72,6 +77,10 @@ node installer/verify-release.mjs
 
 Joindre séparément les fichiers de dist/github-release/v0.12.26/ à la Release, pas seulement un ZIP. Soumettre le XPI ATN avec On this site. Voir [notes de revue](publication/REVIEW-NOTES.md), [description](publication/LISTING.md), [procédure](publication/GITHUB-RELEASE.md). Aucun push, téléversement ou installation automatique. Ne pas versionner clés, identifiants, courriels ou caches ; .gitignore ne supprime pas les secrets déjà commités. MIT : [LICENSE](LICENSE).
 
-## Prise en charge macOS (0.12.26, non publiée)
+## Prise en charge de macOS · 0.12.26
 
-Le code source inclut un assistant Apple Silicon (arm64) et Intel (x64) : identifiants protégés par le trousseau, sélection des exports dans Finder et mises à jour PKG signées distinctes. Le MSI Windows et son mécanisme de mise à jour sont conservés. macOS nécessite un assistant compilé séparément ; le XPI seul ne suffit pas. La signature, la notarisation et les tests sur de vrais Mac restent nécessaires avant publication. Voir [la compilation et les tests macOS](installer/macos/README.md).
+Les paquets Mac contiennent Mail-AI-Assist.xpi à côté de setup-guide.html dans /Library/Application Support/MailAiAssist. Après l’installation, le guide s’ouvre si possible pour l’utilisateur connecté au bureau. Sinon, ouvrez ce dossier dans Finder. Installez le XPI manuellement dans Thunderbird et confirmez ses autorisations.
+
+Les PKG pour macOS 13+ ne sont ni signés ni notariés. Les tests complets d’installation, de connexion et d’intégration Thunderbird sur de vrais Mac restent à effectuer. Les mises à jour automatiques macOS ne sont pas actives.
+
+[la compilation et les tests macOS](installer/macos/README.md)

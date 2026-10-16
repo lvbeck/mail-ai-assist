@@ -50,3 +50,23 @@ selector.addEventListener('change',render);render();
 </script></body></html>
 """
 (root/'installer/download-page.html').write_text(s,encoding='utf-8')
+
+# Share the versioned download instructions across both installation guides.
+downloads = json.loads((root / 'installer/release-downloads.json').read_text(encoding='utf-8'))
+download_blocks = {}
+for language, values in downloads['languages'].items():
+    links = ''.join('<li><a href="' + escape(downloads['baseUrl'] + name, quote=True) + '">' + escape(label) + '</a></li>' for label, name in downloads['links'])
+    download_blocks[language] = '<h2>' + escape(values[0]) + '</h2><ul>' + links + '</ul><p>' + escape(values[1]) + '</p><p>' + escape(values[2]) + '</p>'
+for relative in ['installer/setup-guide.html', 'installer/macos/setup-guide.html']:
+    page = root / relative
+    content = page.read_text(encoding='utf-8')
+    content = re.sub(r'<section id="releaseDownloads"></section><script id="releaseDownloadScript">.*?</script>', '', content, flags=re.S)
+    blocks = dict(download_blocks)
+    if '/macos/' in relative:
+        for language, values in downloads['languages'].items():
+            blocks[language] += '<p>' + escape(values[4]) + '</p><p><a href="Mail-AI-Assist.xpi" download>Mail-AI-Assist.xpi</a></p>'
+        content = re.sub(r'const notices=.*?;\n', 'const notices=' + json.dumps({k:v[2] for k,v in downloads['languages'].items()}, ensure_ascii=False) + ';\n', content)
+        content = content.replace("messages[language][5]+' '+messages[language][7]", "''")
+    script = '<section id="releaseDownloads"></section><script id="releaseDownloadScript">const releaseDownloads=' + json.dumps(blocks, ensure_ascii=False) + ';function renderDownloads(){document.getElementById("releaseDownloads").innerHTML=releaseDownloads[document.getElementById("language").value]||releaseDownloads.en;}document.getElementById("language").addEventListener("change",renderDownloads);renderDownloads();</script>'
+    content = content.replace('</body>', script + '</body>')
+    page.write_text(content, encoding='utf-8')

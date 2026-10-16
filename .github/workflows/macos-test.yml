@@ -30,8 +30,15 @@ jobs:
         run: |
           set -euo pipefail
           package=$(find dist/macos -name '*.pkg' -print -quit)
-          pkgutil --expand "$package" work/expanded-package
+          pkgutil --expand-full "$package" work/expanded-package
           test -f work/expanded-package/PackageInfo
+          sh -n work/expanded-package/Scripts/postinstall
+          test -f work/expanded-package/Scripts/postinstall
+          xpi=$(find work/expanded-package -name 'Mail-AI-Assist.xpi' -print -quit)
+          test -n "$xpi"
+          unzip -t "$xpi"
+          guide=$(find work/expanded-package -name 'setup-guide.html' -print -quit)
+          grep -q 'Mail-AI-Assist.xpi' "$guide"
           cd "$(dirname "$package")"
           shasum -a 256 *.pkg > SHA256SUMS-macos-${{ matrix.arch }}.txt
       - uses: actions/upload-artifact@v4

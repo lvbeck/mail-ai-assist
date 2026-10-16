@@ -30,13 +30,18 @@ Choose ChatGPT authorization, Gemini API or Claude API. Translation supports Goo
 
 Use the same Thunderbird XPI on Windows and macOS, with a separately installed helper for your operating system.
 
-- Windows x64: install the MSI.
-- macOS Apple Silicon: build/install the arm64 PKG.
-- macOS Intel: build/install the x64 PKG.
+### Downloads · v0.12.26
 
-Restart Thunderbird after installing the helper. Public downloads are on [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases). macOS source support is new in 0.12.26; signed PKGs and real-Mac validation are pending, so Mac packages are not yet publicly available.
+- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-x64.msi)
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
+- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26.xpi)
 
-Install the extension through ATN when published, or install the local XPI from Thunderbird’s add-on manager. The manifest minimum is Thunderbird 128; test the actual versions you deploy. No ATN listing or GitHub release is implied by these links. TXT exports selected content with optional quote removal; EML preserves the raw message and attachments. Choose an export folder in Settings. Files are revealed for manual attachment and remain after closing; Settings can clear managed exports.
+Download the helper matching your operating system and the Thunderbird XPI below. Install the helper, then install the XPI from Thunderbird → Add-ons and Themes → Extensions → gear menu → Install Add-on From File. Restart Thunderbird.
+
+The macOS 13+ PKGs are unsigned and not notarized. Full installation, sign-in and Thunderbird integration testing on real Macs is still pending. macOS automatic updates are not active.
+
+Install the extension through ATN when published, or install the local XPI from Thunderbird’s add-on manager. The manifest minimum is Thunderbird 128; test the actual versions you deploy. TXT exports selected content with optional quote removal; EML preserves the raw message and attachments. Choose an export folder in Settings. Files are revealed for manual attachment and remain after closing; Settings can clear managed exports.
 
 ## Updates and migration
 
@@ -72,6 +77,10 @@ node installer/verify-release.mjs
 
 Upload the contents of dist/github-release/v0.12.26/ as release assets, not as a single ZIP. Submit the ATN XPI separately using “On this site”. Review [reviewer notes](publication/REVIEW-NOTES.md), [listing](publication/LISTING.md) and [release procedure](publication/GITHUB-RELEASE.md). The scripts never push, upload or install automatically. Keep keys, credentials, mail and caches out of Git. .gitignore does not remove already committed secrets. MIT: see [LICENSE](LICENSE).
 
-## macOS support (0.12.26, not yet released)
+## macOS support · 0.12.26
 
-The source includes Apple Silicon (arm64) and Intel (x64) helper support: Keychain-protected credentials, Finder export selection and separate signed PKG updates. The existing Windows MSI/update flow is retained. macOS requires a separately built helper; an XPI alone is not sufficient. Signed/notarized PKGs and real Mac validation are still required before public macOS availability. See [macOS build and test instructions](installer/macos/README.md).
+Mac packages include Mail-AI-Assist.xpi next to setup-guide.html in /Library/Application Support/MailAiAssist. After installation, the guide opens for the logged-in desktop user when possible. If it does not open, open this folder in Finder. Install the XPI manually in Thunderbird and confirm its permissions.
+
+The macOS 13+ PKGs are unsigned and not notarized. Full installation, sign-in and Thunderbird integration testing on real Macs is still pending. macOS automatic updates are not active.
+
+[macOS build and test instructions](installer/macos/README.md)

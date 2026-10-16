@@ -30,13 +30,18 @@ Suporta autorização ChatGPT, Gemini API e Claude API. Tradução com Google Cl
 
 Windows e macOS utilizam o mesmo XPI do Thunderbird, com um auxiliar instalado separadamente para cada sistema.
 
-- Windows x64: instale MSI.
-- macOS Apple Silicon: compile/instale PKG arm64.
-- macOS Intel: compile/instale PKG x64.
+### Transferências · v0.12.26
 
-Reinicie o Thunderbird após instalar. As transferências públicas estão em [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases). A versão 0.12.26 adiciona código macOS; faltam PKGs assinados e testes em Macs reais. Os pacotes Mac ainda não estão disponíveis publicamente.
+- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-x64.msi)
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
+- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26.xpi)
 
-Instale a extensão pelo ATN após publicação ou por XPI local. Mínimo declarado: Thunderbird 128; teste as versões utilizadas. Os links não significam que já foi publicado. TXT pode excluir citações; EML preserva original e anexos. Pasta configurável; ficheiros apresentados para anexação manual e mantidos ao fechar. Pode limpar exportações geridas nas definições.
+Transfira abaixo o auxiliar para o seu sistema e o XPI do Thunderbird. Instale o auxiliar e depois o XPI em Thunderbird → Extras e temas → Extensões → menu da engrenagem → Instalar extra a partir de ficheiro. Reinicie o Thunderbird.
+
+Os PKG para macOS 13+ não estão assinados nem notarizados. Os testes completos de instalação, início de sessão e integração com Thunderbird em Macs reais ainda estão pendentes. As atualizações automáticas do macOS não estão ativas.
+
+Instale a extensão pelo ATN após publicação ou por XPI local. Mínimo declarado: Thunderbird 128; teste as versões utilizadas. TXT pode excluir citações; EML preserva original e anexos. Pasta configurável; ficheiros apresentados para anexação manual e mantidos ao fechar. Pode limpar exportações geridas nas definições.
 
 ## Atualizações e migração
 
@@ -72,6 +77,10 @@ node installer/verify-release.mjs
 
 Anexe separadamente os ficheiros de dist/github-release/v0.12.26/ à Release, não apenas um ZIP. Submeta o XPI ATN com On this site. Consulte [revisão](publication/REVIEW-NOTES.md), [descrição](publication/LISTING.md), [procedimento](publication/GITHUB-RELEASE.md). Os scripts não fazem push, carregamentos nem instalações automáticas. Não versione chaves, credenciais, correio ou cache; .gitignore não remove segredos já registados. MIT: [LICENSE](LICENSE).
 
-## Suporte macOS (0.12.26, ainda não publicado)
+## Suporte macOS · 0.12.26
 
-O código inclui suporte para Apple Silicon (arm64) e Intel (x64): credenciais protegidas pelo Porta-chaves, seleção das exportações no Finder e atualizações PKG assinadas separadas. O MSI e as atualizações Windows são mantidos. O macOS requer um auxiliar compilado separadamente; só o XPI não basta. Antes da publicação ainda são necessárias assinatura, notarização e validação em Macs reais. Consulte [compilação e testes macOS](installer/macos/README.md).
+Os pacotes Mac incluem Mail-AI-Assist.xpi junto de setup-guide.html em /Library/Application Support/MailAiAssist. Após a instalação, o guia abre para o utilizador do ambiente de trabalho sempre que possível. Caso contrário, abra esta pasta no Finder. Instale o XPI manualmente no Thunderbird e confirme as permissões.
+
+Os PKG para macOS 13+ não estão assinados nem notarizados. Os testes completos de instalação, início de sessão e integração com Thunderbird em Macs reais ainda estão pendentes. As atualizações automáticas do macOS não estão ativas.
+
+[compilação e testes macOS](installer/macos/README.md)
