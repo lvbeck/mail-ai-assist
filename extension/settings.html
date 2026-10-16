@@ -27,10 +27,21 @@
 
 <section class="account" id="helperUpdate" hidden><p>辅助程序更新已下载。点击安装后，请关闭 Thunderbird，再确认管理员授权。</p><button id="installHelperUpdate" class="primary">安装辅助程序更新</button></section>
 <main><p id="status" role="status" aria-live="polite"></p>
-<details class="about"><summary>关于与许可证</summary><h2>关于</h2><p><span>软件版本</span>: <span id="addonVersion"></span></p><p><span>作者</span>: Jin Lu</p><p><span>联系邮箱</span>: <a href="mailto:it@live.cn">it@live.cn</a></p><p><span>软件许可证</span>: MIT</p>
-<h2>免责声明</h2><p>本软件为独立开发的非官方工具，与 OpenAI、Mozilla 或 Thunderbird 无隶属或背书关系。AI 输出可能包含错误，请在替换或发送邮件前自行核对。</p><p>软件按原样提供，不作任何保证；责任限制以 MIT 许可证为准。使用各模型服务仍须遵守其适用条款。</p>
-<p>MIT 许可证适用于本插件及辅助程序代码；随附 Node.js 及第三方组件保留各自许可证。</p>
-<details><summary>MIT License</summary><pre class="license">MIT License
+</main>
+<section class="settings-group about-card" aria-labelledby="aboutHeading">
+<h2 id="aboutHeading">关于</h2>
+<section class="about-section" aria-labelledby="addonInfoHeading">
+<h3 id="addonInfoHeading">插件信息</h3>
+<dl class="about-info"><div><dt>插件名称</dt><dd>Mail AI Assist</dd></div><div><dt>软件版本</dt><dd id="addonVersion"></dd></div><div><dt>作者</dt><dd>Jin Lu</dd></div><div><dt>联系邮箱</dt><dd><a href="mailto:it@live.cn">it@live.cn</a></dd></div></dl>
+<div class="about-links row">
+<a href="https://github.com/lvbeck/mail-ai-assist" target="_blank" rel="noreferrer noopener"><img src="button-github.svg" width="20" height="20" alt=""><span>GitHub 项目</span></a>
+<a href="privacy.html" target="_blank" rel="noreferrer noopener"><img src="button-document.svg" width="20" height="20" alt=""><span>隐私政策</span></a>
+</div>
+</section>
+<section class="about-section" aria-labelledby="licenseHeading">
+<h3 id="licenseHeading">许可证</h3>
+<p class="note">MIT 许可证适用于本插件及辅助程序代码；随附 Node.js 及第三方组件保留各自许可证。</p>
+<details class="license-details"><summary>查看 MIT 许可证全文</summary><pre class="license">MIT License
 
 Copyright (c) 2026 Jin Lu
 
@@ -52,14 +63,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 </pre></details>
-<div class="about-links row">
-<a href="https://github.com/lvbeck/mail-ai-assist" target="_blank" rel="noreferrer noopener"><img src="button-github.svg" width="20" height="20" alt=""><span>GitHub 项目</span></a>
-<a href="privacy.html" target="_blank" rel="noreferrer noopener"><img src="button-document.svg" width="20" height="20" alt=""><span>隐私政策</span></a>
-</div>
-<section class="about-support" aria-labelledby="supportHeading">
-<h2 id="supportHeading">支持开发</h2>
+</section>
+<section class="about-section" aria-labelledby="disclaimerHeading">
+<h3 id="disclaimerHeading">免责声明</h3>
+<p class="note">本软件为独立开发的非官方工具，与 OpenAI、Mozilla 或 Thunderbird 无隶属或背书关系。AI 输出可能包含错误，请在替换或发送邮件前自行核对。</p>
+<p class="note">软件按原样提供，不作任何保证；责任限制以 MIT 许可证为准。使用各模型服务仍须遵守其适用条款。</p>
+</section>
+<section class="about-section about-support" aria-labelledby="supportHeading">
+<h3 id="supportHeading">支持开发</h3>
 <p class="note">如果这个插件对你有帮助，欢迎支持它的开发。</p>
 <a class="coffee-button" href="https://buymeacoffee.com/lvbeck" target="_blank" rel="noreferrer noopener"><img src="button-coffee.svg" width="22" height="22" alt=""><span>Buy me a coffee</span></a>
 <p class="note support-disclaimer">自愿赞助，不影响任何功能使用。</p>
-</section></details></main>
+</section>
+</section>
 <script src="translations.js"></script><script src="localization.js"></script><script src="rewrite.js"></script><script src="helper-setup.js"></script><script src="tag-instructions.js"></script><script src="tag-alias-settings.js"></script><script src="auto-tags-settings.js"></script><script src="send-settings.js"></script><script src="cache-settings.js"></script><script src="google-settings.js"></script></body></html>

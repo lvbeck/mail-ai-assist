@@ -1,5 +1,9 @@
 globalThis.ComposeTranslations = {
   "zh-CN": {
+    "插件信息": "插件信息",
+    "插件名称": "插件名称",
+    "许可证": "许可证",
+    "查看 MIT 许可证全文": "查看 MIT 许可证全文",
     "GitHub 项目": "GitHub 项目",
     "支持开发": "支持开发",
     "如果这个插件对你有帮助，欢迎支持它的开发。": "如果这个插件对你有帮助，欢迎支持它的开发。",
@@ -279,6 +283,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "请安装新版辅助程序 MSI，然后重启 Thunderbird。"
   },
   "en": {
+    "插件信息": "Add-on information",
+    "插件名称": "Add-on name",
+    "许可证": "License",
+    "查看 MIT 许可证全文": "View full MIT license",
     "GitHub 项目": "GitHub project",
     "支持开发": "Support development",
     "如果这个插件对你有帮助，欢迎支持它的开发。": "If this add-on helps you, consider supporting its development.",
@@ -558,6 +566,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Install the latest helper MSI, then restart Thunderbird."
   },
   "de": {
+    "插件信息": "Add-on-Informationen",
+    "插件名称": "Name des Add-ons",
+    "许可证": "Lizenz",
+    "查看 MIT 许可证全文": "Vollständige MIT-Lizenz anzeigen",
     "GitHub 项目": "GitHub-Projekt",
     "支持开发": "Entwicklung unterstützen",
     "如果这个插件对你有帮助，欢迎支持它的开发。": "Wenn Ihnen dieses Add-on hilft, unterstützen Sie gerne seine Entwicklung.",
@@ -837,6 +849,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Installieren Sie das aktuelle Hilfsprogramm-MSI und starten Sie Thunderbird neu."
   },
   "zh-TW": {
+    "插件信息": "附加元件資訊",
+    "插件名称": "附加元件名稱",
+    "许可证": "授權條款",
+    "查看 MIT 许可证全文": "查看完整 MIT 授權條款",
     "GitHub 项目": "GitHub 專案",
     "支持开发": "支持開發",
     "如果这个插件对你有帮助，欢迎支持它的开发。": "如果這個附加元件對你有幫助，歡迎支持它的開發。",
@@ -1116,6 +1132,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "請安裝新版輔助程式 MSI，然後重新啟動 Thunderbird。"
   },
   "fr": {
+    "插件信息": "Informations sur le module",
+    "插件名称": "Nom du module",
+    "许可证": "Licence",
+    "查看 MIT 许可证全文": "Afficher la licence MIT complète",
     "GitHub 项目": "Projet GitHub",
     "支持开发": "Soutenir le développement",
     "如果这个插件对你有帮助，欢迎支持它的开发。": "Si ce module vous est utile, vous pouvez soutenir son développement.",
@@ -1395,6 +1415,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Installez le dernier MSI de l’assistant, puis redémarrez Thunderbird."
   },
   "it": {
+    "插件信息": "Informazioni sul componente aggiuntivo",
+    "插件名称": "Nome del componente aggiuntivo",
+    "许可证": "Licenza",
+    "查看 MIT 许可证全文": "Visualizza la licenza MIT completa",
     "GitHub 项目": "Progetto GitHub",
     "支持开发": "Sostieni lo sviluppo",
     "如果这个插件对你有帮助，欢迎支持它的开发。": "Se questo componente aggiuntivo ti è utile, puoi sostenerne lo sviluppo.",
@@ -1674,6 +1698,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Installa il MSI più recente del programma locale, poi riavvia Thunderbird."
   },
   "es": {
+    "插件信息": "Información del complemento",
+    "插件名称": "Nombre del complemento",
+    "许可证": "Licencia",
+    "查看 MIT 许可证全文": "Ver la licencia MIT completa",
     "GitHub 项目": "Proyecto en GitHub",
     "支持开发": "Apoya el desarrollo",
     "如果这个插件对你有帮助，欢迎支持它的开发。": "Si este complemento te resulta útil, puedes apoyar su desarrollo.",
@@ -1953,6 +1981,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Instala el MSI más reciente del asistente y reinicia Thunderbird."
   },
   "pt": {
+    "插件信息": "Informações do extra",
+    "插件名称": "Nome do extra",
+    "许可证": "Licença",
+    "查看 MIT 许可证全文": "Ver a licença MIT completa",
     "GitHub 项目": "Projeto no GitHub",
     "支持开发": "Apoiar o desenvolvimento",
     "如果这个插件对你有帮助，欢迎支持它的开发。": "Se este extra lhe for útil, pode apoiar o seu desenvolvimento.",
@@ -2232,6 +2264,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Instale o MSI mais recente do assistente e reinicie o Thunderbird."
   },
   "ja": {
+    "插件信息": "アドオン情報",
+    "插件名称": "アドオン名",
+    "许可证": "ライセンス",
+    "查看 MIT 许可证全文": "MIT ライセンス全文を表示",
     "GitHub 项目": "GitHub プロジェクト",
     "支持开发": "開発を支援",
     "如果这个插件对你有帮助，欢迎支持它的开发。": "このアドオンが役に立ったら、開発へのご支援をご検討ください。",
@@ -2511,6 +2547,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "最新のヘルパー MSI をインストールし、Thunderbird を再起動してください。"
   },
   "ko": {
+    "插件信息": "부가 기능 정보",
+    "插件名称": "부가 기능 이름",
+    "许可证": "라이선스",
+    "查看 MIT 许可证全文": "MIT 라이선스 전문 보기",
     "GitHub 项目": "GitHub 프로젝트",
     "支持开发": "개발 후원",
     "如果这个插件对你有帮助，欢迎支持它的开发。": "이 부가 기능이 도움이 되었다면 개발을 후원해 주세요.",

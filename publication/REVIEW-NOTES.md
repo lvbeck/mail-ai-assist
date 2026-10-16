@@ -58,7 +58,7 @@ The script copies extension assets verbatim and replaces only the archived manif
 
 ## Changes in 0.12.25
 
-Added GitHub and local privacy-policy links and a voluntary Buy Me a Coffee support button at the bottom of About. Support text is localized in all ten interface languages. The donation link opens only after a user click; no remote donation script or embedded payment widget is loaded. Donations do not unlock or restrict features. No permissions, AI processing or native messaging protocol changes were introduced.
+Organized About into one settings card with Add-on information, License, Disclaimer and Support development subsections. Added GitHub and local privacy-policy links and a voluntary Buy Me a Coffee support button at the bottom of About. Support text is localized in all ten interface languages. The donation link opens only after a user click; no remote donation script or embedded payment widget is loaded. Donations do not unlock or restrict features. No permissions, AI processing or native messaging protocol changes were introduced.
 
 ## Automated validation warnings
 
