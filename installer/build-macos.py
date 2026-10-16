@@ -54,7 +54,7 @@ def main():
     shutil.copy2(license_file, app / 'runtime/NODE-LICENSE.txt')
     shutil.copy2(ROOT / 'LICENSE', app / 'LICENSE.txt')
     # Package the same readable XPI as the standalone add-on download.
-    subprocess.run([sys.executable, str(ROOT / 'scripts/build-pages.py')], cwd=ROOT, check=True)
+    subprocess.run([sys.executable, str(ROOT / 'installer/build-pages.py')], cwd=ROOT, check=True)
     subprocess.run([sys.executable, str(ROOT / 'scripts/build-xpi.py')], cwd=ROOT, check=True)
     xpi = ROOT / 'dist' / f'Mail-AI-Assist-{version}.xpi'
     with ZipFile(xpi) as archive:
