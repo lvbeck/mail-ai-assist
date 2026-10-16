@@ -1,8 +1,9 @@
-# Version notes — 0.12.26 (local build)
+# Version notes — 0.12.26
 
-- Added macOS native-helper source support for Apple Silicon and Intel, including Keychain credential protection, folder selection and Finder export reveal.
-- Added macOS helper download entries and platform-specific setup instructions in all ten interface languages.
-- Preserved Windows MSI installation and updates; macOS uses separate signed PKG update feeds.
-- Added package-lock.json to the optional review-source archive and clarified that the readable XPI does not require a transformed-code source build.
+- Added native helper support for macOS 13 and later, with separate installers for Apple Silicon (arm64) and Intel (x64).
+- Added macOS Keychain-backed credential protection, Finder integration for exported files, and platform-specific setup instructions.
+- macOS installers now include the Thunderbird XPI and attempt to open the setup guide for the logged-in desktop user after installation. Users must install the XPI manually in Thunderbird and approve its permissions.
+- Updated all ten README translations and both setup guides with Windows, Apple Silicon, Intel, and XPI download links.
+- Preserved the existing Windows x64 helper and update mechanism.
 
-Release status: macOS PKGs have not yet been compiled, signed/notarized or validated on real Macs. The download entries currently open the GitHub release page. This local build has not been published or submitted to ATN.
+macOS installers are currently unsigned and not notarized. Full validation of installation, sign-in, and Thunderbird integration on physical Macs is still in progress. macOS automatic updates are not enabled.
