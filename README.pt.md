@@ -41,7 +41,7 @@ Transfira abaixo o auxiliar para o seu sistema e o XPI do Thunderbird. Instale o
 
 Os PKG para macOS 13+ não estão assinados nem notarizados. Os testes completos de instalação, início de sessão e integração com Thunderbird em Macs reais ainda estão pendentes. As atualizações automáticas do macOS não estão ativas.
 
-Instale a extensão pelo ATN após publicação ou por XPI local. Mínimo declarado: Thunderbird 128; teste as versões utilizadas. TXT pode excluir citações; EML preserva original e anexos. Pasta configurável; ficheiros apresentados para anexação manual e mantidos ao fechar. Pode limpar exportações geridas nas definições.
+Instale a extensão pelo ATN após publicação ou por XPI local. Mínimo declarado: Thunderbird 148; teste as versões utilizadas. TXT pode excluir citações; EML preserva original e anexos. Pasta configurável; ficheiros apresentados para anexação manual e mantidos ao fechar. Pode limpar exportações geridas nas definições.
 
 ## Atualizações e migração
 

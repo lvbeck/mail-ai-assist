@@ -12,6 +12,8 @@ Mail AI Assist vous aide à traiter les messages sélectionnés dans Thunderbird
 
 ## Fonctionnalités
 
+Un clic droit dans le corps du message, y compris sur les liens et images, ouvre Assistant IA. Sans sélection, les actions traitent le message entier. Avec une sélection, le résumé et la traduction envoient uniquement ce texte, sans objet ni reste du corps.
+
 - **Résumés :** Retrouvez les points essentiels et les actions à effectuer dans le message sélectionné. La langue du résumé est indépendante de celles de l’interface et de la traduction ; elle suit par défaut la langue du système.
 - **Traduction :** Choisissez les langues source et cible, ou détectez automatiquement la langue source. Configurez Google Cloud Translation, Microsoft Azure Translator ou DeepL avec votre propre clé API. Sans service de traduction configuré, le modèle d’IA sélectionné est utilisé.
 - **Étiquettes et alias :** Réutilisez en priorité les étiquettes Thunderbird existantes pour limiter les doublons proches. Les suggestions manuelles sont modifiables avant confirmation. Associez par exemple `Project Alpha` et `Project Beta` à l’étiquette existante `Projects`. Les règles comparent les noms complets, sans tenir compte de la casse ni des espaces superflus.
@@ -30,14 +32,20 @@ Les résumés, traductions et étiquettes traitent l’objet et le corps du mess
 
 ## Services et confidentialité
 
-Autorisation ChatGPT, Gemini API et Claude API sont pris en charge. La traduction peut utiliser Google Cloud Translation, Azure Translator ou DeepL ; sans service configuré, le modèle IA choisi est utilisé. Aucun changement de fournisseur après une erreur. Accès et coûts dépendent du fournisseur. Les contenus pertinents passent par l’assistant Windows vers le service choisi. Identifiants protégés par DPAPI ; cache et exports lisibles localement. Voir la [politique](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md).
+Autorisation ChatGPT, Gemini API et Claude API sont pris en charge.
+
+La permission nativeMessaging relie Thunderbird à l’assistant local installé séparément (local.mail_ai_assist). Elle échange l’objet/le corps demandé ou le texte sélectionné, les paramètres de fournisseur/modèle/langue, les identifiants saisis, les résultats IA, le cache et les contenus/chemins d’export. EML inclut les en-têtes originaux et pièces jointes. L’assistant gère l’authentification, les requêtes HTTPS, le stockage protégé des identifiants, le cache, l’export et l’ouverture d’applications. Le texte pertinent est envoyé au service IA ou de traduction choisi ; l’export local ne sollicite pas l’IA. Windows utilise DPAPI, macOS un chiffrement fondé sur le Trousseau. Cache et exports sont lisibles localement. Conditions et frais du fournisseur applicables.
+
+[Politique de confidentialité](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md)
 
 ## Installation et export
 
-Assistant Windows x64 requis : télécharger le MSI depuis [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases), installer et redémarrer Thunderbird. Installer l’extension via ATN après publication, ou manuellement depuis le XPI. Minimum déclaré : Thunderbird 128 ; tester les versions utilisées. Ces liens ne signifient pas qu’une publication existe déjà. TXT peut exclure les citations ; EML conserve le message original et les pièces jointes. Dossier d’export configurable ; fichiers affichés pour ajout manuel et conservés à la fermeture. Nettoyage disponible dans les paramètres.
+Thunderbird 148 ou ultérieur et un assistant séparé sont nécessaires : Windows x64 (MSI), ou macOS 13+ sur Apple Silicon ou Intel (PKG distincts). Télécharger depuis GitHub Releases, installer et redémarrer Thunderbird. Les paquets macOS ne sont ni signés ni notariés ; les tests complets restent à effectuer. Linux n’est pas pris en charge. ATN met à jour l’extension ; Windows conserve son mécanisme de mise à jour de l’assistant, les paquets macOS publiés nécessitent une mise à jour manuelle.
+
+[GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases)
 
 Licence: MIT
 
 Assistance: it@live.cn
 
-Assistant Windows: https://github.com/lvbeck/mail-ai-assist/releases/latest
+https://github.com/lvbeck/mail-ai-assist/releases/latest

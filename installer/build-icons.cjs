@@ -27,7 +27,7 @@ async function bmp(svgContent, width, height, path) {
 }
 
 (async () => {
-  for (const name of ['icon.svg', 'icon-menu.svg', 'icon-light.svg', 'icon-dark.svg']) fs.writeFileSync('extension/' + name, svg);
+  for (const name of ['icon.svg', 'icon-menu.svg']) fs.writeFileSync('extension/' + name, svg);
   const png = await sharp(Buffer.from(svg)).resize(256, 256).png().toBuffer();
   fs.writeFileSync('installer/assets/ai-icon.png', png);
   const sizes = [16, 20, 24, 32, 40, 48, 64, 128, 256];

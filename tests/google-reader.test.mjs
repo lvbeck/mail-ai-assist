@@ -4,7 +4,7 @@ import vm from 'node:vm';
 import { readFile } from 'node:fs/promises';
 const root = new URL('../extension/', import.meta.url);
 for (const service of ['google', 'azure', 'deepl']) for (const [language, name] of Object.entries({ fr: 'French', it: 'Italian', es: 'Spanish', pt: 'European Portuguese (Portugal)' })) for (const task of ['translate']) {
-  test(`${service} ${task} uses ${language} in reader requests`, async () => {
+  for (const selection of [false, true]) test(`${service} ${task} uses ${language} in reader requests (selection=${selection})`, async () => {
   const elements = new Map();
   const element = id => {
     if (!elements.has(id)) elements.set(id, { value: '', hidden: ['undo', 'confirmTags'].includes(id), classList: { toggle() {} }, listeners: {}, addEventListener(event, fn) { this.listeners[event] = fn; } });
@@ -23,7 +23,7 @@ for (const service of ['google', 'azure', 'deepl']) for (const [language, name] 
       storage: { local: { get: async () => ({ translationService: service, taskModel: '', translationLanguage: language, translationSourceLanguage: language, tagLanguage: language }) } },
       runtime: {
         sendMessage: async message => {
-          if (message.action === 'load') return { ok: true, task, subject: 'Test', text: 'Body' };
+          if (message.action === 'load') return { ok: true, task, selection, subject: 'Private subject', text: selection ? 'Selected text' : 'Body' };
           writes.push(message);
           if (failWrite) return { ok: false, error: 'mail_operation_failed' };
           return { ok: true, names: message.text ? JSON.parse(message.text) : [] };
@@ -52,6 +52,8 @@ for (const service of ['google', 'azure', 'deepl']) for (const [language, name] 
   assert.equal(requests.some(item => ['rewrite', 'status'].includes(item.action)), false);
   assert.equal(requests.find(item => item.action === 'cachePut').descriptor.provider, service);
   assert.equal(request.outputLanguage, language);
+  assert.equal(request.text, selection ? 'Selected text' : 'Body');
+  if (task !== 'tags') assert.equal(requests.find(item => item.action === 'cacheGet').descriptor.scope, selection ? 'selection' : undefined);
   assert.equal(request.sourceLanguage, language);
   assert.equal(writes.length, 0);
   });

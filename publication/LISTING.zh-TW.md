@@ -12,6 +12,8 @@ Mail AI Assist 為 Thunderbird 中使用者選取的郵件提供摘要、翻譯�
 
 ## 功能介紹
 
+在郵件正文中按右鍵即可開啟 AI 助手，連結和圖片上也可使用。未選取文字時處理整封郵件；選取文字時，摘要和翻譯僅傳送選取範圍，不傳送主旨及其餘正文。
+
 - **郵件摘要：** 為選取的郵件整理重點與待辦事項。摘要語言獨立於介面及翻譯語言，預設跟隨系統，也可在設定中指定。
 - **郵件翻譯：** 可指定來源與目標語言，或自動偵測來源語言。支援以自己的 API Key 設定 Google Cloud Translation、Microsoft Azure Translator 或 DeepL；未設定翻譯服務時使用目前的 AI 模型。
 - **標籤建議與別名：** 優先重用 Thunderbird 既有標籤，減少建立近似標籤。手動建議可編輯，確認後才套用。可在設定中將 `Project Alpha`、`Project Beta` 等別名對應至既有的 `Projects` 標籤；依完整名稱比對，忽略大小寫與多餘空格。
@@ -30,14 +32,20 @@ Mail AI Assist 為 Thunderbird 中使用者選取的郵件提供摘要、翻譯�
 
 ## 服務商與隱私
 
-支援 ChatGPT 授權、Gemini API、Claude API。翻譯可選 Google Cloud Translation、Azure Translator、DeepL；未選取或未設定翻譯服務時使用目前 AI 模型，服務失敗不自動切換。帳戶資格與費用依服務商而定。相關郵件內容經 Windows 輔助程式傳送至所選服務商；憑證使用 Windows DPAPI，快取與匯出檔案可在本機讀取。詳見[隱私權政策](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md)。
+支援 ChatGPT 授權、Gemini API、Claude API。
+
+nativeMessaging 權限用於連接另外安裝的本機輔助程式（local.mail_ai_assist）。交換資訊包括請求處理的郵件主旨和正文或選取文字、服務商/模型/語言設定、使用者輸入的登入憑證、AI 結果、快取資料，以及匯出內容和路徑；EML 匯出包含原始郵件標頭和附件。輔助程式負責服務商登入和 HTTPS 請求、憑證保護、本機快取和檔案匯出、開啟桌面應用程式。相關文字會傳送至使用者設定的 AI 或翻譯服務商；本機匯出本身不呼叫 AI。Windows 使用 DPAPI，macOS 使用基於鑰匙圈的加密；快取和匯出檔案可在本機讀取。服務資格與費用依服務商而定。
+
+[隱私權政策](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md)
 
 ## 安裝與匯出
 
-需要 Windows x64 輔助程式。從 [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases) 下載 MSI，安裝後重新啟動 Thunderbird。擴充套件上架 ATN 後可從商店安裝，也可於附加元件管理員手動安裝本機 XPI。manifest 最低版本為 Thunderbird 128，部署前需測試實際版本；連結不表示已發布。TXT 可排除引用；EML 保留原始郵件及附件。設定可選匯出目錄，匯出後選取檔案供手動附加。關閉視窗不刪除檔案，可在設定清理本擴充套件的匯出。
+需要 Thunderbird 148 或更新版本，以及另外安裝的輔助程式：Windows x64（MSI）或 macOS 13+ 的 Apple Silicon、Intel（分別提供 PKG）。從 GitHub Releases 下載安裝後重新啟動 Thunderbird。macOS 套件未簽署、未公證，完整實機驗證仍待完成。暫不支援 Linux。ATN 負責擴充套件更新；Windows 保留獨立的輔助程式更新機制，已發布的 macOS 套件需手動更新。
+
+[GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases)
 
 授權條款: MIT
 
 支援信箱: it@live.cn
 
-Windows 輔助程式: https://github.com/lvbeck/mail-ai-assist/releases/latest
+https://github.com/lvbeck/mail-ai-assist/releases/latest

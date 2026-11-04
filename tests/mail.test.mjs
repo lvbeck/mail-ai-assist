@@ -37,23 +37,25 @@ test('tag output must be a small bounded JSON array', () => {
 });
 async function fixture() {
   let listener, removed;
-  const menu = {};
+  const shown = [], clicked = [];
+  const menu = { show: async (...args) => { for (const fn of shown) await fn(...args); }, click: async (...args) => { for (const fn of clicked) await fn(...args); } };
   const state = { tags: ['existing'], catalog: [{ key: 'known', tag: 'Support' }], writes: 0, created: 0, subject: 'Subject', body: 'Body', target: null };
   const api = {
     storage: { local: { get: async () => ({}) } },
-    menus: { onShown: { addListener: fn => { menu.show = fn; } }, onHidden: { addListener() {} }, onClicked: { addListener: fn => { menu.click = fn; } }, update: async (id, value) => { menu.enabled = value.enabled; }, refresh: async () => {} },
+    menus: { onShown: { addListener: fn => { shown.push(fn); } }, onHidden: { addListener() {} }, onClicked: { addListener: fn => { clicked.push(fn); } }, update: async (id, value) => { if (id === 'message-ai') menu.enabled = value.enabled; }, refresh: async () => {} },
     runtime: { getURL: path => 'moz-extension://test/' + path, onMessage: { addListener: fn => { listener = fn; } } },
     messageDisplay: { getDisplayedMessage: async () => ({ id: 42, subject: state.subject }) },
     windows: { create: async options => { state.url = options.url; return { id: 9 }; }, onRemoved: { addListener: fn => { removed = fn; } } },
     messages: {
+      getRaw: async (id, options) => { assert.equal(id, 42); assert.equal(options.data_format, 'File'); assert.equal(options.decrypt, false); return new Blob([state.rawBytes]); },
       getFull: async id => { state.readId = id; return { contentType: 'text/plain', body: state.body }; },
       get: async id => { assert.equal(id, 42); return { tags: [...state.tags] }; },
-      listTags: async () => state.catalog,
-      createTag: async (key, tag) => { state.created++; state.catalog.push({ key, tag }); },
+      tags: { list: async () => state.catalog,
+        create: async (key, tag) => { state.created++; state.catalog.push({ key, tag }); } },
       update: async (id, value) => { state.target = id; state.tags = value.tags; state.writes++; }
     }
   };
-  const context = vm.createContext({ messenger: api, crypto: webcrypto, URL, TextEncoder });
+  const context = vm.createContext({ messenger: api, crypto: webcrypto, URL, TextEncoder, btoa });
   vm.runInContext(await readFile(new URL('tag-instructions.js', root), 'utf8'), context); vm.runInContext(content, context); vm.runInContext(await readFile(new URL('mail-export.js', root), 'utf8'), context); vm.runInContext(background, context);
   const send = (action, data = {}, url = state.url) => listener({ scope: 'mail-ai', action, key: state.key, ...data }, { url });
   await send('open', { task: 'tags', tabId: 1 }, api.runtime.getURL('mail-menu.html'));
@@ -117,4 +119,66 @@ test('send popup binds export to captured message and rejects tag operations and
   assert.equal(state.writes, 0);
   removed(9);
   assert.equal((await send('export')).error, 'expired_mail');
+});
+
+
+test('body actions use only selected text and never read the full message', async () => {
+  const { state, send, menu } = await fixture();
+  const tab = { id: 1, type: 'mail' };
+  for (const task of ['summary', 'translate']) {
+    await menu.click({ menuItemId: `body-ai-selection-${task}`, selectionText: 'Selected text', contexts: ['selection', 'link'] }, tab);
+    state.key = new URL(state.url).searchParams.get('key');
+    const result = await send('load');
+    assert.equal(result.text, 'Selected text');
+    assert.equal(result.selection, true);
+    assert.equal(result.task, task);
+    assert.equal(state.readId, undefined);
+  }
+  const previous = state.url;
+  await menu.click({ menuItemId: 'body-ai-selection-summary', selectionText: '' }, tab);
+  await menu.click({ menuItemId: 'body-ai-tags', selectionText: 'Selected' }, tab);
+  assert.equal(state.url, previous);
+  await menu.click({ menuItemId: 'body-ai-selection-summary', selectionText: 'x'.repeat(20001) }, tab);
+  state.key = new URL(state.url).searchParams.get('key');
+  assert.equal((await send('load')).error, 'mail_too_long');
+  assert.equal(state.readId, undefined);
+});
+
+test('body menus support whole mail on links/images but exclude compose and web tabs', async () => {
+  const { state, send, menu } = await fixture();
+  for (const type of ['mail', 'messageDisplay']) {
+    for (const context of ['page', 'link', 'image']) {
+      await menu.click({ menuItemId: 'body-ai-summary', contexts: [context] }, { id: 1, type });
+      state.key = new URL(state.url).searchParams.get('key');
+      const result = await send('load');
+      assert.equal(result.selection, false);
+      assert.equal(result.text, 'Subject: Subject\n\nBody');
+      assert.equal(state.readId, 42);
+    }
+  }
+  const previous = state.url;
+  for (const type of ['content', 'messageCompose']) {
+    await menu.click({ menuItemId: 'body-ai-summary', contexts: ['page'] }, { id: 1, type });
+    assert.equal(state.url, previous);
+  }
+  await menu.click({ menuItemId: 'body-ai-summary', contexts: ['message_list'] }, { id: 1, type: 'mail' });
+  assert.equal(state.url, previous);
+});
+
+
+test('raw EML export preserves hidden HTML and binary bytes without HTML extraction', async () => {
+  const { state, send, menu } = await fixture();
+  state.rawBytes = Buffer.concat([Buffer.from('Subject: Original\r\nContent-Type: text/html\r\n\r\n<div hidden>Original hidden data</div>\r\n'), Buffer.from(Array.from({length:70000},(_,i)=>i%256))]);
+  await menu.click({menuItemId:'message-ai-send',selectedMessages:{messages:[{id:42}]}});
+  state.key=new URL(state.url).searchParams.get('key');
+  const chunks=[];
+  let offset=0;
+  while(offset<state.rawBytes.length){
+    const result=await send('raw',{offset});
+    assert.equal(result.ok,true);
+    chunks.push(Buffer.from(result.base64,'base64'));
+    offset=result.end;
+  }
+  assert.deepEqual(Buffer.concat(chunks),state.rawBytes);
+  assert.equal(state.readId,undefined);
 });

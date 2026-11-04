@@ -35,6 +35,8 @@
       tags: { en: 'AI Auto-tag', de: 'KI-Tags hinzufügen', fr: 'Étiquettes IA', it: 'Etichette IA', es: 'Etiquetas IA', pt: 'Etiquetas IA', 'zh-CN': 'AI 自动添加标签', 'zh-TW': 'AI 自動新增標籤', ja: 'AI 自動タグ付け', ko: 'AI 자동 태그 지정' },
       send: {"en": "Export email", "de": "E-Mail exportieren", "fr": "Exporter le message", "it": "Esporta email", "es": "Exportar correo", "pt": "Exportar mensagem", "zh-CN": "导出邮件", "zh-TW": "匯出郵件", "ja": "メールをエクスポート", "ko": "메일 내보내기"}
     };
+    const selectionTitles = {"en": ["Summarize selection", "Translate selection"], "de": ["Auswahl zusammenfassen", "Auswahl übersetzen"], "fr": ["Résumer la sélection", "Traduire la sélection"], "it": ["Riassumi la selezione", "Traduci la selezione"], "es": ["Resumir selección", "Traducir selección"], "pt": ["Resumir seleção", "Traduzir seleção"], "zh-CN": ["摘要选中文字", "翻译选中文字"], "zh-TW": ["摘要選取文字", "翻譯選取文字"], "ja": ["選択範囲を要約", "選択範囲を翻訳"], "ko": ["선택한 텍스트 요약", "선택한 텍스트 번역"]}[locale];
+    const bodyContexts = ['page', 'selection', 'link', 'image'];
     const autoTag = { en: 'Automatically tag new mail', de: 'Neue E-Mails automatisch verschlagworten', fr: 'Étiqueter automatiquement les nouveaux messages', it: 'Etichetta automaticamente i nuovi messaggi', es: 'Etiquetar automáticamente los mensajes nuevos', pt: 'Etiquetar automaticamente novas mensagens', 'zh-CN': '自动标记新邮件', 'zh-TW': '自動標記新郵件', ja: '新着メールの自動タグ付け', ko: '새 메일 자동 태그 지정' }[locale];
     const autoSummary = { en: 'Automatically summarize new mail with AI', de: 'Neue E-Mails automatisch mit KI zusammenfassen', fr: 'Résumer automatiquement les nouveaux messages avec l’IA', it: 'Riepiloga automaticamente i nuovi messaggi con IA', es: 'Resumir automáticamente los mensajes nuevos con IA', pt: 'Resumir automaticamente novas mensagens com IA', 'zh-CN': '自动为新邮件生成 AI 摘要', 'zh-TW': '自動為新郵件產生 AI 摘要', ja: '新着メールを AI で自動要約', ko: '새 메일을 AI로 자동 요약' }[locale];
     if (!menusCreated) {
@@ -48,8 +50,17 @@
       for (const [task, titles] of Object.entries(mailTasks)) messenger.menus.create({ id: `message-ai-${task}`, parentId: 'message-ai', title: titles[locale], contexts: ['message_list'], icons: { 16: `${task === 'tags' ? 'tag' : task}.svg` } });
       messenger.menus.create({ id: 'message-ai-separator', parentId: 'message-ai', type: 'separator', contexts: ['message_list'] });
       messenger.menus.create({ id: 'message-ai-settings', parentId: 'message-ai', title: settings, contexts: ['message_list'], icons: { 16: 'settings.svg' } });
+      messenger.menus.create({ id: 'body-ai', title: assistant, contexts: bodyContexts, visible: false, icons: { 16: 'icon-menu.svg' } });
+      for (const [task, titles] of Object.entries(mailTasks)) messenger.menus.create({ id: `body-ai-${task}`, parentId: 'body-ai', title: titles[locale], contexts: bodyContexts, icons: { 16: `${task === 'tags' ? 'tag' : task}.svg` } });
+      for (const [index, task] of ['summary', 'translate'].entries()) messenger.menus.create({ id: `body-ai-selection-${task}`, parentId: 'body-ai', title: selectionTitles[index], contexts: bodyContexts, visible: false, icons: { 16: `${task}.svg` } });
+      messenger.menus.create({ id: 'body-ai-separator', parentId: 'body-ai', type: 'separator', contexts: bodyContexts });
+      messenger.menus.create({ id: 'body-ai-settings', parentId: 'body-ai', title: settings, contexts: bodyContexts, icons: { 16: 'settings.svg' } });
       menusCreated = true;
     } else {
+      await messenger.menus.update('body-ai', { title: assistant });
+      for (const [task, titles] of Object.entries(mailTasks)) await messenger.menus.update(`body-ai-${task}`, { title: titles[locale] });
+      for (const [index, task] of ['summary', 'translate'].entries()) await messenger.menus.update(`body-ai-selection-${task}`, { title: selectionTitles[index] });
+      await messenger.menus.update('body-ai-settings', { title: settings });
       await messenger.menus.update('account-ai', { title: assistant });
       await messenger.menus.update('message-ai', { title: assistant });
       for (const [task, titles] of Object.entries(mailTasks)) await messenger.menus.update(`message-ai-${task}`, { title: titles[locale] });

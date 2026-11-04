@@ -41,7 +41,7 @@ Laden Sie das Hilfsprogramm für Ihr Betriebssystem und die Thunderbird-XPI unte
 
 Die PKGs für macOS 13+ sind nicht signiert oder notarisiert. Vollständige Tests von Installation, Anmeldung und Thunderbird-Integration auf echten Macs stehen noch aus. Automatische macOS-Updates sind nicht aktiv.
 
-Erweiterung nach Veröffentlichung über ATN oder manuell als XPI installieren. Mindestversion laut Manifest: Thunderbird 128; Zielversionen praktisch testen. TXT kann Zitate auslassen; EML erhält Original und Anhänge. Exportordner ist wählbar; Dateien werden zum manuellen Anhängen angezeigt und beim Schließen behalten. Verwaltete Exporte lassen sich in den Einstellungen löschen.
+Erweiterung nach Veröffentlichung über ATN oder manuell als XPI installieren. Mindestversion laut Manifest: Thunderbird 148; Zielversionen praktisch testen. TXT kann Zitate auslassen; EML erhält Original und Anhänge. Exportordner ist wählbar; Dateien werden zum manuellen Anhängen angezeigt und beim Schließen behalten. Verwaltete Exporte lassen sich in den Einstellungen löschen.
 
 ## Updates und Migration
 

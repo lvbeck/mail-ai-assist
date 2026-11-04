@@ -12,6 +12,8 @@ Mail AI Assist는 Thunderbird에서 선택한 메일의 요약, 번역, 태그 �
 
 ## 기능
 
+메일 본문을 오른쪽 클릭하면 AI 도우미가 표시되며 링크와 이미지에서도 사용할 수 있습니다. 선택한 텍스트가 없으면 전체 메일을 처리합니다. 텍스트를 선택하면 요약과 번역은 선택 영역만 전송하며 제목과 나머지 본문은 전송하지 않습니다.
+
 - **메일 요약:** 선택한 메일의 핵심 내용과 해야 할 일을 정리합니다. 요약 언어는 인터페이스 및 번역 언어와 별도로 설정하며, 기본값은 시스템 언어 따르기입니다.
 - **메일 번역:** 원문과 대상 언어를 선택하거나 원문 언어를 자동으로 감지합니다. 자신의 API 키로 Google Cloud Translation, Microsoft Azure Translator, DeepL을 설정할 수 있습니다. 번역 서비스를 설정하지 않으면 선택한 AI 모델을 사용합니다.
 - **태그 제안과 별칭:** Thunderbird의 기존 태그를 우선 사용하여 유사한 태그의 중복 생성을 줄입니다. 수동 제안은 편집한 후 확인하여 적용합니다. 예를 들어 `Project Alpha`와 `Project Beta`를 기존 `Projects` 태그에 연결할 수 있습니다. 별칭은 전체 이름으로 비교하며 대소문자와 불필요한 공백을 무시합니다.
@@ -30,14 +32,20 @@ Mail AI Assist는 Thunderbird에서 선택한 메일의 요약, 번역, 태그 �
 
 ## 제공업체 및 개인정보
 
-ChatGPT 인증, Gemini API 또는 Claude API를 선택할 수 있습니다. 번역은 Google Cloud Translation, Azure Translator 및 DeepL을 지원합니다. 번역 서비스를 선택하거나 설정하지 않으면 선택한 AI 모델을 사용합니다. 서비스 실패 시 다른 제공업체로 자동 전환하지 않습니다. 이용 자격과 요금은 제공업체에 따라 다릅니다. 관련 메일 내용은 Windows 도우미를 통해 선택한 서비스로 전송됩니다. 인증 정보는 Windows DPAPI로 보호합니다. 캐시와 내보낸 파일은 읽을 수 있는 로컬 파일입니다. [개인정보 처리방침](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md)을 확인하세요.
+ChatGPT 인증, Gemini API 또는 Claude API를 선택할 수 있습니다.
+
+nativeMessaging 권한은 별도로 설치한 로컬 도우미(local.mail_ai_assist)에 연결하는 데 사용됩니다. 요청한 제목/본문 또는 선택한 텍스트, 제공업체/모델/언어 설정, 입력한 인증 정보, AI 결과, 캐시 데이터, 내보내기 내용/경로를 교환합니다. EML에는 원본 헤더와 첨부 파일이 포함됩니다. 도우미는 인증 및 HTTPS 요청, 인증 정보 보호, 캐시, 파일 내보내기, 데스크톱 앱 실행을 담당합니다. 관련 텍스트를 설정한 AI 또는 번역 서비스에 전송하며 로컬 내보내기 자체는 AI를 호출하지 않습니다. Windows는 DPAPI를, macOS는 키체인 기반 암호화를 사용합니다. 캐시와 내보낸 파일은 로컬에서 읽을 수 있습니다. 제공업체의 이용 조건과 요금이 적용됩니다.
+
+[개인정보 처리방침](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md)
 
 ## 설치 및 내보내기
 
-Windows x64 도우미가 필요합니다. [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases)에서 MSI를 다운로드하여 설치하고 Thunderbird를 다시 시작하세요. 부가 기능은 ATN에 게시된 후 설치하거나, 부가 기능 관리자에서 로컬 XPI를 직접 설치할 수 있습니다. manifest의 최소 버전은 Thunderbird 128입니다. 실제 사용하는 버전에서 테스트하세요. 이 링크가 ATN 또는 GitHub에 이미 게시되었음을 의미하지는 않습니다. TXT는 인용문을 제외하여 본문을 내보낼 수 있고 EML은 원본 메일과 첨부 파일을 유지합니다. 설정에서 내보내기 폴더를 선택할 수 있습니다. 수동 첨부를 위해 폴더에서 파일을 표시하며 창을 닫아도 유지됩니다. 설정에서 이 부가 기능이 관리하는 내보낸 파일을 지울 수 있습니다.
+Thunderbird 148 이상과 별도 도우미가 필요합니다. Windows x64(MSI), 또는 macOS 13 이상의 Apple Silicon / Intel(개별 PKG)을 지원합니다. GitHub Releases에서 다운로드해 설치하고 Thunderbird를 다시 시작하세요. macOS 패키지는 서명 및 공증되지 않았으며 전체 실기 검증은 아직 완료되지 않았습니다. Linux는 지원하지 않습니다. ATN이 확장 기능을 업데이트하며 Windows 도우미는 독립 업데이트를 유지합니다. 게시된 macOS 패키지는 수동 업데이트가 필요합니다.
+
+[GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases)
 
 라이선스: MIT
 
 지원: it@live.cn
 
-Windows 도우미: https://github.com/lvbeck/mail-ai-assist/releases/latest
+https://github.com/lvbeck/mail-ai-assist/releases/latest

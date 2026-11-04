@@ -65,14 +65,14 @@
       if (!status.sharing) throw new Error('sign_in_required');
       if (!await allowed(accountId, generation) || channel.cancelled) return;
       const outputLanguage = ['en', 'de', 'fr', 'it', 'es', 'pt', 'zh-CN', 'zh-TW', 'ja', 'ko'].includes(saved.tagLanguage) ? saved.tagLanguage : 'en';
-      const existingTags = await messenger.messages.listTags();
+      const existingTags = await messenger.messages.tags.list();
       const result = await channel.request(provider, 'rewrite', { model, text, recipe: 'custom', custom: MailTagPolicy.instructions(existingTags, text, saved.tagAliases), outputLanguage });
       if (channel.cancelled || !await allowed(accountId, generation)) return;
       const write = tagQueue.then(async () => {
         if (channel.cancelled || !await allowed(accountId, generation)) return false;
         const latest = await messenger.messages.get(current.id);
         if (latest.folder?.accountId !== accountId || !inbox(latest.folder) || latest.junk) return false;
-        const tags = MailTagPolicy.resolve(MailContent.parseTags(result.text), await messenger.messages.listTags(), (await messenger.storage.local.get('tagAliases')).tagAliases);
+        const tags = MailTagPolicy.resolve(MailContent.parseTags(result.text), await messenger.messages.tags.list(), (await messenger.storage.local.get('tagAliases')).tagAliases);
         await applyMailTags(session, JSON.stringify(tags));
         return true;
       });

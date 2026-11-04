@@ -2,21 +2,32 @@
   function hiddenStyle(style) {
     const value = name => style.getPropertyValue(name).trim().toLowerCase();
     const zero = name => /^0(?:px|pt|em|rem|%)?$/.test(value(name));
-    return value('display') === 'none' || ['hidden', 'collapse'].includes(value('visibility')) ||
+    return value('display') === 'none' || value('content-visibility') === 'hidden' || ['hidden', 'collapse'].includes(value('visibility')) ||
       zero('opacity') || zero('font-size') || value('mso-hide') === 'all' ||
       ((zero('height') || zero('max-height')) && ['hidden', 'clip'].includes(value('overflow')));
   }
   function htmlFragment(html) {
     if (typeof html !== 'string' || html.length > 1048576) throw new Error('mail_too_long');
-    // Template contents stay in an inert document: never attach mail markup to the live DOM.
+    // Keep the working tree in an inert template document, never in the live DOM.
+    // Preserve visibility and quote metadata until hidden subtrees are removed.
+    const sanitizer = {
+      removeElements: ['script', 'link', 'meta', 'base', 'title', 'iframe', 'object', 'embed',
+        'img', 'picture', 'video', 'audio', 'source', 'track', 'svg', 'math', 'template', 'noscript']
+    };
     const template = document.createElement('template');
-    template.innerHTML = html;
     const fragment = template.content;
+    const root = fragment.ownerDocument.createElement('html');
+    // An HTML-context fragment retains body/head, but ignores attributes on the
+    // outer html tag. Read those using the same native safe document sanitizer.
+    const metadata = Document.parseHTML(html, { sanitizer });
+    for (const attribute of metadata.documentElement.attributes) root.setAttribute(attribute.name, attribute.value);
+    root.setHTML(html, { sanitizer });
+    fragment.append(root);
     const nodes = fragment.querySelectorAll('*');
     if (nodes.length > 20000) throw new Error('mail_too_long');
     const hidden = new Set();
     for (const node of nodes) {
-      if (node.hasAttribute('hidden') || node.getAttribute('aria-hidden')?.toLowerCase() === 'true' || (node.style && hiddenStyle(node.style)) || /(?:^|;)\s*mso-hide\s*:\s*all\s*(?:!important\s*)?(?:;|$)/i.test(node.getAttribute('style') || '')) hidden.add(node);
+      if (node.hasAttribute('hidden') || node.getAttribute('aria-hidden')?.trim().toLowerCase() === 'true' || (node.style && hiddenStyle(node.style)) || /(?:^|;)\s*mso-hide\s*:\s*all\s*(?:!important\s*)?(?:;|$)/i.test(node.getAttribute('style') || '')) hidden.add(node);
     }
     let ruleCount = 0;
     function visit(rules, depth = 0) {
@@ -25,7 +36,7 @@
         if (++ruleCount > 2000) throw new Error('mail_too_long');
         if (rule.selectorText && rule.style && hiddenStyle(rule.style)) {
           // Conservatively exclude content hidden by embedded rules, including media rules.
-          try { fragment.querySelectorAll(rule.selectorText).forEach(node => hidden.add(node)); } catch {}
+          fragment.querySelectorAll(rule.selectorText).forEach(node => hidden.add(node));
         }
         if (rule.cssRules) visit(rule.cssRules, depth + 1);
       }

@@ -1,5 +1,9 @@
 globalThis.ComposeTranslations = {
   "zh-CN": {
+    "摘要选中文字": "摘要选中文字",
+    "翻译选中文字": "翻译选中文字",
+    "仅发送选中的文字。AI 结果请自行核对。": "仅发送选中的文字。AI 结果请自行核对。",
+
     "插件信息": "插件信息",
     "插件名称": "插件名称",
     "许可证": "许可证",
@@ -283,6 +287,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "请安装新版辅助程序 MSI，然后重启 Thunderbird。"
   },
   "en": {
+    "摘要选中文字": "Summarize selection",
+    "翻译选中文字": "Translate selection",
+    "仅发送选中的文字。AI 结果请自行核对。": "Only the selected text is sent. Please review AI results.",
+
     "插件信息": "Add-on information",
     "插件名称": "Add-on name",
     "许可证": "License",
@@ -566,6 +574,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Install the latest helper MSI, then restart Thunderbird."
   },
   "de": {
+    "摘要选中文字": "Auswahl zusammenfassen",
+    "翻译选中文字": "Auswahl übersetzen",
+    "仅发送选中的文字。AI 结果请自行核对。": "Nur der ausgewählte Text wird gesendet. Bitte prüfen Sie KI-Ergebnisse.",
+
     "插件信息": "Add-on-Informationen",
     "插件名称": "Name des Add-ons",
     "许可证": "Lizenz",
@@ -849,6 +861,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Installieren Sie das aktuelle Hilfsprogramm-MSI und starten Sie Thunderbird neu."
   },
   "zh-TW": {
+    "摘要选中文字": "摘要選取文字",
+    "翻译选中文字": "翻譯選取文字",
+    "仅发送选中的文字。AI 结果请自行核对。": "僅傳送選取的文字。請自行核對 AI 結果。",
+
     "插件信息": "附加元件資訊",
     "插件名称": "附加元件名稱",
     "许可证": "授權條款",
@@ -1132,6 +1148,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "請安裝新版輔助程式 MSI，然後重新啟動 Thunderbird。"
   },
   "fr": {
+    "摘要选中文字": "Résumer la sélection",
+    "翻译选中文字": "Traduire la sélection",
+    "仅发送选中的文字。AI 结果请自行核对。": "Seul le texte sélectionné est envoyé. Vérifiez les résultats de l’IA.",
+
     "插件信息": "Informations sur le module",
     "插件名称": "Nom du module",
     "许可证": "Licence",
@@ -1415,6 +1435,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Installez le dernier MSI de l’assistant, puis redémarrez Thunderbird."
   },
   "it": {
+    "摘要选中文字": "Riassumi la selezione",
+    "翻译选中文字": "Traduci la selezione",
+    "仅发送选中的文字。AI 结果请自行核对。": "Viene inviato solo il testo selezionato. Verifica i risultati dell’IA.",
+
     "插件信息": "Informazioni sul componente aggiuntivo",
     "插件名称": "Nome del componente aggiuntivo",
     "许可证": "Licenza",
@@ -1698,6 +1722,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Installa il MSI più recente del programma locale, poi riavvia Thunderbird."
   },
   "es": {
+    "摘要选中文字": "Resumir selección",
+    "翻译选中文字": "Traducir selección",
+    "仅发送选中的文字。AI 结果请自行核对。": "Solo se envía el texto seleccionado. Revisa los resultados de la IA.",
+
     "插件信息": "Información del complemento",
     "插件名称": "Nombre del complemento",
     "许可证": "Licencia",
@@ -1981,6 +2009,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Instala el MSI más reciente del asistente y reinicia Thunderbird."
   },
   "pt": {
+    "摘要选中文字": "Resumir seleção",
+    "翻译选中文字": "Traduzir seleção",
+    "仅发送选中的文字。AI 结果请自行核对。": "Apenas o texto selecionado é enviado. Verifique os resultados da IA.",
+
     "插件信息": "Informações do extra",
     "插件名称": "Nome do extra",
     "许可证": "Licença",
@@ -2264,6 +2296,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "Instale o MSI mais recente do assistente e reinicie o Thunderbird."
   },
   "ja": {
+    "摘要选中文字": "選択範囲を要約",
+    "翻译选中文字": "選択範囲を翻訳",
+    "仅发送选中的文字。AI 结果请自行核对。": "選択したテキストのみを送信します。AI の結果を確認してください。",
+
     "插件信息": "アドオン情報",
     "插件名称": "アドオン名",
     "许可证": "ライセンス",
@@ -2547,6 +2583,10 @@ globalThis.ComposeTranslations = {
     "请安装新版辅助程序 MSI，然后重启 Thunderbird。": "最新のヘルパー MSI をインストールし、Thunderbird を再起動してください。"
   },
   "ko": {
+    "摘要选中文字": "선택한 텍스트 요약",
+    "翻译选中文字": "선택한 텍스트 번역",
+    "仅发送选中的文字。AI 结果请自行核对。": "선택한 텍스트만 전송합니다. AI 결과를 확인하세요.",
+
     "插件信息": "부가 기능 정보",
     "插件名称": "부가 기능 이름",
     "许可证": "라이선스",

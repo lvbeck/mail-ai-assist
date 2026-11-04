@@ -122,7 +122,7 @@ subprocess.run([wix, 'build', str(generated), str(root / 'installer/scope-ui.wxs
 subprocess.run([sys.executable, 'installer/msi-database.py', 'prepare', str(msi)], check=True)
 subprocess.run([str(node), 'installer/sign-release.mjs'], check=True)
 xpi_hash = hashlib.sha256((release / xpi_name).read_bytes()).hexdigest()
-(upload / 'updates.json').write_text(json.dumps({'addons': {config['addonId']: {'updates': [{'version': version, 'update_link': (f'https://github.com/{config["githubRepository"]}/releases/download/v{version}/{xpi_name}' if config.get('githubRepository') else config['baseUrl'] + f'releases/{version}/{xpi_name}'), 'update_hash': 'sha256:' + xpi_hash, 'applications': {'gecko': {'strict_min_version': '128.0'}}}]}}}, indent=2), encoding='utf-8')
+(upload / 'updates.json').write_text(json.dumps({'addons': {config['addonId']: {'updates': [{'version': version, 'update_link': (f'https://github.com/{config["githubRepository"]}/releases/download/v{version}/{xpi_name}' if config.get('githubRepository') else config['baseUrl'] + f'releases/{version}/{xpi_name}'), 'update_hash': 'sha256:' + xpi_hash, 'applications': {'gecko': {'strict_min_version': manifest['browser_specific_settings']['gecko']['strict_min_version']}}}]}}}, indent=2), encoding='utf-8')
 for item in release.glob('*.wixpdb'): item.unlink()
 shutil.copy2(release / xpi_name, root / 'dist' / xpi_name)
 shutil.copy2(msi, root / 'dist' / msi.name)

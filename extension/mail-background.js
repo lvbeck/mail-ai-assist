@@ -4,6 +4,10 @@ function plainHtml(html) {
   return MailContent.fragmentText(MailContent.htmlFragment(html));
 }
 async function loadMail(session) {
+  if (session.selection) {
+    if (session.text.length > 20000) throw new Error('mail_too_long');
+    return session.text;
+  }
   if (session.text) return session.text;
   const full = await messenger.messages.getFull(session.messageId);
   const body = MailContent.extract(full, plainHtml).trim();
@@ -16,14 +20,14 @@ async function loadMail(session) {
 async function applyMailTags(session, text) {
   if (session.applied) return { names: session.names };
   const names = MailContent.parseTags(text);
-  const existing = await messenger.messages.listTags();
+  const existing = await messenger.messages.tags.list();
   const keys = [];
   // Validate the original message before creating any global tag definitions.
   await messenger.messages.get(session.messageId);
   for (const name of names) {
     const known = existing.find(tag => tag.tag.normalize('NFKC').toLowerCase() === name.normalize('NFKC').toLowerCase());
     const key = known?.key || `mailai-${crypto.randomUUID()}`;
-    if (!known) await messenger.messages.createTag(key, name, '#7856D8');
+    if (!known) await messenger.messages.tags.create(key, name, '#7856D8');
     keys.push(key);
   }
   const current = await messenger.messages.get(session.messageId);
@@ -34,9 +38,14 @@ async function applyMailTags(session, text) {
   session.names = names;
   return { names };
 }
-async function openMailSession(header, task) {
+async function openMailSession(header, task, selectionText = null) {
   const key = crypto.randomUUID();
   const session = { messageId: header.id, subject: header.subject || '', task: task };
+  if (selectionText !== null) {
+    if (!['summary', 'translate'].includes(task) || !selectionText.trim()) throw new Error('empty_mail');
+    session.selection = true;
+    session.text = selectionText;
+  }
   mailSessions.set(key, session);
   try {
     const popup = await messenger.windows.create({ url: messenger.runtime.getURL(`${task === 'send' ? 'send-ai' : 'mail-reader'}.html?key=${key}`), type: 'popup', width: 760, height: 780 });
@@ -92,7 +101,7 @@ messenger.runtime.onMessage.addListener((message, sender) => {
         return { ok: true, mail };
       }
       if (session.task === 'send') throw new Error('expired_mail');
-      if (message.action === 'load') return { ok: true, task: session.task, subject: session.subject, text: await loadMail(session), existingTags: session.task === 'tags' ? await messenger.messages.listTags() : [], tagAliases: session.task === 'tags' ? (await messenger.storage.local.get('tagAliases')).tagAliases || [] : [] };
+      if (message.action === 'load') return { ok: true, task: session.task, subject: session.subject, selection: session.selection === true, text: await loadMail(session), existingTags: session.task === 'tags' ? await messenger.messages.tags.list() : [], tagAliases: session.task === 'tags' ? (await messenger.storage.local.get('tagAliases')).tagAliases || [] : [] };
       if (message.action === 'tags' && session.task === 'tags') {
         const operation = tagQueue.then(() => applyMailTags(session, message.text));
         tagQueue = operation.catch(() => {});
@@ -142,5 +151,49 @@ messenger.menus.onClicked.addListener(async info => {
   if (!header) return;
   // Use the context-clicked message, never the reading pane's current message.
   try { await openMailSession(header, task); }
+  catch (error) { console.error('Unable to open AI mail window', error); }
+});
+
+
+let bodyMenuEpoch = 0;
+function isMailBodyContext(info, tab) {
+  return Number.isInteger(tab?.id) && ['mail', 'messageDisplay'].includes(tab.type)
+    && !info.contexts?.some(value => ['compose_body', 'editable', 'message_list', 'tab', 'folder_pane'].includes(value));
+}
+async function displayedBodyMessage(info, tab) {
+  if (!isMailBodyContext(info, tab)) return null;
+  try { return await messenger.messageDisplay.getDisplayedMessage(tab.id); }
+  catch { return null; }
+}
+messenger.menus.onShown.addListener(async (info, tab) => {
+  const epoch = ++bodyMenuEpoch;
+  const header = await displayedBodyMessage(info, tab);
+  if (epoch !== bodyMenuEpoch) return;
+  const selection = typeof info.selectionText === 'string' && Boolean(info.selectionText.trim());
+  await messenger.menus.update('body-ai', { visible: Boolean(header) });
+  for (const task of ['summary', 'translate', 'tags', 'send']) {
+    await messenger.menus.update(`body-ai-${task}`, { visible: !selection });
+  }
+  for (const task of ['summary', 'translate']) {
+    await messenger.menus.update(`body-ai-selection-${task}`, { visible: selection });
+  }
+  if (epoch === bodyMenuEpoch) await messenger.menus.refresh();
+});
+messenger.menus.onHidden.addListener(() => { bodyMenuEpoch++; });
+messenger.menus.onClicked.addListener(async (info, tab) => {
+  if (!String(info.menuItemId).startsWith('body-ai-')) return;
+  const header = await displayedBodyMessage(info, tab);
+  if (!header) return;
+  if (info.menuItemId === 'body-ai-settings') {
+    await messenger.runtime.openOptionsPage();
+    return;
+  }
+  const match = /^body-ai-(selection-)?(summary|translate|tags|send)$/.exec(info.menuItemId);
+  if (!match) return;
+  const selection = typeof info.selectionText === 'string' && info.selectionText.trim() ? info.selectionText : null;
+  // Never fall back to the whole message when a selection action loses its selection.
+  if (Boolean(match[1]) !== Boolean(selection)) return;
+  if (selection && !['summary', 'translate'].includes(match[2])) return;
+  try { await openMailSession(header, match[2], selection); }
   catch (error) { console.error('Unable to open AI mail window', error); }
 });

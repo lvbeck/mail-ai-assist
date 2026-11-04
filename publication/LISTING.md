@@ -12,6 +12,8 @@ Mail AI Assist helps you work with emails you select in Thunderbird: summarize o
 
 ## Features
 
+Right-click the message body, including links and images, to open AI Assist. Without a text selection, actions process the whole message. With a selection, summary and translation send only that text, without the subject or remaining body.
+
 - **Email summaries:** Open AI Summary for the selected message to extract its main points and action items. Choose the summary language independently of the interface and translation languages; the default follows the system language.
 - **Email translation:** Select source and target languages, or detect the source language automatically. Use Google Cloud Translation, Microsoft Azure Translator or DeepL with your own API key; without a configured translation service, translation uses the selected AI model.
 - **Tag suggestions and aliases:** Prefer existing Thunderbird tags instead of creating near-duplicates. Review and edit manual suggestions before confirming. In Settings, map names such as `Project Alpha` and `Project Beta` to the existing `Projects` tag. Alias matching ignores case and extra spaces and matches complete names.
@@ -30,14 +32,20 @@ Summary, translation and tagging process the message subject and body, not attac
 
 ## Providers and privacy
 
-Choose ChatGPT authorization, Gemini API or Claude API. Translation supports Google Cloud Translation, Azure Translator and DeepL; when no translation service is selected/configured, it uses the selected AI model. Service failures do not silently switch providers. Eligibility and charges depend on the provider. Relevant email content is sent to the selected service through the Windows helper. Credentials use Windows DPAPI; cache and exports are readable local files. See [privacy policy](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md).
+Choose ChatGPT authorization, Gemini API or Claude API.
+
+The nativeMessaging permission connects Thunderbird to the separately installed local helper (local.mail_ai_assist). It exchanges the requested message subject/body or selected text, provider/model/language settings, credentials entered for authentication, AI results, cache data and export content/paths. EML export includes original headers and attachments. The helper handles provider authentication and HTTPS requests, protected credential storage, local cache and file export, and opening desktop apps. Relevant text is sent to your configured AI or translation provider; local export itself makes no AI request. Windows uses DPAPI; macOS uses Keychain-backed encryption. Cache and exports are readable local files. Provider eligibility and fees apply.
+
+[Privacy policy](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md)
 
 ## Install and export
 
-Windows x64 helper required. Download the MSI from [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases), install it and restart Thunderbird. Install the extension through ATN when published, or install the local XPI from Thunderbird’s add-on manager. The manifest minimum is Thunderbird 128; test the actual versions you deploy. No ATN listing or GitHub release is implied by these links. TXT exports selected content with optional quote removal; EML preserves the raw message and attachments. Choose an export folder in Settings. Files are revealed for manual attachment and remain after closing; Settings can clear managed exports.
+Thunderbird 148 or later and a separately installed helper are required: Windows x64 (MSI), or macOS 13+ on Apple Silicon or Intel (separate PKGs). Download from GitHub Releases, install and restart Thunderbird. macOS packages are unsigned and not notarized; end-to-end testing is still pending. Linux is not currently supported. ATN manages extension updates; Windows retains its independent helper updater, while published macOS packages require manual updates.
+
+[GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases)
 
 License: MIT
 
 Support: it@live.cn
 
-Windows helper: https://github.com/lvbeck/mail-ai-assist/releases/latest
+https://github.com/lvbeck/mail-ai-assist/releases/latest

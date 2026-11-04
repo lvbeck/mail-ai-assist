@@ -12,6 +12,8 @@ Mail AI Assist は、Thunderbird で選択したメールの要約、翻訳、�
 
 ## 機能
 
+メール本文を右クリックすると AI アシスタントを開けます。リンクや画像上でも使用できます。未選択時はメール全体を処理します。文字を選択した場合、要約と翻訳はその選択範囲のみを送信し、件名や残りの本文は送信しません。
+
 - **メール要約：** 選択したメールの要点や対応事項を整理します。要約言語は表示言語・翻訳言語とは別に設定でき、既定ではシステム言語に従います。
 - **メール翻訳：** 原文と翻訳先の言語を指定するか、原文の言語を自動検出できます。自分の API キーで Google Cloud Translation、Microsoft Azure Translator、DeepL を設定できます。翻訳サービスが未設定の場合は選択中の AI モデルを使用します。
 - **タグの提案と別名：** Thunderbird の既存タグを優先し、似たタグの重複作成を減らします。手動の提案は編集してから確定できます。例えば `Project Alpha` と `Project Beta` を既存の `Projects` タグに対応付けられます。別名は名前全体で照合し、大文字・小文字や余分な空白を区別しません。
@@ -30,14 +32,20 @@ Mail AI Assist は、Thunderbird で選択したメールの要約、翻訳、�
 
 ## 提供元とプライバシー
 
-ChatGPT 認証、Gemini API、Claude API を選択できます。翻訳は Google Cloud Translation、Azure Translator、DeepL に対応し、翻訳サービスが未選択または未設定の場合は選択した AI モデルを使用します。サービスの失敗時に自動で別の提供元へ切り替えません。利用条件と料金は提供元によって異なります。関連するメール内容は Windows ヘルパー経由で選択したサービスに送信します。認証情報は Windows DPAPI で保護します。キャッシュとエクスポートは読み取り可能なローカルファイルです。[プライバシーポリシー](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md)を参照してください。
+ChatGPT 認証、Gemini API、Claude API を選択できます。
+
+nativeMessaging 権限は別途インストールするローカルヘルパー（local.mail_ai_assist）との接続に使用します。処理対象の件名/本文または選択テキスト、提供元/モデル/言語設定、入力した認証情報、AI 結果、キャッシュデータ、エクスポート内容/パスを交換します。EML は元のヘッダーと添付ファイルを含みます。ヘルパーは認証と HTTPS リクエスト、認証情報の保護、キャッシュ、ファイル出力、デスクトップアプリの起動を担当します。必要なテキストを設定した AI または翻訳サービスに送信しますが、ローカル出力自体は AI を呼び出しません。Windows は DPAPI、macOS はキーチェーンを利用した暗号化を使用します。キャッシュと出力はローカルで読み取り可能です。利用条件と料金は提供元に従います。
+
+[プライバシーポリシー](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md)
 
 ## インストールとエクスポート
 
-Windows x64 ヘルパーが必要です。[GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases) から MSI をダウンロードしてインストールし、Thunderbird を再起動してください。アドオンは ATN で公開後にインストールするか、アドオンマネージャーからローカル XPI を手動でインストールします。manifest の最低対応バージョンは Thunderbird 128 です。実際に使用するバージョンで動作確認してください。これらのリンクは ATN や GitHub での公開済み状態を保証しません。TXT は引用を除外して本文を出力でき、EML は元のメールと添付ファイルを保持します。エクスポート先は設定で選択できます。ファイルは手動添付のためにフォルダー内で表示され、ウィンドウを閉じても残ります。設定で本アドオンが管理するエクスポートを消去できます。
+Thunderbird 148 以降と別途ヘルパーが必要です。Windows x64（MSI）、または macOS 13 以降の Apple Silicon / Intel（個別 PKG）に対応します。GitHub Releases から入手してインストール後、Thunderbird を再起動してください。macOS パッケージは未署名・未公証で、完全な実機検証は未完了です。Linux は未対応です。拡張機能は ATN が更新し、Windows ヘルパーは独立した更新機構を維持します。公開済み macOS パッケージは手動更新が必要です。
+
+[GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases)
 
 ライセンス: MIT
 
 サポート: it@live.cn
 
-Windows ヘルパー: https://github.com/lvbeck/mail-ai-assist/releases/latest
+https://github.com/lvbeck/mail-ai-assist/releases/latest

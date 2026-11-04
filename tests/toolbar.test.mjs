@@ -23,6 +23,8 @@ test('compose and reading toolbars and compose menu follow all ten UI languages'
     saved = locale; await change({ uiLanguage: { newValue: locale } }, 'local');
     assert.equal(items.get('account-ai').title, assistant);
     assert.equal(items.get('message-ai').title, assistant);
+    assert.equal(items.get('body-ai').title, assistant);
+    for (const task of ['summary', 'translate']) assert.ok(items.get(`body-ai-selection-${task}`).title);
     for (const task of ['summary', 'translate', 'tags']) assert.ok(items.get(`message-ai-${task}`).title);
     assert.ok(items.get('account-ai-auto-tags').title);
     assert.equal(values.compose, assistant); assert.equal(values.reading, assistant);
@@ -32,6 +34,8 @@ test('compose and reading toolbars and compose menu follow all ten UI languages'
     assert.equal(items.get('message-ai-settings').title, settings);
     assert.equal(items.get('message-ai-settings').parentId, 'message-ai');
   }
-  assert.equal(created, 13);
+  assert.equal(created, 22);
+  assert.deepEqual(Array.from(items.get('body-ai').contexts), ['page', 'selection', 'link', 'image']);
+  assert.equal(items.get('body-ai').visible, false);
   assert.deepEqual(Array.from(items.get('compose-ai-write').contexts), ['compose_action_menu']);
 });

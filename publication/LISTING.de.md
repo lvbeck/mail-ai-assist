@@ -12,6 +12,8 @@ Mail AI Assist unterstützt Sie bei ausgewählten E-Mails in Thunderbird: Nachri
 
 ## Funktionen
 
+Im Nachrichtentext, auch auf Links und Bildern, öffnet ein Rechtsklick den KI-Assistenten. Ohne Textauswahl wird die ganze Nachricht verarbeitet. Bei einer Auswahl senden Zusammenfassung und Übersetzung nur diesen Text, ohne Betreff und restlichen Inhalt.
+
 - **Zusammenfassungen:** Erfassen Sie die wichtigsten Punkte und Aufgaben einer ausgewählten Nachricht. Die Ausgabesprache ist unabhängig von der Oberflächen- und Übersetzungssprache; standardmäßig folgt sie der Systemsprache.
 - **Übersetzung:** Wählen Sie Quell- und Zielsprache oder lassen Sie die Quellsprache automatisch erkennen. Google Cloud Translation, Microsoft Azure Translator und DeepL lassen sich mit eigenen API-Schlüsseln nutzen. Ohne konfigurierten Übersetzungsdienst wird das ausgewählte KI-Modell verwendet.
 - **Schlagwörter und Aliasse:** Vorhandene Thunderbird-Schlagwörter werden bevorzugt, um ähnliche Neuanlagen zu vermeiden. Manuelle Vorschläge können vor der Bestätigung bearbeitet werden. Ordnen Sie beispielsweise `Project Alpha` und `Project Beta` dem vorhandenen Schlagwort `Projects` zu. Regeln vergleichen vollständige Namen und ignorieren Groß-/Kleinschreibung sowie überzählige Leerzeichen.
@@ -30,14 +32,20 @@ Zusammenfassung, Übersetzung und Verschlagwortung verarbeiten Betreff und Nachr
 
 ## Anbieter und Datenschutz
 
-ChatGPT-Autorisierung, Gemini API und Claude API werden unterstützt. Übersetzungen können Google Cloud Translation, Azure Translator oder DeepL verwenden; ohne konfigurierten Übersetzungsdienst wird das gewählte KI-Modell genutzt. Fehler lösen keinen Anbieterwechsel aus. Berechtigung und Kosten richten sich nach dem Anbieter. Relevante Inhalte gelangen über das Windows-Hilfsprogramm zum gewählten Dienst. Zugangsdaten sind mit DPAPI geschützt, Cache und Exporte lokal lesbar. Siehe [Datenschutz](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md).
+ChatGPT-Autorisierung, Gemini API und Claude API werden unterstützt.
+
+Die Berechtigung nativeMessaging verbindet Thunderbird mit dem separat installierten lokalen Hilfsprogramm (local.mail_ai_assist). Ausgetauscht werden angeforderter Betreff/Nachrichtentext oder ausgewählter Text, Anbieter-/Modell-/Spracheinstellungen, eingegebene Zugangsdaten, KI-Ergebnisse, Cachedaten sowie Exportinhalte und Pfade. EML umfasst Originalkopfzeilen und Anhänge. Das Hilfsprogramm übernimmt Anmeldung, HTTPS-Anfragen, geschützte Zugangsdaten, Cache, Dateiexport und das Öffnen von Desktop-Apps. Relevanter Text geht an den gewählten KI- oder Übersetzungsdienst; der lokale Export ruft keine KI auf. Windows nutzt DPAPI, macOS eine auf dem Schlüsselbund basierende Verschlüsselung. Cache und Exporte sind lokal lesbar. Bedingungen und Kosten des Anbieters gelten.
+
+[Datenschutz](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md)
 
 ## Installation und Export
 
-Windows-x64-Hilfsprogramm erforderlich: MSI unter [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases) herunterladen, installieren und Thunderbird neu starten. Erweiterung nach Veröffentlichung über ATN oder manuell als XPI installieren. Mindestversion laut Manifest: Thunderbird 128; Zielversionen praktisch testen. Links bedeuten keine erfolgte Veröffentlichung. TXT kann Zitate auslassen; EML erhält Original und Anhänge. Exportordner ist wählbar; Dateien werden zum manuellen Anhängen angezeigt und beim Schließen behalten. Verwaltete Exporte lassen sich in den Einstellungen löschen.
+Erforderlich sind Thunderbird 148 oder neuer und ein separat installiertes Hilfsprogramm: Windows x64 (MSI) oder macOS 13+ auf Apple Silicon oder Intel (separate PKGs). Von GitHub Releases herunterladen, installieren und Thunderbird neu starten. macOS-Pakete sind weder signiert noch notarisiert; vollständige Praxistests stehen noch aus. Linux wird derzeit nicht unterstützt. ATN aktualisiert die Erweiterung; Windows behält den separaten Helper-Updater, veröffentlichte macOS-Pakete werden manuell aktualisiert.
+
+[GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases)
 
 Lizenz: MIT
 
 Support: it@live.cn
 
-Windows-Hilfsprogramm: https://github.com/lvbeck/mail-ai-assist/releases/latest
+https://github.com/lvbeck/mail-ai-assist/releases/latest

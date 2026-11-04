@@ -41,7 +41,7 @@ Download the helper matching your operating system and the Thunderbird XPI below
 
 The macOS 13+ PKGs are unsigned and not notarized. Full installation, sign-in and Thunderbird integration testing on real Macs is still pending. macOS automatic updates are not active.
 
-Install the extension through ATN when published, or install the local XPI from Thunderbird’s add-on manager. The manifest minimum is Thunderbird 128; test the actual versions you deploy. TXT exports selected content with optional quote removal; EML preserves the raw message and attachments. Choose an export folder in Settings. Files are revealed for manual attachment and remain after closing; Settings can clear managed exports.
+Install the extension through ATN when published, or install the local XPI from Thunderbird’s add-on manager. The manifest minimum is Thunderbird 148; test the actual versions you deploy. TXT exports selected content with optional quote removal; EML preserves the raw message and attachments. Choose an export folder in Settings. Files are revealed for manual attachment and remain after closing; Settings can clear managed exports.
 
 ## Updates and migration
 

@@ -41,3 +41,9 @@ Thumbs.db
 *.pkg
 *.dmg
 *.dSYM/
+
+# Official ATN linter caches.
+/WEBEXT-LINTER-CACHE/
+
+# Local browser validation artifacts.
+/.playwright-cli/

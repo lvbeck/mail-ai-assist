@@ -4,7 +4,7 @@ import vm from 'node:vm';
 import { readFile } from 'node:fs/promises';
 const root = new URL('../extension/', import.meta.url);
 for (const [language, name] of Object.entries({ fr: 'French', it: 'Italian', es: 'Spanish', pt: 'European Portuguese (Portugal)' })) for (const task of ['summary', 'translate', 'tags']) {
-  test(`${task} uses ${language} in reader requests`, async () => {
+  for (const selection of (task === 'tags' ? [false] : [false, true])) test(`${task} uses ${language} in reader requests (selection=${selection})`, async () => {
   const elements = new Map();
   const element = id => {
     if (!elements.has(id)) elements.set(id, { value: '', hidden: ['undo', 'confirmTags'].includes(id), classList: { toggle() {} }, listeners: {}, addEventListener(event, fn) { this.listeners[event] = fn; } });
@@ -23,7 +23,7 @@ for (const [language, name] of Object.entries({ fr: 'French', it: 'Italian', es:
       storage: { local: { get: async () => ({ taskModel: 'test', summaryLanguage: language, translationLanguage: language, translationSourceLanguage: language, tagLanguage: language }) } },
       runtime: {
         sendMessage: async message => {
-          if (message.action === 'load') return { ok: true, task, subject: 'Test', text: 'Body' };
+          if (message.action === 'load') return { ok: true, task, selection, subject: 'Private subject', text: selection ? 'Selected text' : 'Body' };
           writes.push(message);
           if (failWrite) return { ok: false, error: 'mail_operation_failed' };
           return { ok: true, names: message.text ? JSON.parse(message.text) : [] };
@@ -50,6 +50,8 @@ for (const [language, name] of Object.entries({ fr: 'French', it: 'Italian', es:
   }
   const request = requests.find(item => item.action === 'rewrite');
   assert.equal(request.outputLanguage, language);
+  assert.equal(request.text, selection ? 'Selected text' : 'Body');
+  if (task !== 'tags') assert.equal(requests.find(item => item.action === 'cacheGet').descriptor.scope, selection ? 'selection' : undefined);
   if (task === 'translate') assert.ok(request.custom.includes(`The selected source language is ${name}.`));
   assert.equal(writes.length, 0);
   });

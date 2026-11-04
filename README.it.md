@@ -41,7 +41,7 @@ Scarica qui sotto il programma ausiliario per il tuo sistema e il file XPI di Th
 
 I PKG per macOS 13+ non sono firmati né autenticati tramite notarizzazione. I test completi di installazione, accesso e integrazione con Thunderbird su Mac reali sono ancora da eseguire. Gli aggiornamenti automatici macOS non sono attivi.
 
-Installa l’estensione da ATN dopo la pubblicazione o manualmente tramite XPI. Minimo dichiarato: Thunderbird 128; verifica le versioni effettive. TXT può escludere citazioni; EML conserva originale e allegati. Cartella configurabile, file mostrati per aggiunta manuale e conservati alla chiusura. Pulizia disponibile nelle impostazioni.
+Installa l’estensione da ATN dopo la pubblicazione o manualmente tramite XPI. Minimo dichiarato: Thunderbird 148; verifica le versioni effettive. TXT può escludere citazioni; EML conserva originale e allegati. Cartella configurabile, file mostrati per aggiunta manuale e conservati alla chiusura. Pulizia disponibile nelle impostazioni.
 
 ## Aggiornamenti e migrazione
 

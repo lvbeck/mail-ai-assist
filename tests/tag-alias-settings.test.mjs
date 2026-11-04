@@ -8,7 +8,7 @@ test('settings save, reload, conflict detection, removal and errors use persiste
  function node() { return {value:'', textContent:'', children:[], get options(){return this.children;}, listeners:{}, addEventListener(type,fn){this.listeners[type]=fn;}, replaceChildren(){this.children=[];this.value='';},append(child){this.children.push(child);if(!this.value)this.value=child.value;}}; }
  const el=id=>{if(!elements.has(id))elements.set(id,node());return elements.get(id);};
  const saved={}; let tags=[{key:'h',tag:'Helena'},{key:'tc',tag:'TechCalc'}]; let fail=false;
- const context=vm.createContext({document:{getElementById:el,createElement:node},window:{addEventListener(){}},ComposeI18n:{initialize:async()=>{},t:key=>key},messenger:{messages:{listTags:async()=>tags},storage:{local:{get:async()=>saved,set:async values=>{if(fail)throw Error('storage');Object.assign(saved,values);}}}}});
+ const context=vm.createContext({document:{getElementById:el,createElement:node},window:{addEventListener(){}},ComposeI18n:{initialize:async()=>{},t:key=>key},messenger:{messages:{tags:{list:async()=>tags}},storage:{local:{get:async()=>saved,set:async values=>{if(fail)throw Error('storage');Object.assign(saved,values);}}}}});
  vm.runInContext(await readFile(new URL('tag-instructions.js',root),'utf8'),context);
  vm.runInContext(await readFile(new URL('tag-alias-settings.js',root),'utf8'),context);
  await new Promise(resolve=>setImmediate(resolve));

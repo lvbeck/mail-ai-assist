@@ -18,7 +18,7 @@ function fixture(saved = {}) {
   const messenger = {
     storage: { local: { get: async () => structuredClone(state.saved), set }, onChanged: { addListener(fn) { state.listeners.push(fn); } } },
     accounts: { onCreated: { addListener(fn) { state.created = fn; } }, onDeleted: { addListener(fn) { state.deleted = fn; } } },
-    messages: { listTags: async () => [{ key: 'techcalc', tag: 'TechCalc' }], onNewMailReceived: { addListener(fn) { state.receive = fn; } }, get: async id => state.headers[id] || header(id), continueList: async id => state.pages[id] },
+    messages: { tags: { list: async () => [{ key: 'techcalc', tag: 'TechCalc' }] }, onNewMailReceived: { addListener(fn) { state.receive = fn; } }, get: async id => state.headers[id] || header(id), continueList: async id => state.pages[id] },
     runtime: { connectNative() {
       let response, disconnect;
       return {

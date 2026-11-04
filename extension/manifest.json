@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "0.12.26",
+  "version": "0.12.27",
   "description": "__MSG_extensionDescription__",
   "browser_specific_settings": {
     "gecko": {
       "id": "mail-ai-assist@lvbeck.github.com",
-      "strict_min_version": "128.0"
+      "strict_min_version": "148.0"
     }
   },
   "permissions": [
@@ -17,6 +17,7 @@
     "messagesRead",
     "messagesUpdate",
     "messagesTags",
+    "messagesTagsList",
     "menus",
     "accountsRead",
     "clipboardWrite"

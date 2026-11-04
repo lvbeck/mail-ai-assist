@@ -12,6 +12,8 @@ Mail AI Assist aiuta a elaborare le email selezionate in Thunderbird: riassunti,
 
 ## Funzionalità
 
+Il clic destro nel corpo del messaggio, anche su link e immagini, apre Assistente IA. Senza selezione viene elaborato l’intero messaggio. Con una selezione, riepilogo e traduzione inviano solo quel testo, senza oggetto né resto del corpo.
+
 - **Riassunti:** Estrai i punti principali e le attività da svolgere dal messaggio selezionato. La lingua del riassunto è indipendente da quelle dell’interfaccia e della traduzione; per impostazione predefinita segue il sistema.
 - **Traduzione:** Scegli le lingue di origine e destinazione oppure rileva automaticamente quella di origine. Configura Google Cloud Translation, Microsoft Azure Translator o DeepL con la tua chiave API. Senza un servizio configurato viene usato il modello IA selezionato.
 - **Etichette e alias:** Riutilizza preferibilmente le etichette Thunderbird esistenti per evitare duplicati simili. Modifica i suggerimenti manuali prima di confermarli. Associa, ad esempio, `Project Alpha` e `Project Beta` all’etichetta esistente `Projects`. Le regole confrontano nomi completi ignorando maiuscole, minuscole e spazi superflui.
@@ -30,14 +32,20 @@ Riassunti, traduzioni ed etichette elaborano oggetto e corpo del messaggio, non 
 
 ## Fornitori e privacy
 
-Supporta autorizzazione ChatGPT, Gemini API e Claude API. Per tradurre: Google Cloud Translation, Azure Translator o DeepL; senza servizio configurato usa il modello IA scelto. Nessun cambio di fornitore dopo un errore. Accesso e costi dipendono dal fornitore. I contenuti pertinenti passano tramite il programma Windows al servizio scelto. Credenziali protette con DPAPI; cache ed esportazioni leggibili localmente. Vedi [privacy](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md).
+Supporta autorizzazione ChatGPT, Gemini API e Claude API.
+
+Il permesso nativeMessaging collega Thunderbird al programma locale installato separatamente (local.mail_ai_assist). Scambia oggetto/corpo richiesto o testo selezionato, impostazioni di fornitore/modello/lingua, credenziali inserite, risultati IA, cache e contenuti/percorsi di esportazione. EML include intestazioni originali e allegati. Il programma gestisce autenticazione, richieste HTTPS, credenziali protette, cache, esportazione e apertura di applicazioni. Il testo pertinente viene inviato al servizio IA o di traduzione scelto; l’esportazione locale non chiama l’IA. Windows usa DPAPI, macOS la crittografia basata sul Portachiavi. Cache ed esportazioni sono leggibili localmente. Si applicano condizioni e costi del fornitore.
+
+[Informativa sulla privacy](https://github.com/lvbeck/mail-ai-assist/blob/main/publication/PRIVACY.md)
 
 ## Installazione ed esportazione
 
-Serve il programma Windows x64: scarica il MSI da [GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases), installa e riavvia Thunderbird. Installa l’estensione da ATN dopo la pubblicazione o manualmente tramite XPI. Minimo dichiarato: Thunderbird 128; verifica le versioni effettive. I collegamenti non implicano una pubblicazione già avvenuta. TXT può escludere citazioni; EML conserva originale e allegati. Cartella configurabile, file mostrati per aggiunta manuale e conservati alla chiusura. Pulizia disponibile nelle impostazioni.
+Servono Thunderbird 148 o successivo e il programma separato: Windows x64 (MSI), oppure macOS 13+ su Apple Silicon o Intel (PKG distinti). Scaricare da GitHub Releases, installare e riavviare Thunderbird. I pacchetti macOS non sono firmati né autenticati da Apple; i test completi sono ancora da eseguire. Linux non è supportato. ATN aggiorna l’estensione; Windows mantiene l’aggiornamento separato del programma, i pacchetti macOS pubblicati richiedono aggiornamenti manuali.
+
+[GitHub Releases](https://github.com/lvbeck/mail-ai-assist/releases)
 
 Licenza: MIT
 
 Assistenza: it@live.cn
 
-Programma ausiliario Windows: https://github.com/lvbeck/mail-ai-assist/releases/latest
+https://github.com/lvbeck/mail-ai-assist/releases/latest

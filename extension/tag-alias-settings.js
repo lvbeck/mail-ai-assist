@@ -25,7 +25,7 @@
     busy = true; render();
     try {
       const selected = el('aliasTarget').value;
-      tags = (await messenger.messages.listTags()).filter(tag => MailTagPolicy.names([tag]).length);
+      tags = (await messenger.messages.tags.list()).filter(tag => MailTagPolicy.names([tag]).length);
       const saved = (await messenger.storage.local.get('tagAliases')).tagAliases;
       rules = Array.isArray(saved) ? saved.filter(rule => rule && typeof rule.tagKey === 'string') : [];
       el('aliasTarget').replaceChildren();
@@ -46,7 +46,7 @@
     if (busy) return;
     busy = true; render();
     try {
-      const latestTags = await messenger.messages.listTags();
+      const latestTags = await messenger.messages.tags.list();
       const saved = (await messenger.storage.local.get('tagAliases')).tagAliases;
       const next = remove ? (Array.isArray(saved) ? saved : []).filter(rule => rule?.tagKey !== el('aliasTarget').value) : MailTagPolicy.saveRule(saved, latestTags, el('aliasTarget').value, el('aliasNames').value);
       await messenger.storage.local.set({ tagAliases: next });
