@@ -40,3 +40,5 @@ Contact it@live.cn with privacy questions. Do not include private mail, password
 ## macOS storage and updates
 
 On macOS, credentials are AES-256-GCM encrypted under ~/Library/Application Support/MailAiAssist using an encryption key stored in the user's Keychain. Cache and default exports use the Cache and Exports subfolders and remain readable local files. Keychain access may require user approval. Windows DPAPI credentials are not migrated. The currently published unsigned macOS packages require manual helper updates. When signed architecture-specific update feeds are configured, the Mac updater opens macOS Installer only after the user requests installation; it does not install silently. Removing credentials does not remove the shared Keychain encryption key used for other providers.
+
+When Ollama is selected, the helper requests the model list from the configured server. AI requests send the relevant email text to that same server. The default address is loopback. A custom server receives the text over the network. Use HTTPS for remote servers.

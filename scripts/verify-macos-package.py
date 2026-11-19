@@ -88,7 +88,7 @@ def run_native_tests(app):
     if bridge.exists():
         raise RuntimeError('Refusing to overwrite an existing test bridge')
     shutil.copy2(app / 'native/mail-ai-assist-macos', bridge)
-    tests = ['macos-support', 'process-lock', 'export-lock', 'desktop-export', 'desktop-cleanup', 'export-directory', 'export-retention', 'raw-eml', 'provider-routing']
+    tests = ['macos-support', 'process-lock', 'export-lock', 'desktop-export', 'desktop-cleanup', 'export-directory', 'export-retention', 'raw-eml', 'provider-routing', 'ollama']
     result = subprocess.run([str(app / 'runtime/node'), '--test', '--test-reporter=tap', *[f'tests/{name}.test.mjs' for name in tests]], cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=180)
     report = ROOT / 'work/macos-native-tests.tap'
     report.write_text(result.stdout, encoding='utf-8')

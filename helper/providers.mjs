@@ -9,12 +9,12 @@ import { dataDirectory } from './platform.mjs';
 import { withSessionLock } from './auth.mjs';
 
 export function validateProvider(value = 'chatgpt') {
-  if (!['chatgpt', 'openai', 'gemini', 'claude'].includes(value)) throw new AppError('invalid_provider');
+  if (!['chatgpt', 'openai', 'gemini', 'claude', 'ollama'].includes(value)) throw new AppError('invalid_provider');
   return value;
 }
 function apiProvider(value) {
   validateProvider(value);
-  if (value === 'chatgpt') throw new AppError('invalid_provider');
+  if (value === 'chatgpt' || value === 'ollama') throw new AppError('invalid_provider');
 }
 function directory() {
   return dataDirectory();
@@ -35,6 +35,7 @@ async function saveKeys(keys) {
   } finally { await unlink(temp).catch(() => {}); }
 }
 export async function apiStatus(provider) {
+  if (provider === 'ollama') return { provider, sharing: true, configured: true };
   apiProvider(provider);
   const configured = Boolean((await loadKeys())[provider]);
   return { provider, connected: configured, sharing: configured, configured };

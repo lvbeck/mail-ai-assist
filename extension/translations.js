@@ -3047,3 +3047,76 @@ for (const [locale, messages] of Object.entries({
     "macOS 安装包尚未发布；下载入口暂时打开 GitHub 发布页。": "macOS 설치 파일은 아직 게시되지 않았습니다. 다운로드 링크는 현재 GitHub Releases를 엽니다."
   }
 })) Object.assign(globalThis.ComposeTranslations[locale], messages);
+
+for (const [locale, messages] of Object.entries({
+  "en": {
+    "ollamaAddress": "Server address",
+    "ollamaSave": "Save and refresh models",
+    "ollamaNote": "Email content is sent to the selected Ollama server.",
+    "ollamaInvalid": "Enter an HTTP or HTTPS server URL without credentials, query, or fragment.",
+    "ollamaEmpty": "No models found on this Ollama server."
+  },
+  "de": {
+    "ollamaAddress": "Serveradresse",
+    "ollamaSave": "Speichern und Modelle aktualisieren",
+    "ollamaNote": "E-Mail-Inhalte werden an den ausgewählten Ollama-Server gesendet.",
+    "ollamaInvalid": "HTTP- oder HTTPS-Adresse ohne Zugangsdaten, Abfrage oder Fragment eingeben.",
+    "ollamaEmpty": "Auf diesem Ollama-Server wurden keine Modelle gefunden."
+  },
+  "fr": {
+    "ollamaAddress": "Adresse du serveur",
+    "ollamaSave": "Enregistrer et actualiser les modèles",
+    "ollamaNote": "Le contenu des courriels est envoyé au serveur Ollama sélectionné.",
+    "ollamaInvalid": "Saisissez une URL HTTP ou HTTPS sans identifiants, paramètres ni fragment.",
+    "ollamaEmpty": "Aucun modèle sur ce serveur Ollama."
+  },
+  "it": {
+    "ollamaAddress": "Indirizzo del server",
+    "ollamaSave": "Salva e aggiorna i modelli",
+    "ollamaNote": "Il contenuto delle email viene inviato al server Ollama selezionato.",
+    "ollamaInvalid": "Inserisci un URL HTTP o HTTPS senza credenziali, parametri o frammenti.",
+    "ollamaEmpty": "Nessun modello su questo server Ollama."
+  },
+  "es": {
+    "ollamaAddress": "Dirección del servidor",
+    "ollamaSave": "Guardar y actualizar modelos",
+    "ollamaNote": "El contenido del correo se envía al servidor Ollama seleccionado.",
+    "ollamaInvalid": "Introduce una URL HTTP o HTTPS sin credenciales, parámetros ni fragmentos.",
+    "ollamaEmpty": "No hay modelos en este servidor Ollama."
+  },
+  "pt": {
+    "ollamaAddress": "Endereço do servidor",
+    "ollamaSave": "Guardar e atualizar modelos",
+    "ollamaNote": "O conteúdo das mensagens é enviado para o servidor Ollama selecionado.",
+    "ollamaInvalid": "Introduza um URL HTTP ou HTTPS sem credenciais, parâmetros ou fragmentos.",
+    "ollamaEmpty": "Este servidor Ollama não tem modelos."
+  },
+  "zh-CN": {
+    "ollamaAddress": "服务器地址",
+    "ollamaSave": "保存并刷新模型",
+    "ollamaNote": "邮件内容会发送到所选 Ollama 服务器。",
+    "ollamaInvalid": "请输入 HTTP 或 HTTPS 服务器地址，不含凭据、查询参数或片段。",
+    "ollamaEmpty": "这台 Ollama 服务器没有可用模型。"
+  },
+  "zh-TW": {
+    "ollamaAddress": "伺服器位址",
+    "ollamaSave": "儲存並重新整理模型",
+    "ollamaNote": "郵件內容會傳送至所選的 Ollama 伺服器。",
+    "ollamaInvalid": "請輸入 HTTP 或 HTTPS 伺服器位址，不含憑證、查詢參數或片段。",
+    "ollamaEmpty": "這台 Ollama 伺服器沒有可用模型。"
+  },
+  "ja": {
+    "ollamaAddress": "サーバーアドレス",
+    "ollamaSave": "保存してモデル一覧を更新",
+    "ollamaNote": "メールの内容は選択した Ollama サーバーに送信されます。",
+    "ollamaInvalid": "認証情報、クエリ、フラグメントを含まない HTTP または HTTPS URL を入力してください。",
+    "ollamaEmpty": "この Ollama サーバーにはモデルがありません。"
+  },
+  "ko": {
+    "ollamaAddress": "서버 주소",
+    "ollamaSave": "저장하고 모델 목록 새로 고침",
+    "ollamaNote": "메일 내용은 선택한 Ollama 서버로 전송됩니다.",
+    "ollamaInvalid": "인증 정보, 쿼리, 프래그먼트가 없는 HTTP 또는 HTTPS URL을 입력하세요.",
+    "ollamaEmpty": "이 Ollama 서버에 모델이 없습니다."
+  }
+})) Object.assign(globalThis.ComposeTranslations[locale], messages);

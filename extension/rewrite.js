@@ -16,9 +16,12 @@ let accountProblem = '';
 let renewable;
 let selectedModel = "";
 let availableModels = [];
+const defaultOllamaServer = 'http://localhost:11434';
+let currentServer = defaultOllamaServer;
 let currentProvider = "chatgpt";
 
 const errors = {
+  invalid_ollama_server: 'ollamaInvalid',
   api_key_required: '请在设置页填写所选提供商的 API Key。',
   invalid_api_key: 'API Key 无效，请检查并重新保存。',
   api_permission_denied: 'API 权限不足，请检查密钥、项目、地区或账户权限。',
@@ -54,10 +57,12 @@ function show(text, error = false) {
 function renderDynamicText() {
   const apiMode = currentProvider !== 'chatgpt';
   if ($('chatgptControls')) $('chatgptControls').hidden = apiMode;
-  if ($('apiControls')) $('apiControls').hidden = !apiMode;
-  if ($('providerNote')) $('providerNote').textContent = t(currentProvider === 'openai' ? 'OpenAI API 使用 API Key，费用和额度以 OpenAI API 账户为准。' : currentProvider === 'gemini' ? 'Gemini API 免费层取决于项目和模型；已启用计费的项目可能产生费用，不使用网页订阅额度。' : currentProvider === 'claude' ? 'Claude API 通常另行计费，不包含在 Claude Free、Pro 或 Max 网页订阅中。' : '使用已授权的 ChatGPT 订阅额度。');
+  const ollama = currentProvider === 'ollama';
+  if ($('ollamaControls')) $('ollamaControls').hidden = !ollama;
+  if ($('apiControls')) $('apiControls').hidden = !apiMode || ollama;
+  if ($('providerNote')) $('providerNote').textContent = t(ollama ? 'ollamaNote' : currentProvider === 'openai' ? 'OpenAI API 使用 API Key，费用和额度以 OpenAI API 账户为准。' : currentProvider === 'gemini' ? 'Gemini API 免费层取决于项目和模型；已启用计费的项目可能产生费用，不使用网页订阅额度。' : currentProvider === 'claude' ? 'Claude API 通常另行计费，不包含在 Claude Free、Pro 或 Max 网页订阅中。' : '使用已授权的 ChatGPT 订阅额度。');
   if ($('apiConsole')) $('apiConsole').href = currentProvider === 'openai' ? 'https://platform.openai.com/api-keys' : currentProvider === 'claude' ? 'https://platform.claude.com/settings/keys' : 'https://aistudio.google.com/apikey';
-  if ($('account')) $('account').textContent = t(!nativePort ? '本地辅助程序未连接' : accountProblem || (apiMode ? (sharing ? 'API Key 已加密保存。' : '尚未配置 API Key。') : (sharing ?
+  if ($('account')) $('account').textContent = t(!nativePort ? '本地辅助程序未连接' : accountProblem || (ollama ? '' : apiMode ? (sharing ? 'API Key 已加密保存。' : '尚未配置 API Key。') : (sharing ?
     renewable === true ? 'connectedRenewable' : renewable === false ? 'connectedLegacy' : 'connected' : '未登录，或当前授权已过期')), { email: accountEmail || 'ChatGPT' });
   if ($("count")) $("count").textContent = t('characterCount', { count: $("source").value.length });
   if (!sharing && $("model") && $("model").options.length === 1) $("model").options[0].textContent = t('请先登录');
@@ -74,7 +79,7 @@ function showError(error) {
 }
 function refreshControls() {
   const disabled = { installHelperUpdate: busy || !nativePort, signIn: busy || !nativePort, signOut: busy || !nativePort,
-    saveKey: busy || !nativePort, removeKey: busy || !nativePort, apiKey: busy, provider: busy, model: busy || !sharing || !availableModels.length, recipe: busy, language: busy, custom: busy, uiLanguage: busy,
+    ollamaSave: busy || !nativePort, ollamaServer: busy, saveKey: busy || !nativePort, removeKey: busy || !nativePort, apiKey: busy, provider: busy, model: busy || !sharing || !availableModels.length, recipe: busy, language: busy, custom: busy, uiLanguage: busy,
     generate: busy || !sharing || !$("source")?.value.trim() || !selectedModel,
     cancel: !busy || !activeRequest, apply: busy || !readyResult || !$("result")?.value.trim() };
   for (const [id, value] of Object.entries(disabled)) if ($(id)) $(id).disabled = value;
@@ -104,7 +109,7 @@ function request(action, data = {}, onDelta) {
   activeRequest = id;
   const promise = new Promise((resolve, reject) => {
     pending.set(id, { resolve, reject, onDelta });
-    try { nativePort.postMessage({ id, action, provider: currentProvider, ...data }); }
+    try { nativePort.postMessage({ id, action, provider: currentProvider, ...(currentProvider === 'ollama' && { ollamaServer: currentServer }), ...data }); }
     catch { pending.delete(id); reject({ code: "helper_unavailable" }); }
   });
   refreshControls();
@@ -113,10 +118,13 @@ function request(action, data = {}, onDelta) {
 async function loadAccount(forceModels = true) {
   const wasSharing = sharing;
   const previousProvider = currentProvider;
-  const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_openai', 'model_gemini', 'model_claude']);
+  const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_openai', 'model_gemini', 'model_claude', 'model_ollama', 'ollamaServer']);
   currentProvider = saved.provider || 'chatgpt';
-  if (!['chatgpt', 'openai', 'gemini', 'claude'].includes(currentProvider)) throw { code: 'invalid_provider' };
-  const changed = previousProvider !== currentProvider;
+  if (!['chatgpt', 'openai', 'gemini', 'claude', 'ollama'].includes(currentProvider)) throw { code: 'invalid_provider' };
+  const server = saved.ollamaServer ?? defaultOllamaServer;
+  const changed = previousProvider !== currentProvider || (currentProvider === 'ollama' && currentServer !== server);
+  if ($('ollamaServer') && (changed || !$('ollamaServer').value)) $('ollamaServer').value = server;
+  currentServer = server;
   if (changed) {
     selectedModel = ''; availableModels = []; sharing = false; accountProblem = ''; show('');
     if ($('apiKey')) $('apiKey').value = '';
@@ -155,7 +163,7 @@ async function loadAccount(forceModels = true) {
   const storedModel = saved['model_' + currentProvider] || (currentProvider === 'chatgpt' ? saved.taskModel : '');
   selectedModel = availableModels.some(model => model.slug === storedModel) ? storedModel :
     !storedModel && currentProvider === 'chatgpt' ? availableModels[0]?.slug || '' : '';
-  if (sharing && !availableModels.length) show('当前账户没有可用模型，请检查套餐授权。', true);
+  if (sharing && !availableModels.length) show(currentProvider === 'ollama' ? 'ollamaEmpty' : '当前账户没有可用模型，请检查套餐授权。', true);
   else if (sharing && !selectedModel) show('请在设置页选择可用的模型。', true);
   else if (statusText === '请在设置页选择可用的模型。') show('');
   if ($('model')) {
@@ -265,8 +273,21 @@ $("provider")?.addEventListener('change', () => perform(async () => {
   await loadAccount();
 }));
 messenger.storage.onChanged?.addListener((changes, area) => {
-  if (area === 'local' && (changes.provider || Object.keys(changes).some(name => name.startsWith('model_')))) checkAccount();
+  if (area === 'local' && (changes.provider || changes.ollamaServer || Object.keys(changes).some(name => name.startsWith('model_')))) checkAccount();
 });
+
+// Verify the catalog before committing a new destination for email content.
+$('ollamaSave')?.addEventListener('click', () => perform(async () => {
+  const value = $('ollamaServer').value.trim() || defaultOllamaServer;
+  let url;
+  try { url = new URL(value); } catch { throw { code: 'invalid_ollama_server' }; }
+  const server = url.href.replace(/\/+$/, '');
+  await request('models', { ollamaServer: server });
+  if (server !== currentServer) await messenger.storage.local.set({ ollamaServer: server, model_ollama: '' });
+  $('ollamaServer').value = server;
+  show('');
+  await loadAccount();
+}));
 
 $('saveKey')?.addEventListener('click', () => perform(async () => {
   const apiKey = $('apiKey').value;

@@ -51,9 +51,10 @@
       const current = await messenger.messages.get(header.id);
       if (current.folder?.accountId !== accountId || !inbox(current.folder) || current.junk) return;
       if (!await claim(accountId, current)) return;
-      const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_openai', 'model_gemini', 'model_claude', 'tagLanguage', 'tagAliases']);
+      const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_openai', 'model_gemini', 'model_claude', 'model_ollama', 'ollamaServer', 'tagLanguage', 'tagAliases']);
       const provider = saved.provider || 'chatgpt';
-      if (!['chatgpt', 'openai', 'gemini', 'claude'].includes(provider)) throw new Error('invalid_provider');
+      if (!['chatgpt', 'openai', 'gemini', 'claude', 'ollama'].includes(provider)) throw new Error('invalid_provider');
+      const endpoint = provider === 'ollama' ? { ollamaServer: saved.ollamaServer ?? 'http://localhost:11434' } : {};
       const model = saved['model_' + provider] || (provider === 'chatgpt' ? saved.taskModel : '');
       if (!model) throw new Error('model_required');
       const session = { messageId: current.id, subject: current.subject || '' };
@@ -70,7 +71,7 @@
       const eligible = await messenger.messages.get(current.id);
       if (eligible.folder?.accountId !== accountId || !inbox(eligible.folder) || eligible.junk) return;
       if (!await allowed(accountId, generation) || channel.cancelled) return;
-      const result = await channel.request(provider, 'rewrite', { model, text, recipe: 'custom', custom: MailTagPolicy.instructions(existingTags, text, saved.tagAliases), outputLanguage });
+      const result = await channel.request(provider, 'rewrite', { ...endpoint, model, text, recipe: 'custom', custom: MailTagPolicy.instructions(existingTags, text, saved.tagAliases), outputLanguage });
       if (channel.cancelled || !await allowed(accountId, generation)) return;
       const write = tagQueue.then(async () => {
         if (channel.cancelled || !await allowed(accountId, generation)) return false;

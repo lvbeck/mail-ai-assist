@@ -1,3 +1,4 @@
+import { listOllamaModels, rewriteOllama } from './ollama.mjs';
 import { cacheGet, cachePut, cacheStats, cacheClear, cacheOpen } from './result-cache.mjs';
 import { AppError, API_ORIGIN, buildRequest, consumeHttpResponse } from './core.mjs';
 import { getSession, signIn, signOut, listModels, getAccessToken } from './auth.mjs';
@@ -72,8 +73,11 @@ async function handle(message) {
       case 'signIn': if (provider !== 'chatgpt') throw new AppError('invalid_provider'); result = await signIn(signal, message.uiLanguage); break;
       case 'signOut': result = provider === 'chatgpt' ? await signOut(signal) : await removeApiKey(provider, signal); break;
       case 'saveApiKey': result = await saveApiKey(provider, message.apiKey, signal); break;
-      case 'models': result = provider === 'chatgpt' ? await listModels(signal) : await listApiModels(provider, signal); break;
+      case 'models':
+        if (provider === 'ollama') { result = await listOllamaModels(message.ollamaServer, signal); break; }
+        result = provider === 'chatgpt' ? await listModels(signal) : await listApiModels(provider, signal); break;
       case 'rewrite': {
+        if (provider === 'ollama') { result = await rewriteOllama(message, signal); break; }
         if (provider !== 'chatgpt') { result = await rewriteApi(provider, message, signal); break; }
         const body = buildRequest(message);
         const token = await getAccessToken(signal);
