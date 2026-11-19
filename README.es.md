@@ -33,9 +33,9 @@ Windows y macOS usan el mismo XPI de Thunderbird y un auxiliar instalado por sep
 ### Descargas · v0.12.29
 
 - [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29-x64.msi)
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29-macos-x64-unsigned.pkg)
 - [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29.xpi)
-
-El asistente de Windows y el XPI actuales son la versión 0.12.29. Los paquetes de macOS siguen en la versión 0.12.26; consulta la sección de macOS más abajo. No incluyen el nuevo soporte de OpenAI API ni las correcciones del asistente de la versión 0.12.29.
 
 Descarga abajo el auxiliar para tu sistema y el XPI de Thunderbird. Instala el auxiliar y después el XPI desde Thunderbird → Complementos y temas → Extensiones → menú del engranaje → Instalar complemento desde archivo. Reinicia Thunderbird.
 
@@ -77,10 +77,7 @@ node installer/verify-release.mjs
 
 Adjunta por separado los archivos de dist/github-release/v0.12.29/ a la Release, no solo un ZIP. Envía el XPI ATN con On this site. Consulta [revisión](publication/REVIEW-NOTES.md), [descripción](publication/LISTING.md), [procedimiento](publication/GITHUB-RELEASE.md). Los scripts no hacen push, subidas ni instalaciones automáticas. No incluyas claves, credenciales, correo ni caché; .gitignore no elimina secretos ya confirmados. MIT: [LICENSE](LICENSE).
 
-## Compatibilidad con macOS · 0.12.26
-
-- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
-- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
+## Compatibilidad con macOS · 0.12.29
 
 Los paquetes Mac incluyen Mail-AI-Assist.xpi junto a setup-guide.html en /Library/Application Support/MailAiAssist. Tras la instalación, la guía se abre para el usuario del escritorio cuando es posible. Si no se abre, abre esta carpeta en Finder. Instala el XPI manualmente en Thunderbird y confirma sus permisos.
 

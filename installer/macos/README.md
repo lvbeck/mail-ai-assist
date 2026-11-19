@@ -1,6 +1,6 @@
 # macOS helper: build, install and validate
 
-Version 0.12.26 source support is implemented. No signed PKG has been built or published from the Windows development environment. Do not advertise a tested Mac release until the acceptance checks below pass on both architectures. Existing Windows MSI/update assets are independent.
+Version 0.12.29 provides unsigned, unnotarized Apple Silicon and Intel PKGs for manual installation. GitHub Actions builds and checks each package on its matching native macOS runner. Full Thunderbird GUI, real-provider, installation and upgrade acceptance checks remain pending. Existing Windows MSI/update assets are independent.
 
 ## Layout and security
 
@@ -36,13 +36,13 @@ python3 installer/build-macos.py --arch arm64 --runtime /path/to/node-darwin-arm
 
 Repeat with --arch x64 and the Intel runtime. This explicit signed-build command sends the installer to Apple's notarization service; ordinary source editing and XPI packaging do not. The command never creates a GitHub release or uploads to ATN. Check hardened-runtime/JIT behavior with the chosen Node version. Do not disable Gatekeeper as a distribution solution.
 
-Output: `dist/macos/0.12.26/Mail-AI-Assist-0.12.26-macos-arm64.pkg` and `...-macos-x64.pkg`. The builder refuses to overwrite an existing package. Rebuild after moving an old build to a backup location. System-wide installation requires normal macOS installer authorization. Close Thunderbird before updating and restart it afterward. No login items or background daemons are installed. Sign out/remove keys before uninstalling if desired; uninstall only the helper installation and its matching manifest, never recursively delete the user's data directory.
+Output: `dist/macos/0.12.29/Mail-AI-Assist-0.12.29-macos-arm64.pkg` and `...-macos-x64.pkg`. The builder refuses to overwrite an existing package. Rebuild after moving an old build to a backup location. System-wide installation requires normal macOS installer authorization. Close Thunderbird before updating and restart it afterward. No login items or background daemons are installed. Sign out/remove keys before uninstalling if desired; uninstall only the helper installation and its matching manifest, never recursively delete the user's data directory.
 
 ## Signed updates
 
 The Mac feeds are `helper-updates-macos-arm64.json` and `helper-updates-macos-x64.json`; Windows retains `helper-updates.json` and its MSI workflow. The helper checks at most daily while used. Exact platform/versioned URL, RSA signature, package size and SHA-256 are checked before offering an update, and checked again before opening Installer. A failed/cancelled installer remains available to retry. No automatic elevation, silent package installation or forced Thunderbird termination occurs.
 
-Sign only the final notarized/stapled package. Either sign on Windows with the existing DPAPI key (MAIL_AI_SIGNING_KEY_FILE) after transferring the PKG into dist/macos/0.12.26, or supply an externally managed PEM private-key file on a trusted Mac/CI using MAIL_AI_MAC_SIGNING_KEY_FILE. Never commit or include that private file. Existing signing keys must not be regenerated.
+Sign only the final notarized/stapled package. Either sign on Windows with the existing DPAPI key (MAIL_AI_SIGNING_KEY_FILE) after transferring the PKG into dist/macos/0.12.29, or supply an externally managed PEM private-key file on a trusted Mac/CI using MAIL_AI_MAC_SIGNING_KEY_FILE. Never commit or include that private file. Existing signing keys must not be regenerated.
 
 ```sh
 export MAIL_AI_MAC_SIGNING_KEY_FILE=/private/location/existing-update-key.pem
@@ -50,7 +50,7 @@ node installer/sign-macos-release.mjs arm64 /path/to/update-public-key.pem
 node installer/sign-macos-release.mjs x64 /path/to/update-public-key.pem
 ```
 
-This produces per-architecture signed manifests and SHA256SUMS files alongside the PKGs. Publish them only after explicit release approval. Do not overwrite Windows update assets. Unsigned test PKGs for both architectures are available in v0.12.26. They are not Developer ID signed or notarized, and no macOS update manifest is published. Rebuilt PKGs include Mail-AI-Assist.xpi next to setup-guide.html and attempt to open the guide for the logged-in desktop user after installation. Install the XPI manually in Thunderbird and approve its permissions.
+This produces per-architecture signed manifests and SHA256SUMS files alongside the PKGs. Publish them only after explicit release approval. Do not overwrite Windows update assets. Unsigned test PKGs for both architectures are available in v0.12.29. They are not Developer ID signed or notarized, and no macOS update manifest is published. Rebuilt PKGs include Mail-AI-Assist.xpi next to setup-guide.html and attempt to open the guide for the logged-in desktop user after installation. Install the XPI manually in Thunderbird and approve its permissions.
 
 ## Acceptance checks on real Macs
 

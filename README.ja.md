@@ -33,9 +33,9 @@ Windows と macOS で同じ Thunderbird XPI を使用し、OS に対応するヘ
 ### ダウンロード · v0.12.29
 
 - [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29-x64.msi)
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29-macos-x64-unsigned.pkg)
 - [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29.xpi)
-
-現在の Windows ヘルパーと XPI はバージョン 0.12.29 です。macOS ヘルパーは 0.12.26 のままです。下の macOS セクションを参照してください。旧パッケージには、新しい OpenAI API サポートと 0.12.29 のヘルパー修正は含まれません。
 
 以下からお使いの OS に対応するヘルパーと Thunderbird XPI をダウンロードしてください。ヘルパーをインストール後、Thunderbird → アドオンとテーマ → 拡張機能 → 歯車メニュー → ファイルからアドオンをインストールで XPI を選択し、Thunderbird を再起動してください。
 
@@ -77,10 +77,7 @@ node installer/verify-release.mjs
 
 単一の ZIP ではなく、dist/github-release/v0.12.29/ 内の各ファイルをリリースアセットとしてアップロードしてください。ATN XPI は「On this site」を選んで別途提出します。[審査担当者向け説明](publication/REVIEW-NOTES.md)、[掲載情報](publication/LISTING.md)、[リリース手順](publication/GITHUB-RELEASE.md)を確認してください。スクリプトは自動で push、アップロード、インストールを行いません。鍵、認証情報、メール、キャッシュを Git に含めないでください。.gitignore はすでにコミットされた機密情報を削除しません。MIT ライセンス：[LICENSE](LICENSE)。
 
-## macOS 対応 · 0.12.26
-
-- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
-- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
+## macOS 対応 · 0.12.29
 
 Mac パッケージは /Library/Application Support/MailAiAssist に Mail-AI-Assist.xpi と setup-guide.html を配置します。インストール後、可能な場合はログイン中のデスクトップユーザー向けにガイドを開きます。開かない場合は Finder でこのフォルダーを開いてください。Thunderbird で XPI を手動インストールし、権限を確認してください。
 

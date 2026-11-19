@@ -5,11 +5,16 @@ permissions:
   contents: read
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
-        arch: [arm64, x64]
+        include:
+          - arch: arm64
+            runner: macos-15
+          - arch: x64
+            runner: macos-15-intel
     steps:
       - uses: actions/checkout@v4
       - name: Download and verify Node runtime
@@ -23,26 +28,19 @@ jobs:
           curl --fail --location --retry 3 https://nodejs.org/dist/v22.22.0/SHASUMS256.txt -o SHASUMS256.txt
           grep "  $name.tar.gz$" SHASUMS256.txt | shasum -a 256 -c -
           tar -xzf "$name.tar.gz"
-      - name: Build unsigned test installer
+      - name: Build unsigned installer
         run: python3 installer/build-macos.py --arch ${{ matrix.arch }} --runtime work/runtime/node-v22.22.0-darwin-${{ matrix.arch }} --public-key installer/macos/update-public-key.txt --unsigned
-      - name: Verify package and checksum
-        shell: bash
-        run: |
-          set -euo pipefail
-          package=$(find dist/macos -name '*.pkg' -print -quit)
-          pkgutil --expand-full "$package" work/expanded-package
-          test -f work/expanded-package/PackageInfo
-          sh -n work/expanded-package/Scripts/postinstall
-          test -f work/expanded-package/Scripts/postinstall
-          xpi=$(find work/expanded-package -name 'Mail-AI-Assist.xpi' -print -quit)
-          test -n "$xpi"
-          unzip -t "$xpi"
-          guide=$(find work/expanded-package -name 'setup-guide.html' -print -quit)
-          grep -q 'Mail-AI-Assist.xpi' "$guide"
-          cd "$(dirname "$package")"
-          shasum -a 256 *.pkg > SHA256SUMS-macos-${{ matrix.arch }}.txt
+      - name: Verify payload and execute native regression tests
+        run: python3 scripts/verify-macos-package.py --arch ${{ matrix.arch }} --runtime work/runtime/node-v22.22.0-darwin-${{ matrix.arch }}
       - uses: actions/upload-artifact@v4
         with:
           name: macos-${{ matrix.arch }}-test-installer
           path: dist/macos/**/*
           if-no-files-found: error
+      - name: Upload diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-${{ matrix.arch }}-diagnostics
+          path: work/macos-native-tests.tap
+          if-no-files-found: ignore

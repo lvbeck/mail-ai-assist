@@ -33,9 +33,9 @@ Windows와 macOS에서 동일한 Thunderbird XPI를 사용하고 운영체제에
 ### 다운로드 · v0.12.29
 
 - [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29-x64.msi)
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29-macos-x64-unsigned.pkg)
 - [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29.xpi)
-
-현재 Windows 도우미와 XPI는 버전 0.12.29입니다. macOS 도우미 패키지는 0.12.26으로 유지되며, 다운로드는 아래 macOS 섹션을 참조하세요. 이 이전 패키지에는 새 OpenAI API 지원과 0.12.29 도우미 수정 사항이 포함되지 않습니다.
 
 아래에서 운영체제에 맞는 도우미와 Thunderbird XPI를 다운로드하세요. 도우미를 설치한 다음 Thunderbird → 부가 기능 및 테마 → 확장 기능 → 톱니바퀴 메뉴 → 파일에서 부가 기능 설치에서 XPI를 선택하고 Thunderbird를 다시 시작하세요.
 
@@ -77,10 +77,7 @@ node installer/verify-release.mjs
 
 단일 ZIP이 아니라 dist/github-release/v0.12.29/ 안의 파일들을 각각 릴리스 자산으로 업로드하세요. ATN XPI는 'On this site'를 선택하여 별도로 제출합니다. [검토자 안내](publication/REVIEW-NOTES.md), [등록 정보](publication/LISTING.md), [릴리스 절차](publication/GITHUB-RELEASE.md)를 확인하세요. 스크립트는 자동으로 푸시, 업로드 또는 설치하지 않습니다. 키, 인증 정보, 메일 및 캐시를 Git에 포함하지 마세요. .gitignore는 이미 커밋된 비밀 정보를 제거하지 않습니다. MIT 라이선스: [LICENSE](LICENSE).
 
-## macOS 지원 · 0.12.26
-
-- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
-- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
+## macOS 지원 · 0.12.29
 
 Mac 패키지는 /Library/Application Support/MailAiAssist에 Mail-AI-Assist.xpi와 setup-guide.html을 설치합니다. 설치 후 가능한 경우 로그인한 데스크톱 사용자를 위해 안내서를 엽니다. 열리지 않으면 Finder에서 이 폴더를 여세요. Thunderbird에서 XPI를 수동 설치하고 권한을 확인하세요.
 
