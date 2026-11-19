@@ -30,12 +30,12 @@ ChatGPT 認証、Gemini API、Claude API を選択できます。翻訳は Googl
 
 Windows と macOS で同じ Thunderbird XPI を使用し、OS に対応するヘルパーを別途インストールします。
 
-### ダウンロード · v0.12.26
+### ダウンロード · v0.12.29
 
-- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-x64.msi)
-- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
-- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
-- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26.xpi)
+- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29-x64.msi)
+- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29.xpi)
+
+現在の Windows ヘルパーと XPI はバージョン 0.12.29 です。macOS ヘルパーは 0.12.26 のままです。下の macOS セクションを参照してください。旧パッケージには、新しい OpenAI API サポートと 0.12.29 のヘルパー修正は含まれません。
 
 以下からお使いの OS に対応するヘルパーと Thunderbird XPI をダウンロードしてください。ヘルパーをインストール後、Thunderbird → アドオンとテーマ → 拡張機能 → 歯車メニュー → ファイルからアドオンをインストールで XPI を選択し、Thunderbird を再起動してください。
 
@@ -75,9 +75,12 @@ node installer/verify-release.mjs
 
 ## 公開
 
-単一の ZIP ではなく、dist/github-release/v0.12.26/ 内の各ファイルをリリースアセットとしてアップロードしてください。ATN XPI は「On this site」を選んで別途提出します。[審査担当者向け説明](publication/REVIEW-NOTES.md)、[掲載情報](publication/LISTING.md)、[リリース手順](publication/GITHUB-RELEASE.md)を確認してください。スクリプトは自動で push、アップロード、インストールを行いません。鍵、認証情報、メール、キャッシュを Git に含めないでください。.gitignore はすでにコミットされた機密情報を削除しません。MIT ライセンス：[LICENSE](LICENSE)。
+単一の ZIP ではなく、dist/github-release/v0.12.29/ 内の各ファイルをリリースアセットとしてアップロードしてください。ATN XPI は「On this site」を選んで別途提出します。[審査担当者向け説明](publication/REVIEW-NOTES.md)、[掲載情報](publication/LISTING.md)、[リリース手順](publication/GITHUB-RELEASE.md)を確認してください。スクリプトは自動で push、アップロード、インストールを行いません。鍵、認証情報、メール、キャッシュを Git に含めないでください。.gitignore はすでにコミットされた機密情報を削除しません。MIT ライセンス：[LICENSE](LICENSE)。
 
 ## macOS 対応 · 0.12.26
+
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
 
 Mac パッケージは /Library/Application Support/MailAiAssist に Mail-AI-Assist.xpi と setup-guide.html を配置します。インストール後、可能な場合はログイン中のデスクトップユーザー向けにガイドを開きます。開かない場合は Finder でこのフォルダーを開いてください。Thunderbird で XPI を手動インストールし、権限を確認してください。
 

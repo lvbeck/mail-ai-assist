@@ -30,12 +30,12 @@ Suporta autorização ChatGPT, Gemini API e Claude API. Tradução com Google Cl
 
 Windows e macOS utilizam o mesmo XPI do Thunderbird, com um auxiliar instalado separadamente para cada sistema.
 
-### Transferências · v0.12.26
+### Transferências · v0.12.29
 
-- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-x64.msi)
-- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
-- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
-- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26.xpi)
+- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29-x64.msi)
+- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29.xpi)
+
+As versões atuais do auxiliar Windows e do XPI são 0.12.29. Os pacotes macOS permanecem na versão 0.12.26; consulte a secção macOS abaixo. Não incluem o novo suporte da OpenAI API nem as correções do auxiliar da versão 0.12.29.
 
 Transfira abaixo o auxiliar para o seu sistema e o XPI do Thunderbird. Instale o auxiliar e depois o XPI em Thunderbird → Extras e temas → Extensões → menu da engrenagem → Instalar extra a partir de ficheiro. Reinicie o Thunderbird.
 
@@ -75,9 +75,12 @@ node installer/verify-release.mjs
 
 ## Publicação
 
-Anexe separadamente os ficheiros de dist/github-release/v0.12.26/ à Release, não apenas um ZIP. Submeta o XPI ATN com On this site. Consulte [revisão](publication/REVIEW-NOTES.md), [descrição](publication/LISTING.md), [procedimento](publication/GITHUB-RELEASE.md). Os scripts não fazem push, carregamentos nem instalações automáticas. Não versione chaves, credenciais, correio ou cache; .gitignore não remove segredos já registados. MIT: [LICENSE](LICENSE).
+Anexe separadamente os ficheiros de dist/github-release/v0.12.29/ à Release, não apenas um ZIP. Submeta o XPI ATN com On this site. Consulte [revisão](publication/REVIEW-NOTES.md), [descrição](publication/LISTING.md), [procedimento](publication/GITHUB-RELEASE.md). Os scripts não fazem push, carregamentos nem instalações automáticas. Não versione chaves, credenciais, correio ou cache; .gitignore não remove segredos já registados. MIT: [LICENSE](LICENSE).
 
 ## Suporte macOS · 0.12.26
+
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
 
 Os pacotes Mac incluem Mail-AI-Assist.xpi junto de setup-guide.html em /Library/Application Support/MailAiAssist. Após a instalação, o guia abre para o utilizador do ambiente de trabalho sempre que possível. Caso contrário, abra esta pasta no Finder. Instale o XPI manualmente no Thunderbird e confirme as permissões.
 

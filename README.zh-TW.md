@@ -30,12 +30,12 @@ Mail AI Assist 為 Thunderbird 中使用者選取的郵件提供摘要、翻譯�
 
 Windows 與 macOS 使用相同的 Thunderbird XPI，另外安裝適合作業系統的輔助程式。
 
-### 下載 · v0.12.26
+### 下載 · v0.12.29
 
-- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-x64.msi)
-- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
-- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
-- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26.xpi)
+- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29-x64.msi)
+- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.29/Mail-AI-Assist-0.12.29.xpi)
+
+目前 Windows 輔助程式與 XPI 為 0.12.29。macOS 輔助程式仍為 0.12.26，下載請見下方 macOS 區段；這些舊套件不包含新增的 OpenAI API 支援及 0.12.29 輔助程式修正。
 
 下載下方與你的系統相符的輔助程式和 Thunderbird XPI。安裝輔助程式後，在 Thunderbird → 附加元件與佈景主題 → 擴充套件 → 齒輪選單 → 從檔案安裝附加元件中選擇 XPI，然後重新啟動 Thunderbird。
 
@@ -75,9 +75,12 @@ node installer/verify-release.mjs
 
 ## 發布
 
-將 dist/github-release/v0.12.26/ 內檔案逐一上傳為 Release 附件，不要只上傳 ZIP。ATN XPI 另外提交並選 On this site。參閱[審核說明](publication/REVIEW-NOTES.md)、[商店介紹](publication/LISTING.md)、[發布流程](publication/GITHUB-RELEASE.md)。腳本不會自動推送、上傳或安裝。私鑰、憑證、郵件與快取不得入庫；.gitignore 不會移除已提交秘密。MIT，見 [LICENSE](LICENSE)。
+將 dist/github-release/v0.12.29/ 內檔案逐一上傳為 Release 附件，不要只上傳 ZIP。ATN XPI 另外提交並選 On this site。參閱[審核說明](publication/REVIEW-NOTES.md)、[商店介紹](publication/LISTING.md)、[發布流程](publication/GITHUB-RELEASE.md)。腳本不會自動推送、上傳或安裝。私鑰、憑證、郵件與快取不得入庫；.gitignore 不會移除已提交秘密。MIT，見 [LICENSE](LICENSE)。
 
 ## macOS 支援 · 0.12.26
+
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.26/Mail-AI-Assist-0.12.26-macos-x64-unsigned.pkg)
 
 Mac 安裝套件將 Mail-AI-Assist.xpi 和 setup-guide.html 放在 /Library/Application Support/MailAiAssist。安裝完成後會盡可能為目前登入的桌面使用者開啟指南；若未開啟，請在 Finder 中開啟此目錄。在 Thunderbird 中手動安裝 XPI 並確認權限。
 
