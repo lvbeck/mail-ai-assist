@@ -25,7 +25,7 @@ Les résumés, traductions et étiquettes traitent l’objet et le corps du mess
 
 ## Services et confidentialité
 
-Autorisation ChatGPT, OpenAI API, Gemini API, Claude API et Ollama sont pris en charge. La traduction peut utiliser Google Cloud Translation, Azure Translator ou DeepL ; sans service configuré, le modèle IA choisi est utilisé. Aucun changement de fournisseur après une erreur. Accès et coûts dépendent du fournisseur. Les contenus pertinents passent par l’assistant Windows vers le service choisi. Identifiants protégés par DPAPI ; cache et exports lisibles localement. Voir la [politique](publication/PRIVACY.md).
+Autorisation ChatGPT, OpenAI API, Gemini API, Claude API et Ollama sont pris en charge. La traduction peut utiliser Google Cloud Translation, Azure Translator ou DeepL ; sans service configuré, le modèle IA choisi est utilisé. Aucun changement de fournisseur après une erreur. Accès et coûts dépendent du fournisseur. Les contenus pertinents passent par l’assistant local vers le service choisi. Identifiants protégés par DPAPI sous Windows ou par une clé du trousseau sous macOS ; cache et exports lisibles localement. Voir la [politique](publication/PRIVACY.md).
 
 ## Installation et export
 

@@ -25,7 +25,7 @@ Los resúmenes, las traducciones y las etiquetas procesan el asunto y el cuerpo 
 
 ## Proveedores y privacidad
 
-Admite autorización ChatGPT, OpenAI API, Gemini API, Claude API y Ollama. Traducción con Google Cloud Translation, Azure Translator o DeepL; sin servicio configurado usa el modelo IA elegido. Los errores no cambian de proveedor. Acceso y costes dependen del servicio. El contenido pertinente pasa por el asistente Windows al proveedor. Credenciales protegidas con DPAPI; caché y exportaciones legibles localmente. Consulta la [política](publication/PRIVACY.md).
+Admite autorización ChatGPT, OpenAI API, Gemini API, Claude API y Ollama. Traducción con Google Cloud Translation, Azure Translator o DeepL; sin servicio configurado usa el modelo IA elegido. Los errores no cambian de proveedor. Acceso y costes dependen del servicio. El contenido pertinente pasa por el asistente local al proveedor. Credenciales protegidas con DPAPI en Windows o una clave del llavero en macOS; caché y exportaciones legibles localmente. Consulta la [política](publication/PRIVACY.md).
 
 ## Instalación y exportación
 

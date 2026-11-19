@@ -25,7 +25,7 @@ Zusammenfassung, Übersetzung und Verschlagwortung verarbeiten Betreff und Nachr
 
 ## Anbieter und Datenschutz
 
-ChatGPT-Autorisierung, OpenAI API, Gemini API, Claude API und Ollama werden unterstützt. Übersetzungen können Google Cloud Translation, Azure Translator oder DeepL verwenden; ohne konfigurierten Übersetzungsdienst wird das gewählte KI-Modell genutzt. Fehler lösen keinen Anbieterwechsel aus. Berechtigung und Kosten richten sich nach dem Anbieter. Relevante Inhalte gelangen über das Windows-Hilfsprogramm zum gewählten Dienst. Zugangsdaten sind mit DPAPI geschützt, Cache und Exporte lokal lesbar. Siehe [Datenschutz](publication/PRIVACY.md).
+ChatGPT-Autorisierung, OpenAI API, Gemini API, Claude API und Ollama werden unterstützt. Übersetzungen können Google Cloud Translation, Azure Translator oder DeepL verwenden; ohne konfigurierten Übersetzungsdienst wird das gewählte KI-Modell genutzt. Fehler lösen keinen Anbieterwechsel aus. Berechtigung und Kosten richten sich nach dem Anbieter. Relevante Inhalte gelangen über das lokale Hilfsprogramm zum gewählten Dienst. Zugangsdaten sind unter Windows mit DPAPI und unter macOS mit einem Schlüssel aus dem Schlüsselbund geschützt, Cache und Exporte lokal lesbar. Siehe [Datenschutz](publication/PRIVACY.md).
 
 ## Installation und Export
 

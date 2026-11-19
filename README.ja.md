@@ -25,7 +25,7 @@ Mail AI Assist は、Thunderbird で選択したメールの要約、翻訳、�
 
 ## 提供元とプライバシー
 
-ChatGPT 認証、OpenAI API、Gemini API、Claude API、Ollama を選択できます。翻訳は Google Cloud Translation、Azure Translator、DeepL に対応し、翻訳サービスが未選択または未設定の場合は選択した AI モデルを使用します。サービスの失敗時に自動で別の提供元へ切り替えません。利用条件と料金は提供元によって異なります。関連するメール内容は Windows ヘルパー経由で選択したサービスに送信します。認証情報は Windows DPAPI で保護します。キャッシュとエクスポートは読み取り可能なローカルファイルです。[プライバシーポリシー](publication/PRIVACY.md)を参照してください。
+ChatGPT 認証、OpenAI API、Gemini API、Claude API、Ollama を選択できます。翻訳は Google Cloud Translation、Azure Translator、DeepL に対応し、翻訳サービスが未選択または未設定の場合は選択した AI モデルを使用します。サービスの失敗時に自動で別の提供元へ切り替えません。利用条件と料金は提供元によって異なります。関連するメール内容は ローカルヘルパー経由で選択したサービスに送信します。認証情報は Windows では DPAPI、macOS ではキーチェーンに保存した鍵で保護します。キャッシュとエクスポートは読み取り可能なローカルファイルです。[プライバシーポリシー](publication/PRIVACY.md)を参照してください。
 
 ## インストールとエクスポート
 
