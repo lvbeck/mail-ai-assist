@@ -24,16 +24,16 @@ test('native host routes every provider explicitly and never falls back', async 
   });
   vm.runInContext(source, context);
   let id = 0;
-  for (const provider of ['chatgpt', 'gemini', 'claude']) {
+  for (const provider of ['chatgpt', 'openai', 'gemini', 'claude']) {
     for (const action of ['status','models','rewrite','signOut']) {
       await context.handle({ id: ++id, action, provider }); assert.equal(sent.at(-1).ok, true);
     }
   }
   assert.equal(calls.filter(value => value === 'chatgpt-token').length, 1);
-  assert.ok(calls.includes('gemini-rewrite')); assert.ok(calls.includes('claude-rewrite'));
+  assert.ok(calls.includes('openai-rewrite')); assert.ok(calls.includes('gemini-rewrite')); assert.ok(calls.includes('claude-rewrite'));
   await context.handle({ id: ++id, action: 'rewrite', provider: 'unknown' });
   assert.equal(sent.at(-1).error.code, 'invalid_provider');
-  await context.handle({ id: ++id, action: 'signIn', provider: 'claude' });
+  await context.handle({ id: ++id, action: 'signIn', provider: 'openai' });
   assert.equal(sent.at(-1).error.code, 'invalid_provider');
   await context.handle({ id: ++id, action: 'status' });
   assert.equal(sent.at(-1).result.provider, 'chatgpt');

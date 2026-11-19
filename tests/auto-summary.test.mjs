@@ -40,6 +40,14 @@ function fixture(saved = {}) {
   return { state, set, boot, folder, header, receive: (ids, where = folder) => state.receive(where, { messages: ids.map(header) }) };
 }
 
+test('automatic summaries use the OpenAI provider and its own selected model', async () => {
+ const h = fixture({ provider: 'openai', model_openai: 'gpt-test', autoSummaryAccounts: { a: 1 } });
+ await h.receive([1]);
+ const request = h.state.calls.find(call => call.action === 'rewrite');
+ assert.equal(request?.provider, 'openai'); assert.equal(request.model, 'gpt-test');
+ assert.equal(h.state.calls.find(call => call.action === 'cachePut').descriptor.provider, 'openai');
+});
+
 test('automatic summaries default off and only process enabled inbox accounts', async () => {
  const h = fixture(); await h.receive([1]); assert.equal(h.state.calls.length, 0);
  await h.set({ autoSummaryAccounts: { a: 1 } });

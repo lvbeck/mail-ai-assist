@@ -17,20 +17,25 @@ async function loadMail(session) {
   session.text = text;
   return text;
 }
-async function applyMailTags(session, text) {
+async function applyMailTags(session, text, canApply = () => true) {
   if (session.applied) return { names: session.names };
-  const names = MailContent.parseTags(text);
+  const normalize = name => name.normalize('NFKC').toLowerCase();
+  const names = MailContent.parseTags(text).filter((name, index, values) =>
+    values.findIndex(value => normalize(value) === normalize(name)) === index);
+  const ensureActive = () => { if (!canApply()) throw new Error('cancelled'); };
   const existing = await messenger.messages.tags.list();
   const keys = [];
   // Validate the original message before creating any global tag definitions.
   await messenger.messages.get(session.messageId);
   for (const name of names) {
-    const known = existing.find(tag => tag.tag.normalize('NFKC').toLowerCase() === name.normalize('NFKC').toLowerCase());
+    ensureActive();
+    const known = existing.find(tag => normalize(tag.tag) === normalize(name));
     const key = known?.key || `mailai-${crypto.randomUUID()}`;
     if (!known) await messenger.messages.tags.create(key, name, '#7856D8');
     keys.push(key);
   }
   const current = await messenger.messages.get(session.messageId);
+  ensureActive();
   const original = current.tags || [];
   session.added = keys.filter(key => !original.includes(key));
   await messenger.messages.update(session.messageId, { tags: [...new Set([...original, ...keys])] });

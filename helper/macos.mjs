@@ -4,10 +4,10 @@ import { AppError } from './core.mjs';
 import { encryptCredential, decryptCredential } from './credential-envelope.mjs';
 
 const executable = fileURLToPath(new URL('../native/mail-ai-assist-macos', import.meta.url));
-export function runMacNative(request, signal) {
+export function runMacNative(request, signal, descriptor) {
   signal?.throwIfAborted();
   return new Promise((resolve, reject) => {
-    const child = spawn(executable, [], { stdio: ['pipe', 'pipe', 'ignore'] });
+    const child = spawn(executable, [], { stdio: ['pipe', 'pipe', 'ignore', ...(descriptor === undefined ? [] : [descriptor])] });
     let finished = false, output = '';
     const finish = (error, result) => {
       if (finished) return;
@@ -24,6 +24,7 @@ export function runMacNative(request, signal) {
     child.on('close', code => {
       try {
         const result = JSON.parse(output);
+        if (request.action === 'fileLock' && result?.code === 'operation_busy') { finish(new AppError('operation_busy')); return; }
         if (code !== 0 || result.ok !== true) throw new Error('native_operation_failed');
         finish(null, result);
       } catch { finish(new AppError('local_operation_failed')); }

@@ -9,7 +9,7 @@ import { dataDirectory } from './platform.mjs';
 import { withSessionLock } from './auth.mjs';
 
 export function validateProvider(value = 'chatgpt') {
-  if (!['chatgpt', 'gemini', 'claude'].includes(value)) throw new AppError('invalid_provider');
+  if (!['chatgpt', 'openai', 'gemini', 'claude'].includes(value)) throw new AppError('invalid_provider');
   return value;
 }
 function apiProvider(value) {
@@ -63,10 +63,10 @@ export async function removeApiKey(provider, signal) {
     return { provider, configured: false };
   }, signal);
 }
-const endpoints = { gemini: 'https://generativelanguage.googleapis.com/v1beta', claude: 'https://api.anthropic.com/v1' };
+const endpoints = { openai: 'https://api.openai.com/v1', gemini: 'https://generativelanguage.googleapis.com/v1beta', claude: 'https://api.anthropic.com/v1' };
 async function callApi(provider, path, key, signal, body) {
   apiProvider(provider);
-  const headers = provider === 'gemini' ? { 'x-goog-api-key': key } : { 'x-api-key': key, 'anthropic-version': '2023-06-01' };
+  const headers = provider === 'openai' ? { Authorization: `Bearer ${key}` } : provider === 'gemini' ? { 'x-goog-api-key': key } : { 'x-api-key': key, 'anthropic-version': '2023-06-01' };
   let response;
   try {
     response = await fetch(endpoints[provider] + path, { method: body ? 'POST' : 'GET', redirect: 'error', signal,
@@ -88,16 +88,18 @@ export async function listApiModels(provider, signal, suppliedKey) {
   for (let page = 0; page < 20; page++) {
     const query = new URLSearchParams(provider === 'gemini' ? { pageSize: '100' } : { limit: '100' });
     if (cursor) query.set(provider === 'gemini' ? 'pageToken' : 'after_id', cursor);
-    const data = await callApi(provider, `/models?${query}`, key, signal);
+    const data = await callApi(provider, provider === 'openai' ? '/models' : `/models?${query}`, key, signal);
     const items = provider === 'gemini' ? data?.models : data?.data;
     if (!Array.isArray(items)) throw new AppError('invalid_model_catalog');
     for (const model of items) {
       const slug = provider === 'gemini' ? model.name?.replace(/^models\//, '') : model.id;
       if (typeof slug !== 'string' || !/^[a-zA-Z0-9._-]{1,150}$/.test(slug)) continue;
       if (provider === 'gemini' && !model.supportedGenerationMethods?.includes('generateContent')) continue;
+      // The catalog has no endpoint capabilities. Exclude known non-Responses model families.
+      if (provider === 'openai' && (!/^(gpt-|o[1-9])/.test(slug) || /(?:audio|realtime|transcribe|tts|image|search|instruct|moderation)/i.test(slug) || /^(?:gpt-3|gpt-4(?:$|-)|o1-(?:mini|preview))/.test(slug))) continue;
       models.push({ slug, displayName: (provider === 'gemini' ? model.displayName : model.display_name) || slug });
     }
-    const next = provider === 'gemini' ? data.nextPageToken : data.has_more ? data.last_id : null;
+    const next = provider === 'openai' ? null : provider === 'gemini' ? data.nextPageToken : data.has_more ? data.last_id : null;
     if (!next) return models;
     if (typeof next !== 'string' || seen.has(next)) throw new AppError('invalid_model_catalog');
     seen.add(next); cursor = next;
@@ -111,7 +113,13 @@ export async function rewriteApi(provider, data, signal) {
   const key = await getKey(provider);
   const system = request.instructions + '\n\n' + request.input[0].content;
   let text;
-  if (provider === 'gemini') {
+  if (provider === 'openai') {
+    const result = await callApi(provider, '/responses', key, signal, { ...request, stream: false, max_output_tokens: 8192 });
+    if (result?.status !== 'completed') throw new AppError(result?.status === 'incomplete' ? 'incomplete_response' : 'api_response_blocked');
+    const messages = Array.isArray(result.output) ? result.output.filter(item => item?.type === 'message' && item.role === 'assistant') : [];
+    if (!messages.length || messages.some(item => item.status !== 'completed' || !Array.isArray(item.content) || item.content.some(part => part?.type !== 'output_text' || typeof part.text !== 'string'))) throw new AppError('api_response_blocked');
+    text = messages.flatMap(item => item.content.map(part => part.text)).join('');
+  } else if (provider === 'gemini') {
     const result = await callApi(provider, `/models/${request.model}:generateContent`, key, signal, {
       systemInstruction: { parts: [{ text: system }] }, contents: [{ role: 'user', parts: [{ text: request.input[1].content }] }],
       generationConfig: { maxOutputTokens: 8192 }

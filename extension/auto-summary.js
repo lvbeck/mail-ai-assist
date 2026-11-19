@@ -62,9 +62,9 @@
       const current = await messenger.messages.get(header.id);
       if (current.folder?.accountId !== accountId || !inbox(current.folder) || current.junk) return;
       if (!await claim(accountId, current)) return;
-      const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_gemini', 'model_claude', 'summaryLanguage']);
+      const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_openai', 'model_gemini', 'model_claude', 'summaryLanguage']);
       const provider = saved.provider || 'chatgpt';
-      if (!['chatgpt', 'gemini', 'claude'].includes(provider)) throw new Error('invalid_provider');
+      if (!['chatgpt', 'openai', 'gemini', 'claude'].includes(provider)) throw new Error('invalid_provider');
       const model = saved['model_' + provider] || (provider === 'chatgpt' ? saved.taskModel : '');
       if (!model) throw new Error('model_required');
       const session = { messageId: current.id, subject: current.subject || '' };

@@ -1,12 +1,13 @@
 import { authorizationMessage } from './auth-messages.mjs';
 import { randomBytes, randomUUID } from 'node:crypto';
 import { createServer } from 'node:http';
-import { mkdir, readFile, writeFile, rename, open, unlink } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, rename, unlink } from 'node:fs/promises';
 import { join } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
 import { AppError, AUTH_ORIGIN, API_ORIGIN, APP_NAME, challenge, validateCallback, verifyIdToken } from './core.mjs';
 import { protect, unprotect, openBrowser } from './platform-crypto.mjs';
 import { dataDirectory } from './platform.mjs';
+import { acquireProcessLock } from './process-lock.mjs';
 
 function stateDirectory() {
   return dataDirectory();
@@ -28,24 +29,9 @@ async function saveState(state) {
   } finally { await unlink(temp).catch(() => {}); }
 }
 async function withLoginLock(operation) {
-  const root = stateDirectory();
-  await mkdir(root, { recursive: true });
-  const path = join(root, 'login.lock');
-  let handle;
-  try { handle = await open(path, 'wx'); }
-  catch (error) {
-    if (error.code !== 'EEXIST') throw new AppError('storage_unavailable');
-    // Only remove a lock when its owning process no longer exists.
-    let pid;
-    try { pid = Number(await readFile(path, 'utf8')); } catch { throw new AppError('login_busy'); }
-    if (!Number.isInteger(pid) || pid <= 0) throw new AppError('login_busy');
-    try { process.kill(pid, 0); throw new AppError('login_busy'); }
-    catch (probe) { if (probe.code !== 'ESRCH') throw new AppError('login_busy'); }
-    await unlink(path).catch(() => {});
-    try { handle = await open(path, 'wx'); } catch { throw new AppError('login_busy'); }
-  }
-  try { await handle.writeFile(String(process.pid)); return await operation(); }
-  finally { await handle.close(); await unlink(path).catch(() => {}); }
+  const release = await acquireProcessLock('credentials', 'login_busy');
+  try { return await operation(); }
+  finally { await release(); }
 }
 export async function fetchJson(url, options = {}) {
   const response = await fetch(url, { ...options, redirect: 'error' });

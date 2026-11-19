@@ -49,9 +49,9 @@ async function fixture() {
     messages: {
       getRaw: async (id, options) => { assert.equal(id, 42); assert.equal(options.data_format, 'File'); assert.equal(options.decrypt, false); return new Blob([state.rawBytes]); },
       getFull: async id => { state.readId = id; return { contentType: 'text/plain', body: state.body }; },
-      get: async id => { assert.equal(id, 42); return { tags: [...state.tags] }; },
-      tags: { list: async () => state.catalog,
-        create: async (key, tag) => { state.created++; state.catalog.push({ key, tag }); } },
+      get: async id => { assert.equal(id, 42); await state.beforeGet?.(); return { tags: [...state.tags] }; },
+      tags: { list: async () => { await state.beforeList?.(); return structuredClone(state.catalog); },
+        create: async (key, tag) => { state.created++; state.catalog.push({ key, tag }); await state.afterCreate?.(); } },
       update: async (id, value) => { state.target = id; state.tags = value.tags; state.writes++; }
     }
   };
@@ -60,8 +60,38 @@ async function fixture() {
   const send = (action, data = {}, url = state.url) => listener({ scope: 'mail-ai', action, key: state.key, ...data }, { url });
   await send('open', { task: 'tags', tabId: 1 }, api.runtime.getURL('mail-menu.html'));
   state.key = new URL(state.url).searchParams.get('key');
-  return { state, send, removed, menu };
+  return { state, send, removed, menu, apply: (session, text, guard) => context.applyMailTags(session, text, guard) };
 }
+
+test('equivalent new tag names create one global definition and one message key', async () => {
+  const { state, send } = await fixture();
+  const result = await send('tags', { text: '["NewTag", "newtag", "ＮｅｗＴａｇ"]' });
+  assert.equal(result.ok, true);
+  assert.deepEqual(Array.from(result.names), ['NewTag']);
+  assert.equal(state.created, 1);
+  assert.equal(state.tags.length, 2);
+});
+
+test('automatic tag guards are checked after waits and before each mutation', async () => {
+  for (const checkpoint of ['beforeList', 'beforeGet', 'afterCreate']) {
+    const { state, apply } = await fixture();
+    let active = true;
+    state[checkpoint] = () => { active = false; };
+    await assert.rejects(apply({ messageId: 42 }, '["First", "Second"]', () => active), /cancelled/);
+    assert.equal(state.created, checkpoint === 'afterCreate' ? 1 : 0);
+    assert.equal(state.writes, 0);
+    assert.deepEqual(state.tags, ['existing']);
+  }
+});
+
+test('automatic tag revocation during the final header read prevents message updates', async () => {
+  const { state, apply } = await fixture();
+  let active = true, reads = 0;
+  state.beforeGet = () => { if (++reads === 2) active = false; };
+  await assert.rejects(apply({ messageId: 42 }, '["Support"]', () => active), /cancelled/);
+  assert.equal(state.created, 0);
+  assert.equal(state.writes, 0);
+});
 test('tags target captured message, preserve existing tags, reuse names and support undo', async () => {
   const { state, send } = await fixture();
   assert.equal((await send('load')).text, 'Subject: Subject\n\nBody');

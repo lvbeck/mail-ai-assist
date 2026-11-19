@@ -1,13 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile, readFile, stat, unlink, rmdir } from 'node:fs/promises';
-import { resolve, join, dirname } from 'node:path';
+import { mkdir, writeFile, readFile, stat } from 'node:fs/promises';
+import { join, dirname } from 'node:path';
 import { saveDesktopExportDirectory, prepareDesktop, cleanupAllDesktop, desktopExportInfo, clearDesktopExports, beginEml, appendEml, finishEml } from '../helper/desktop-export.mjs';
+import { storageFixture, nativeLockOptions } from './storage-fixture.mjs';
 
-test('exports survive disconnect and clearing preserves unrelated and incomplete files', async () => {
-  const root = await mkdtemp(resolve('work/retention-test-'));
-  const original = process.env.LOCALAPPDATA;
-  process.env.LOCALAPPDATA = root;
+test('exports survive disconnect and clearing preserves unrelated and incomplete files', nativeLockOptions, async t => {
+  const { root } = await storageFixture(t, 'mail-retention-test-', cleanupAllDesktop);
   const exports = join(root, 'exports');
   await mkdir(exports);
   try {
@@ -56,9 +55,5 @@ test('exports survive disconnect and clearing preserves unrelated and incomplete
     assert.equal((await desktopExportInfo()).bytes, 3);
     await clearDesktopExports({ path: exports });
     await assert.rejects(stat(dirname(pending.path)), { code: 'ENOENT' });
-    await unlink(extra); await rmdir(dirname(result.path));
-    await unlink(unrelated); await rmdir(exports);
-    await unlink(join(root, 'MailAiAssist', 'export-settings.json'));
-    await rmdir(join(root, 'MailAiAssist')); await rmdir(root);
-  } finally { process.env.LOCALAPPDATA = original; }
+  } finally { await cleanupAllDesktop(); }
 });

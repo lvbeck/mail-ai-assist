@@ -18,7 +18,7 @@ function fixture(saved = {}) {
   const messenger = {
     storage: { local: { get: async () => structuredClone(state.saved), set }, onChanged: { addListener(fn) { state.listeners.push(fn); } } },
     accounts: { onCreated: { addListener(fn) { state.created = fn; } }, onDeleted: { addListener(fn) { state.deleted = fn; } } },
-    messages: { tags: { list: async () => [{ key: 'techcalc', tag: 'TechCalc' }] }, onNewMailReceived: { addListener(fn) { state.receive = fn; } }, get: async id => state.headers[id] || header(id), continueList: async id => state.pages[id] },
+    messages: { tags: { list: async () => { await state.beforeTagList?.(); return [{ key: 'techcalc', tag: 'TechCalc' }]; } }, onNewMailReceived: { addListener(fn) { state.receive = fn; } }, get: async id => state.headers[id] || header(id), continueList: async id => state.pages[id] },
     runtime: { connectNative() {
       let response, disconnect;
       return {
@@ -26,6 +26,7 @@ function fixture(saved = {}) {
         postMessage(message) {
           state.calls.push(message);
           const reply = () => response({ id: message.id, ok: !state.fail, error: { code: 'api_quota_exceeded' }, result: message.action === 'status' ? { sharing: true, provider: message.provider } : { text: '["Product"]' } });
+          state.beforeReply?.(message);
           if (message.action === 'rewrite' && state.hold) state.release = reply; else queueMicrotask(reply);
         }
       };
@@ -38,6 +39,14 @@ function fixture(saved = {}) {
   boot();
   return { state, set, boot, folder, header, receive: (ids, where = folder) => state.receive(where, { messages: ids.map(header) }) };
 }
+test('automatic tags use the OpenAI provider and its own selected model', async () => {
+  const h = fixture({ provider: 'openai', model_openai: 'gpt-test', autoTagAccounts: { a: 1 } });
+  await h.receive([1]);
+  const request = h.state.calls.find(call => call.action === 'rewrite');
+  assert.equal(request?.provider, 'openai'); assert.equal(request.model, 'gpt-test');
+  assert.deepEqual(h.state.applied, [1]);
+});
+
 test('disabled accounts and non-inbox events never read or send mail', async () => {
   const h = fixture(); await h.receive([1]);
   await h.set({ autoTagAccounts: { a: 1 } });
@@ -81,6 +90,30 @@ test('moved and junk mail are skipped; old queued events stay disabled', async (
   h.state.headers[2] = { ...h.header(2), junk: true };
   h.state.headers[3] = { ...h.header(3), folder: { accountId: 'a', specialUse: ['trash'] } };
   await h.receive([2, 3]); assert.equal(h.state.calls.length, 0);
+});
+
+test('automatic tags recheck eligibility after helper and tag-catalog waits', async () => {
+  for (const checkpoint of ['status', 'catalog']) {
+    for (const change of [{ junk: true }, { folder: { accountId: 'a', type: 'trash' } }, { folder: { accountId: 'b', type: 'inbox' } }]) {
+      const h = fixture({ autoTagAccounts: { a: 1 } });
+      const exclude = () => { h.state.headers[1] = { ...h.header(1), ...change }; };
+      if (checkpoint === 'status') h.state.beforeReply = message => { if (message.action === 'status') exclude(); };
+      else h.state.beforeTagList = exclude;
+      await h.receive([1]);
+      assert.equal(h.state.calls.some(call => call.action === 'rewrite'), false);
+      assert.deepEqual(h.state.applied, []);
+    }
+  }
+});
+
+test('revoking automatic tags during write preparation prevents applying completed inference', async () => {
+  const h = fixture({ autoTagAccounts: { a: 1 } });
+  h.state.beforeTagList = async () => {
+    if (h.state.calls.some(call => call.action === 'rewrite')) await h.set({ autoTagAccounts: {} });
+  };
+  await h.receive([1]);
+  assert.equal(h.state.calls.filter(call => call.action === 'rewrite').length, 1);
+  assert.deepEqual(h.state.applied, []);
 });
 
 for (const language of ['fr', 'it', 'es', 'pt']) test(`automatic tags honor ${language}`, async () => {

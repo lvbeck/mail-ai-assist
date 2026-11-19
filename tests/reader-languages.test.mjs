@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import { readFile } from 'node:fs/promises';
 const root = new URL('../extension/', import.meta.url);
-for (const [language, name] of Object.entries({ fr: 'French', it: 'Italian', es: 'Spanish', pt: 'European Portuguese (Portugal)' })) for (const task of ['summary', 'translate', 'tags']) {
-  test(`${task} uses ${language} in reader requests`, async () => {
+for (const provider of ['chatgpt', 'openai']) for (const [language, name] of Object.entries({ fr: 'French', it: 'Italian', es: 'Spanish', pt: 'European Portuguese (Portugal)' })) for (const task of ['summary', 'translate', 'tags']) {
+  test(`${task} uses ${language} and ${provider} in reader requests`, async () => {
   const elements = new Map();
   const element = id => {
     if (!elements.has(id)) elements.set(id, { value: '', hidden: ['undo', 'confirmTags'].includes(id), classList: { toggle() {} }, listeners: {}, addEventListener(event, fn) { this.listeners[event] = fn; } });
@@ -20,7 +20,7 @@ for (const [language, name] of Object.entries({ fr: 'French', it: 'Italian', es:
     window: { addEventListener() {}, close() { closed++; } },
     ComposeI18n: { t: text => text, initialize: async () => {} }, MailTagInstructions: 'Tags',
     messenger: {
-      storage: { local: { get: async () => ({ translationService: { fr: 'none', it: 'google', es: 'azure', pt: 'deepl' }[language], taskModel: 'test', summaryLanguage: language, translationLanguage: language, translationSourceLanguage: language, tagLanguage: language }) } },
+      storage: { local: { get: async () => ({ provider, model_openai: 'gpt-test', translationService: { fr: 'none', it: 'google', es: 'azure', pt: 'deepl' }[language], taskModel: 'test', summaryLanguage: language, translationLanguage: language, translationSourceLanguage: language, tagLanguage: language }) } },
       runtime: {
         sendMessage: async message => {
           if (message.action === 'load') return { ok: true, task, subject: 'Test', text: 'Body' };
@@ -30,7 +30,7 @@ for (const [language, name] of Object.entries({ fr: 'French', it: 'Italian', es:
         },
         connectNative: () => ({ onMessage: { addListener: fn => { receive = fn; } }, onDisconnect: { addListener() {} }, postMessage: message => {
           requests.push(message);
-          queueMicrotask(() => receive({ id: message.id, ok: true, result: message.action === 'translationStatus' ? { configured: false } : message.action === 'cacheGet' ? { generation: 'test' } : message.action === 'cachePut' ? { stored: true } : message.action === 'status' ? { sharing: true } : { text: '["Original", "Suggested"]' } }));
+          queueMicrotask(() => receive({ id: message.id, ok: true, result: message.action === 'translationStatus' ? { configured: false } : message.action === 'cacheGet' ? { generation: 'test' } : message.action === 'cachePut' ? { stored: true } : message.action === 'status' ? { provider, sharing: true } : { text: '["Original", "Suggested"]' } }));
         } })
       }
     }
@@ -42,6 +42,8 @@ for (const [language, name] of Object.entries({ fr: 'French', it: 'Italian', es:
   await new Promise(resolve => setImmediate(resolve));
 
   const request = requests.find(item => item.action === 'rewrite');
+  assert.equal(request.provider, provider);
+  assert.equal(request.model, provider === 'openai' ? 'gpt-test' : 'test');
   assert.equal(request.outputLanguage, language);
   if (task === 'translate') assert.ok(request.custom.includes(`The selected source language is ${name}.`));
   assert.equal(requests.some(item => item.action === 'translationTranslate'), false);

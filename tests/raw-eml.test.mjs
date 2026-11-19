@@ -1,12 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, rmdir } from 'node:fs/promises';
-import { resolve, join } from 'node:path';
-import { beginEml, appendEml, finishEml, cleanupDesktop } from '../helper/desktop-export.mjs';
-test('raw EML chunks preserve every byte including binary attachment data', async () => {
-  const old = process.env.LOCALAPPDATA;
-  const root = await mkdtemp(resolve('work/raw-eml-test-'));
-  process.env.LOCALAPPDATA = root;
+import { readFile } from 'node:fs/promises';
+import { beginEml, appendEml, finishEml, cleanupDesktop, cleanupAllDesktop } from '../helper/desktop-export.mjs';
+import { storageFixture, nativeLockOptions } from './storage-fixture.mjs';
+test('raw EML chunks preserve every byte including binary attachment data', nativeLockOptions, async t => {
+  await storageFixture(t, 'mail-raw-eml-test-', cleanupAllDesktop);
   let session;
   try {
     const bytes = Buffer.concat([Buffer.from('Subject: Original\r\nContent-Type: multipart/mixed; boundary=x\r\n\r\n--x\r\n'), Buffer.from(Array.from({length: 200000}, (_, i) => i % 256))]);
@@ -19,7 +17,5 @@ test('raw EML chunks preserve every byte including binary attachment data', asyn
     await assert.rejects(appendEml({ token: session.token, offset: bytes.length, base64: 'YQ==' }), /desktop_invalid/);
   } finally {
     if (session) await cleanupDesktop({ token: session.token });
-    process.env.LOCALAPPDATA = old;
-    await rmdir(join(root, 'MailAiAssist/Exports')); await rmdir(join(root, 'MailAiAssist')); await rmdir(root);
   }
 });

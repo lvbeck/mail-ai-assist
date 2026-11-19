@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile, stat, unlink, rmdir } from 'node:fs/promises';
-import { resolve, join } from 'node:path';
+import { mkdir, writeFile, stat, unlink } from 'node:fs/promises';
+import { join } from 'node:path';
 import { removeExportFile, cleanupDesktop } from '../helper/desktop-export.mjs';
-test('cleanup removes only captured export and refuses unexpected contents and paths', async () => {
-  const root = await mkdtemp(resolve('work/cleanup-test-'));
+import { storageFixture, nativeLockOptions } from './storage-fixture.mjs';
+test('cleanup removes only captured export and refuses unexpected contents and paths', nativeLockOptions, async t => {
+  const { root } = await storageFixture(t, 'mail-cleanup-test-');
   const token = '12345678-1234-1234-1234-123456789abc';
   const folder = join(root, token), file = join(folder, 'mail-12345678.txt');
   await mkdir(folder); await writeFile(file, 'test');
@@ -18,6 +19,5 @@ test('cleanup removes only captured export and refuses unexpected contents and p
   await removeExportFile(root, token, file);
   await assert.rejects(stat(folder), { code: 'ENOENT' });
   await removeExportFile(root, token, file);
-  await rmdir(root);
   await assert.rejects(cleanupDesktop({ token }), /desktop_cleanup_failed/);
 });

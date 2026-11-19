@@ -55,8 +55,8 @@ function renderDynamicText() {
   const apiMode = currentProvider !== 'chatgpt';
   if ($('chatgptControls')) $('chatgptControls').hidden = apiMode;
   if ($('apiControls')) $('apiControls').hidden = !apiMode;
-  if ($('providerNote')) $('providerNote').textContent = t(currentProvider === 'gemini' ? 'Gemini API 免费层取决于项目和模型；已启用计费的项目可能产生费用，不使用网页订阅额度。' : currentProvider === 'claude' ? 'Claude API 通常另行计费，不包含在 Claude Free、Pro 或 Max 网页订阅中。' : '使用已授权的 ChatGPT 订阅额度。');
-  if ($('apiConsole')) $('apiConsole').href = currentProvider === 'claude' ? 'https://platform.claude.com/settings/keys' : 'https://aistudio.google.com/apikey';
+  if ($('providerNote')) $('providerNote').textContent = t(currentProvider === 'openai' ? 'OpenAI API 使用 API Key，费用和额度以 OpenAI API 账户为准。' : currentProvider === 'gemini' ? 'Gemini API 免费层取决于项目和模型；已启用计费的项目可能产生费用，不使用网页订阅额度。' : currentProvider === 'claude' ? 'Claude API 通常另行计费，不包含在 Claude Free、Pro 或 Max 网页订阅中。' : '使用已授权的 ChatGPT 订阅额度。');
+  if ($('apiConsole')) $('apiConsole').href = currentProvider === 'openai' ? 'https://platform.openai.com/api-keys' : currentProvider === 'claude' ? 'https://platform.claude.com/settings/keys' : 'https://aistudio.google.com/apikey';
   if ($('account')) $('account').textContent = t(!nativePort ? '本地辅助程序未连接' : accountProblem || (apiMode ? (sharing ? 'API Key 已加密保存。' : '尚未配置 API Key。') : (sharing ?
     renewable === true ? 'connectedRenewable' : renewable === false ? 'connectedLegacy' : 'connected' : '未登录，或当前授权已过期')), { email: accountEmail || 'ChatGPT' });
   if ($("count")) $("count").textContent = t('characterCount', { count: $("source").value.length });
@@ -113,9 +113,9 @@ function request(action, data = {}, onDelta) {
 async function loadAccount(forceModels = true) {
   const wasSharing = sharing;
   const previousProvider = currentProvider;
-  const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_gemini', 'model_claude']);
+  const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_openai', 'model_gemini', 'model_claude']);
   currentProvider = saved.provider || 'chatgpt';
-  if (!['chatgpt', 'gemini', 'claude'].includes(currentProvider)) throw { code: 'invalid_provider' };
+  if (!['chatgpt', 'openai', 'gemini', 'claude'].includes(currentProvider)) throw { code: 'invalid_provider' };
   const changed = previousProvider !== currentProvider;
   if (changed) {
     selectedModel = ''; availableModels = []; sharing = false; accountProblem = ''; show('');

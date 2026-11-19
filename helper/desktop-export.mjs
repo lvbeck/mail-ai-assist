@@ -1,10 +1,12 @@
 import { randomUUID, createHash } from 'node:crypto';
-import { readdir, mkdir, writeFile, appendFile, stat, unlink, rmdir, lstat, realpath, readFile, rename } from 'node:fs/promises';
+import { readdir, mkdir, writeFile, appendFile, stat, unlink, rmdir, lstat, realpath, readFile, rename, open } from 'node:fs/promises';
 import { join, dirname, isAbsolute, resolve, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
+import { hostname } from 'node:os';
 import { AppError } from './core.mjs';
 import { dataDirectory, validateDesktopApplication } from './platform.mjs';
+import { acquireProcessLock } from './process-lock.mjs';
 const sessions = new Map();
 const directory = dirname(fileURLToPath(import.meta.url));
 function exportSettingsFile() { return join(dataDirectory(), 'export-settings.json'); }
@@ -80,6 +82,60 @@ function folderKey(message) {
   const hash = createHash('sha256').update(message.identity).digest('hex').slice(0, 32);
   return `${hash.slice(0, 8)}-${hash.slice(8, 12)}-${hash.slice(12, 16)}-${hash.slice(16, 20)}-${hash.slice(20)}`;
 }
+async function lockExport(folder) {
+  const info = await stat(folder, { bigint: true });
+  const resource = `export:${info.dev}:${info.ino}`;
+  const storage = dataDirectory();
+  await mkdir(storage, { recursive: true });
+  const root = await realpath(storage);
+  const identity = JSON.stringify([hostname(), process.platform === 'win32' ? root.toLowerCase() : root]);
+  const owner = createHash('sha256').update(identity).digest('hex');
+  const release = await acquireProcessLock(resource);
+  return { release, marker: JSON.stringify({ version: 1, owner, resource }) };
+}
+async function removeStaleExportMarker(folder, marker) {
+  const path = join(folder, '.exporting');
+  try {
+    const info = await lstat(path);
+    if (!info.isDirectory() || info.isSymbolicLink()) throw new AppError('operation_busy');
+    const ownerPath = join(path, 'owner.json');
+    const owner = await lstat(ownerPath).catch(error => { if (error.code === 'ENOENT') throw new AppError('operation_busy'); throw error; });
+    if (!owner.isFile() || owner.isSymbolicLink() || owner.size > 512 || await readFile(ownerPath, 'utf8') !== marker) throw new AppError('operation_busy');
+    // A local lock cannot establish the liveness of foreign or legacy owners.
+    const released = join(folder, `.${randomUUID()}.marker.tmp`);
+    // Withdraw ownership atomically before deleting its identity metadata.
+    await rename(path, released);
+    await unlink(join(released, 'owner.json'));
+    await rmdir(released);
+  } catch (error) { if (error.code !== 'ENOENT') throw error; }
+}
+async function claimExportMarker(folder, marker) {
+  await removeStaleExportMarker(folder, marker);
+  const temporary = join(folder, `.${randomUUID()}.marker.tmp`);
+  await mkdir(temporary);
+  try {
+    await writeFile(join(temporary, 'owner.json'), marker, { flag: 'wx' });
+    // A published marker is always nonempty, so rename cannot replace an active owner.
+    await rename(temporary, join(folder, '.exporting'));
+  } catch (error) {
+    if (['EEXIST', 'ENOTEMPTY', 'EACCES', 'EPERM'].includes(error.code)) throw new AppError('operation_busy');
+    throw error;
+  } finally {
+    await unlink(join(temporary, 'owner.json')).catch(error => { if (error.code !== 'ENOENT') throw error; });
+    await rmdir(temporary).catch(error => { if (error.code !== 'ENOENT') throw error; });
+  }
+}
+async function withExportMarker(folder, marker, operation) {
+  await claimExportMarker(folder, marker);
+  try { return await operation(); }
+  finally { await removeStaleExportMarker(folder, marker); }
+}
+async function releaseExport(session) {
+  if (session.released) return;
+  session.released = true;
+  try { await removeStaleExportMarker(dirname(session.lock), session.marker); }
+  finally { await session.release(); }
+}
 async function startExport(message, extension) {
   const token = randomUUID(), key = folderKey(message);
   const root = await desktopExportDirectory(), folder = join(root, key);
@@ -88,8 +144,11 @@ async function startExport(message, extension) {
   const suffix = extension === 'txt' ? (message.includeQuotes === true ? '-with-quotes' : '-without-quotes') : '';
   const path = join(folder, `mail-${key.slice(0, 8)}${suffix}.${extension}`);
   const lock = join(folder, '.exporting'), temporary = join(folder, `.${token}.tmp`);
-  await writeFile(lock, '', { flag: 'wx' });
-  return { token, key, root, path, lock, temporary, target: message.target, executable: message.executable };
+  const { release, marker } = await lockExport(folder);
+  try {
+    await claimExportMarker(folder, marker);
+  } catch (error) { await release(); throw error; }
+  return { token, key, root, path, lock, marker, temporary, release, target: message.target, executable: message.executable };
 }
 export async function prepareDesktop(message, signal) {
   if (!['chatgpt', 'codex', 'custom'].includes(message.target)) throw new AppError('desktop_invalid');
@@ -97,12 +156,16 @@ export async function prepareDesktop(message, signal) {
   const content = serializeMail(message.mail, message.format);
   const session = await startExport(message, 'txt');
   const { token } = session;
+  let created = false;
   try {
-    await writeFile(session.temporary, content, { encoding: 'utf8', flag: 'wx' });
+    const file = await open(session.temporary, 'wx');
+    created = true;
+    try { await file.writeFile(content, 'utf8'); }
+    finally { await file.close(); }
     await rename(session.temporary, session.path);
   } finally {
-    await unlink(session.temporary).catch(error => { if (error.code !== 'ENOENT') throw error; });
-    await unlink(session.lock);
+    try { if (created) await unlink(session.temporary).catch(error => { if (error.code !== 'ENOENT') throw error; }); }
+    finally { await releaseExport(session); }
   }
   sessions.set(token, session);
   return openExport(session, token, signal);
@@ -129,9 +192,12 @@ export async function removeExportFile(root, token, path) {
   try {
     const info = await lstat(folder);
     if (!info.isDirectory() || info.isSymbolicLink() || await realpath(folder) !== join(await realpath(root), token)) throw new AppError('desktop_cleanup_failed');
-    await unlink(path).catch(error => { if (error.code !== 'ENOENT') throw error; });
-    // Never recurse: unexpected files must remain untouched.
-    await rmdir(folder);
+    const { release, marker } = await lockExport(folder);
+    try {
+      await withExportMarker(folder, marker, () => unlink(path).catch(error => { if (error.code !== 'ENOENT') throw error; }));
+      // Never recurse: unexpected files must remain untouched.
+      await rmdir(folder);
+    } finally { await release(); }
   } catch (error) { if (error.code !== 'ENOENT') throw new AppError('desktop_cleanup_failed'); }
 }
 export async function cleanupDesktop(message) {
@@ -146,7 +212,8 @@ export async function beginEml(message) {
   if (!['chatgpt', 'codex', 'custom'].includes(message.target) || !Number.isSafeInteger(message.size) || message.size < 1) throw new AppError('desktop_invalid');
   if (message.target === 'custom') await validateDesktopApplication(message.executable);
   const session = await startExport(message, 'eml');
-  await writeFile(session.temporary, Buffer.alloc(0), { flag: 'wx' });
+  try { await writeFile(session.temporary, Buffer.alloc(0), { flag: 'wx' }); }
+  catch (error) { await releaseExport(session); throw error; }
   sessions.set(session.token, { ...session, size: message.size, received: 0 });
   return { token: session.token, path: session.path };
 }
@@ -163,8 +230,8 @@ export async function finishEml(message, signal) {
   const session = sessions.get(message.token);
   if (!session || session.finished || !Number.isSafeInteger(session.size) || session.received !== session.size) throw new AppError('desktop_invalid');
   await rename(session.temporary, session.path);
-  await unlink(session.lock);
   session.finished = true;
+  await releaseExport(session);
   return openExport(session, message.token, signal);
 }
 
@@ -173,7 +240,7 @@ export async function cleanupAllDesktop() {
   for (const session of sessions.values()) {
     if (session.size && !session.finished) {
       await unlink(session.temporary).catch(() => {});
-      await unlink(session.lock).catch(() => {});
+      await releaseExport(session).catch(() => {});
     }
   }
   sessions.clear();
@@ -192,7 +259,14 @@ async function managedExports(root) {
     try {
       if (await realpath(folder) !== join(canonicalRoot, token)) continue;
       const contents = await readdir(folder);
-      if (contents.includes('.exporting')) continue;
+      if (contents.includes('.exporting')) {
+        let lock;
+        try { lock = await lockExport(folder); }
+        catch (error) { if (error.code === 'operation_busy') continue; throw error; }
+        try { await removeStaleExportMarker(folder, lock.marker); }
+        catch (error) { if (error.code === 'operation_busy') continue; throw error; }
+        finally { await lock.release(); }
+      }
       for (const ext of ['txt', 'eml', 'with-quotes.txt', 'without-quotes.txt']) {
         const path = join(folder, `mail-${token.slice(0, 8)}${ext.includes('-quotes') ? '-' : '.'}${ext}`);
         if (!contents.includes(basename(path))) continue;
@@ -215,10 +289,22 @@ export async function clearDesktopExports(message) {
     // Validate every absolute target; never recursively delete a custom folder.
     const folder = resolve(root, file.token);
     if (dirname(resolve(file.path)) !== folder || await realpath(folder) !== join(await realpath(root), file.token)) throw new AppError('desktop_cleanup_failed');
-    const info = await lstat(file.path).catch(error => { if (error.code !== 'ENOENT') throw error; });
-    if (!info || !info.isFile() || info.isSymbolicLink()) continue;
-    await unlink(file.path);
-    await rmdir(folder).catch(error => { if (!['ENOENT', 'ENOTEMPTY', 'EEXIST'].includes(error.code)) throw error; });
+    let lock;
+    try { lock = await lockExport(folder); }
+    catch (error) { if (error.code === 'operation_busy') continue; throw error; }
+    try {
+      let removed = false;
+      try {
+        await withExportMarker(folder, lock.marker, async () => {
+          const info = await lstat(file.path).catch(error => { if (error.code !== 'ENOENT') throw error; });
+          if (!info || !info.isFile() || info.isSymbolicLink()) return;
+          await unlink(file.path);
+          removed = true;
+        });
+      }
+      catch (error) { if (error.code === 'operation_busy') continue; throw error; }
+      if (removed) await rmdir(folder).catch(error => { if (!['ENOENT', 'ENOTEMPTY', 'EEXIST'].includes(error.code)) throw error; });
+    } finally { await lock.release(); }
   }
   return desktopExportInfo();
 }

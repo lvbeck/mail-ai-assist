@@ -58,9 +58,9 @@ async function run(force = false) {
     el('taskTitle').textContent = t(titles[loaded.task]);
     document.title = `${t(titles[loaded.task])} · ${t('邮箱 AI 助手')}`;
     el('subject').textContent = loaded.subject;
-    const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_gemini', 'model_claude', 'translationLanguage', 'translationSourceLanguage', 'tagLanguage', 'translationService', 'summaryLanguage']);
+    const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_openai', 'model_gemini', 'model_claude', 'translationLanguage', 'translationSourceLanguage', 'tagLanguage', 'translationService', 'summaryLanguage']);
     const provider = saved.provider || 'chatgpt';
-    if (!['chatgpt', 'gemini', 'claude'].includes(provider)) throw new Error('invalid_provider');
+    if (!['chatgpt', 'openai', 'gemini', 'claude'].includes(provider)) throw new Error('invalid_provider');
     const model = saved['model_' + provider] || (provider === 'chatgpt' ? saved.taskModel : '');
     connectMail();
     const service = ['google', 'azure', 'deepl'].includes(saved.translationService) ? saved.translationService : 'none';

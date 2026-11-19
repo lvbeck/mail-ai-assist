@@ -1,6 +1,7 @@
 import Foundation
 import AppKit
 import Security
+import Darwin
 
 enum NativeError: Error { case invalidRequest, keychain(OSStatus), operationFailed }
 
@@ -35,6 +36,12 @@ func fileURL(_ request: [String: Any], _ field: String = "path", directory: Bool
 func handle(_ request: [String: Any]) throws -> [String: Any] {
     guard let action = request["action"] as? String else { throw NativeError.invalidRequest }
     switch action {
+    case "fileLock":
+        // fd 3 shares the parent's open-file description. Its last close releases the lock.
+        if flock(3, LOCK_EX | LOCK_NB) != 0 {
+            if errno == EWOULDBLOCK { return ["ok": false, "code": "operation_busy"] }
+            throw NativeError.operationFailed
+        }
     case "credentialKey":
         return ["ok": true, "key": try credentialKey(create: request["create"] as? Bool == true).base64EncodedString()]
     case "browser":
