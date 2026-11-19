@@ -1,6 +1,6 @@
 # Mail AI Assist Privacy Policy
 
-Effective date: 5 November 2026
+Effective date: 19 November 2026
 Developer and contact: Jin Lu, it@live.cn
 
 ## What this extension does
@@ -11,7 +11,7 @@ Mail AI Assist provides email summaries, translation, tag suggestions, selected-
 
 When you request whole-message summary, translation or tags, the extension reads the relevant email subject and body. For summary or translation of selected message-body text, only the selection is sent; the subject and remaining body are not included. Existing tag names and configured aliases may be included in tagging instructions. Selected-text rewriting sends the selected draft text, your instructions, language, style and model selection. Automatic summaries and tags are disabled by default; enabling either for an account authorizes processing of eligible new inbox messages without a separate prompt for each message. They can be disabled from the account menu. AI operations do not process email attachments. HTML-to-text extraction uses the native sanitizer in Thunderbird 148+. Recognized hidden subtrees are removed before text is sent; email text remains untrusted data even when visible. EML export retains the original message bytes, including HTML that is excluded from AI text extraction.
 
-The extension sends this information to the local helper using Thunderbird native messaging. The helper forwards inference requests over HTTPS to the provider you select: OpenAI (ChatGPT-authorized service or OpenAI API using your own API key), Google Gemini, or Anthropic Claude. Translation can instead use Google Cloud Translation, Microsoft Azure Translator or DeepL. If no translation provider is selected or configured, translation uses the selected AI model. Provider request failures do not silently switch to another provider.
+The extension sends this information to the local helper using Thunderbird native messaging. For OpenAI, Gemini and Claude, the helper sends inference requests over HTTPS. For Ollama, the helper lists models and sends inference requests to your configured server. The default is http://localhost:11434 on this computer. A custom server receives the email content. HTTPS encrypts the connection. Remote HTTP sends plaintext unless the network provides separate encryption. Translation can instead use Google Cloud Translation, Microsoft Azure Translator or DeepL. If no translation provider is selected or configured, translation uses the selected AI model. Provider request failures do not silently switch to another provider.
 
 The native interface also exchanges provider settings, API keys for encrypted local storage, authentication status, generated results, cache requests, export content and local paths, and helper update commands. Account information is used to display login status. Provider credentials are sent to the relevant provider for authentication, validation, model discovery and requests. OpenAI login takes place in your browser, uses a temporary loopback callback, and may renew authorization in the background. The add-on does not read your OpenAI password.
 
@@ -40,5 +40,3 @@ Contact it@live.cn with privacy questions. Do not include private mail, password
 ## macOS storage and updates
 
 On macOS, credentials are AES-256-GCM encrypted under ~/Library/Application Support/MailAiAssist using an encryption key stored in the user's Keychain. Cache and default exports use the Cache and Exports subfolders and remain readable local files. Keychain access may require user approval. Windows DPAPI credentials are not migrated. The currently published unsigned macOS packages require manual helper updates. When signed architecture-specific update feeds are configured, the Mac updater opens macOS Installer only after the user requests installation; it does not install silently. Removing credentials does not remove the shared Keychain encryption key used for other providers.
-
-When Ollama is selected, the helper requests the model list from the configured server. AI requests send the relevant email text to that same server. The default address is loopback. A custom server receives the text over the network. Use HTTPS for remote servers.

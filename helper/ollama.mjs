@@ -5,7 +5,7 @@ export function ollamaServer(value = 'http://localhost:11434') {
   if (typeof value !== 'string' || value.length > 2048) throw new AppError('invalid_ollama_server');
   let url;
   try { url = new URL(value); } catch { throw new AppError('invalid_ollama_server'); }
-  if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password || url.search || url.hash) {
+  if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password || /[?#]/.test(url.href)) {
     throw new AppError('invalid_ollama_server');
   }
   return url.href.replace(/\/+$/, '');

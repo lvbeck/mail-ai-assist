@@ -30,7 +30,7 @@ test('Ollama sends the mail envelope only to the configured chat endpoint', asyn
 });
 
 test('Ollama rejects ambiguous or credential-bearing server addresses', () => {
-  for (const value of [null, 'invalid', 'file:///tmp', 'https://user@host', 'https://host/?key=x', 'https://host/#x']) {
+  for (const value of [null, 'invalid', 'file:///tmp', 'https://user@host', 'https://host/?key=x', 'https://host/#x', 'https://host/?', 'https://host/#']) {
     assert.throws(() => ollamaServer(value), { code: 'invalid_ollama_server' });
   }
 });

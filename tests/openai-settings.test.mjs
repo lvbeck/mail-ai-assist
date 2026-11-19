@@ -16,7 +16,7 @@ test('OpenAI settings isolate model selection, key controls and subscription sta
   const requests = [];
   let receive;
   const context = vm.createContext({
-    URLSearchParams, location: { search: '' }, setInterval() {},
+    URL, URLSearchParams, location: { search: '' }, setInterval() {},
     document: { body: { dataset: { page: 'settings' } }, documentElement: { lang: 'zh-CN' }, getElementById: id => elements.get(id) },
     window: { addEventListener() {} }, Option: class { constructor(text, value) { this.textContent = text; this.value = value; } },
     ComposeI18n: { t: text => text, initialize: () => new Promise(() => {}) },
@@ -52,4 +52,21 @@ test('OpenAI settings isolate model selection, key controls and subscription sta
   delete saved.model_openai; await vm.runInContext('loadAccount()', context);
   assert.equal(elements.get('model').value, '');
   assert.equal(saved.model_chatgpt, 'subscription-test');
+  saved.provider = 'ollama';
+  await vm.runInContext('loadAccount()', context);
+  assert.equal(elements.get('apiControls').hidden, true);
+  assert.equal(elements.get('ollamaControls').hidden, false);
+  assert.equal(requests.at(-1).ollamaServer, 'http://localhost:11434');
+  elements.get('ollamaServer').value = 'https://mail.example.test/';
+  await elements.get('ollamaSave').listeners.click();
+  assert.equal(saved.ollamaServer, 'https://mail.example.test');
+  assert.equal(saved.model_ollama, '');
+  assert.equal(elements.get('model').options.at(-1).value, 'subscription-test');
+  context.window.confirm = () => false;
+  elements.get('ollamaServer').value = 'http://other.example.test';
+  await elements.get('ollamaSave').listeners.click();
+  assert.equal(saved.ollamaServer, 'https://mail.example.test');
+  assert.ok(!requests.some(item => item.ollamaServer === 'http://other.example.test'));
+  assert.equal(requests.filter(item => item.action === 'helperUpdateStatus').at(-1).provider, 'chatgpt');
+
 });

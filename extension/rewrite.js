@@ -115,7 +115,7 @@ function request(action, data = {}, onDelta) {
   refreshControls();
   return promise.finally(() => { if (activeRequest === id) activeRequest = null; });
 }
-async function loadAccount(forceModels = true) {
+async function loadAccount(forceModels = true, verifiedCatalog) {
   const wasSharing = sharing;
   const previousProvider = currentProvider;
   const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_openai', 'model_gemini', 'model_claude', 'model_ollama', 'ollamaServer']);
@@ -134,7 +134,7 @@ async function loadAccount(forceModels = true) {
   let session;
   if (isSettings && $('helperUpdate')) {
     try {
-      const update = await request('helperUpdateStatus');
+      const update = await request('helperUpdateStatus', { provider: 'chatgpt' });
       $('helperUpdate').hidden = !update.available && !update.waiting;
       $('installHelperUpdate').hidden = !update.available;
     } catch { $('helperUpdate').hidden = true; }
@@ -143,6 +143,7 @@ async function loadAccount(forceModels = true) {
     session = await request('status');
     if (currentProvider !== 'chatgpt' && session.provider !== currentProvider) throw { code: 'helper_update_required' };
   } catch (error) {
+    if (currentProvider === 'ollama' && error.code === 'invalid_provider') error = { code: 'helper_update_required' };
     sharing = false; selectedModel = '';
     accountProblem = errors[error.code] || '登录状态暂时无法确认，将自动重试。';
     renderDynamicText(); throw error;
@@ -158,7 +159,10 @@ async function loadAccount(forceModels = true) {
     availableModels = [];
     selectedModel = '';
     if ($('model')) $('model').replaceChildren(new Option(t('请选择模型'), ''));
-    availableModels = sharing ? await request('models') : [];
+    if (sharing) {
+      const verified = currentProvider === 'ollama' && verifiedCatalog?.server === server;
+      availableModels = verified ? verifiedCatalog.models : await request('models');
+    }
   }
   const storedModel = saved['model_' + currentProvider] || (currentProvider === 'chatgpt' ? saved.taskModel : '');
   selectedModel = availableModels.some(model => model.slug === storedModel) ? storedModel :
@@ -282,11 +286,15 @@ $('ollamaSave')?.addEventListener('click', () => perform(async () => {
   let url;
   try { url = new URL(value); } catch { throw { code: 'invalid_ollama_server' }; }
   const server = url.href.replace(/\/+$/, '');
-  await request('models', { ollamaServer: server });
+  const loopback = url.hostname === 'localhost' || url.hostname === '[::1]' || /^127(?:\.\d{1,3}){3}$/.test(url.hostname);
+  if (url.protocol === 'http:' && !loopback && server !== currentServer) {
+    if (!window.confirm(t('ollamaPlainHttp', { host: url.host }))) return;
+  }
+  const models = await request('models', { ollamaServer: server });
   if (server !== currentServer) await messenger.storage.local.set({ ollamaServer: server, model_ollama: '' });
   $('ollamaServer').value = server;
   show('');
-  await loadAccount();
+  await loadAccount(true, { server, models });
 }));
 
 $('saveKey')?.addEventListener('click', () => perform(async () => {
@@ -309,7 +317,7 @@ $('tagLanguage')?.addEventListener('change', () => messenger.storage.local.set({
 
 $('translationSourceLanguage')?.addEventListener('change', () => messenger.storage.local.set({ translationSourceLanguage: $('translationSourceLanguage').value }).catch(showError));
 $('installHelperUpdate')?.addEventListener('click', () => perform(async () => {
-  await request('installHelperUpdate');
+  await request('installHelperUpdate', { provider: 'chatgpt' });
   $('installHelperUpdate').hidden = true;
   show('请关闭 Thunderbird，随后确认管理员授权以安装更新。');
 }));

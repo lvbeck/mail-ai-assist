@@ -25,7 +25,7 @@ Mail AI Assist는 Thunderbird에서 선택한 메일의 요약, 번역, 태그 �
 
 ## 제공업체 및 개인정보
 
-ChatGPT 인증, Gemini API 또는 Claude API를 선택할 수 있습니다. 번역은 Google Cloud Translation, Azure Translator 및 DeepL을 지원합니다. 번역 서비스를 선택하거나 설정하지 않으면 선택한 AI 모델을 사용합니다. 서비스 실패 시 다른 제공업체로 자동 전환하지 않습니다. 이용 자격과 요금은 제공업체에 따라 다릅니다. 관련 메일 내용은 Windows 도우미를 통해 선택한 서비스로 전송됩니다. 인증 정보는 Windows DPAPI로 보호합니다. 캐시와 내보낸 파일은 읽을 수 있는 로컬 파일입니다. [개인정보 처리방침](publication/PRIVACY.md)을 확인하세요.
+ChatGPT 인증, OpenAI API, Gemini API, Claude API 또는 Ollama를 선택할 수 있습니다. 번역은 Google Cloud Translation, Azure Translator 및 DeepL을 지원합니다. 번역 서비스를 선택하거나 설정하지 않으면 선택한 AI 모델을 사용합니다. 서비스 실패 시 다른 제공업체로 자동 전환하지 않습니다. 이용 자격과 요금은 제공업체에 따라 다릅니다. 관련 메일 내용은 Windows 도우미를 통해 선택한 서비스로 전송됩니다. 인증 정보는 Windows DPAPI로 보호합니다. 캐시와 내보낸 파일은 읽을 수 있는 로컬 파일입니다. [개인정보 처리방침](publication/PRIVACY.md)을 확인하세요.
 
 ## 설치 및 내보내기
 

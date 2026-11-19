@@ -25,7 +25,7 @@ Mail AI Assist 為 Thunderbird 中使用者選取的郵件提供摘要、翻譯�
 
 ## 服務商與隱私
 
-支援 ChatGPT 授權、Gemini API、Claude API。翻譯可選 Google Cloud Translation、Azure Translator、DeepL；未選取或未設定翻譯服務時使用目前 AI 模型，服務失敗不自動切換。帳戶資格與費用依服務商而定。相關郵件內容經 Windows 輔助程式傳送至所選服務商；憑證使用 Windows DPAPI，快取與匯出檔案可在本機讀取。詳見[隱私權政策](publication/PRIVACY.md)。
+支援 ChatGPT 授權、OpenAI API、Gemini API、Claude API 和 Ollama。翻譯可選 Google Cloud Translation、Azure Translator、DeepL；未選取或未設定翻譯服務時使用目前 AI 模型，服務失敗不自動切換。帳戶資格與費用依服務商而定。相關郵件內容經 Windows 輔助程式傳送至所選服務商；憑證使用 Windows DPAPI，快取與匯出檔案可在本機讀取。詳見[隱私權政策](publication/PRIVACY.md)。
 
 ## 安裝與匯出
 

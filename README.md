@@ -25,7 +25,7 @@ Summary, translation and tagging process the message subject and body, not attac
 
 ## Providers and privacy
 
-Choose ChatGPT subscription authorization, OpenAI API, Gemini API or Claude API. For OpenAI API, select it in Settings, save and verify your API key, then select a model. Costs and allowances depend on your OpenAI API account. Provider keys and model selections are stored independently. Translation supports Google Cloud Translation, Azure Translator and DeepL; when no translation service is selected/configured, it uses the selected AI model. Service failures do not silently switch providers. Eligibility and charges depend on the provider. Relevant email content is sent to the selected service through the Windows helper. Credentials use Windows DPAPI; cache and exports are readable local files. See [privacy policy](publication/PRIVACY.md).
+Choose ChatGPT subscription authorization, OpenAI API, Gemini API, Claude API or Ollama. For OpenAI API, select it in Settings, save and verify your API key, then select a model. Costs and allowances depend on your OpenAI API account. Provider keys and model selections are stored independently. Translation supports Google Cloud Translation, Azure Translator and DeepL; when no translation service is selected/configured, it uses the selected AI model. Service failures do not silently switch providers. Eligibility and charges depend on the provider. Relevant email content is sent to the selected service through the Windows helper. Credentials use Windows DPAPI; cache and exports are readable local files. See [privacy policy](publication/PRIVACY.md).
 
 ## Install and export
 
