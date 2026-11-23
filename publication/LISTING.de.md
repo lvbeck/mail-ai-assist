@@ -32,7 +32,7 @@ Zusammenfassung, Übersetzung und Verschlagwortung verarbeiten Betreff und Nachr
 
 ## Anbieter und Datenschutz
 
-ChatGPT-Autorisierung, Gemini API und Claude API werden unterstützt.
+ChatGPT-Autorisierung, OpenAI API, Gemini API, Claude API und Ollama werden unterstützt. In den Einstellungen Ollama auswählen. Für diesen Computer `http://localhost:11434` verwenden oder die Basisadresse eines eigenen Servers eingeben, etwa eine HTTPS-Adresse im Tailscale-Netz. Adresse speichern und ein Modell aus der Serverliste auswählen. E-Mail-Inhalte werden auf dem gewählten Server verarbeitet. Für entfernte Server, auch im LAN oder VPN, ist HTTPS erforderlich. HTTP ist nur für Loopback-Adressen mit explizitem Port zulässig. Ersetzen Sie gespeicherte entfernte HTTP-Adressen durch den jeweiligen HTTPS-Endpunkt.
 
 Die Berechtigung nativeMessaging verbindet Thunderbird mit dem separat installierten lokalen Hilfsprogramm (local.mail_ai_assist). Ausgetauscht werden angeforderter Betreff/Nachrichtentext oder ausgewählter Text, Anbieter-/Modell-/Spracheinstellungen, eingegebene Zugangsdaten, KI-Ergebnisse, Cachedaten sowie Exportinhalte und Pfade. EML umfasst Originalkopfzeilen und Anhänge. Das Hilfsprogramm übernimmt Anmeldung, HTTPS-Anfragen, geschützte Zugangsdaten, Cache, Dateiexport und das Öffnen von Desktop-Apps. Relevanter Text geht an den gewählten KI- oder Übersetzungsdienst; der lokale Export ruft keine KI auf. Windows nutzt DPAPI, macOS eine auf dem Schlüsselbund basierende Verschlüsselung. Cache und Exporte sind lokal lesbar. Bedingungen und Kosten des Anbieters gelten.
 

@@ -32,7 +32,7 @@ Mail AI Assist 為 Thunderbird 中使用者選取的郵件提供摘要、翻譯�
 
 ## 服務商與隱私
 
-支援 ChatGPT 授權、Gemini API、Claude API。
+支援 ChatGPT 授權、OpenAI API、Gemini API、Claude API 和 Ollama。 在設定中選擇 Ollama。本機使用預設位址 `http://localhost:11434`，也可以填入自訂伺服器的基底位址，例如 Tailscale 網路內的 HTTPS 位址。儲存後從自動載入的清單中選擇模型。郵件內容由所選伺服器處理。 區域網路和 VPN 中的遠端伺服器也必須使用 HTTPS。HTTP 僅限明確指定連接埠的回環位址。請將先前儲存的遠端 HTTP 位址改為該伺服器的 HTTPS 位址。
 
 nativeMessaging 權限用於連接另外安裝的本機輔助程式（local.mail_ai_assist）。交換資訊包括請求處理的郵件主旨和正文或選取文字、服務商/模型/語言設定、使用者輸入的登入憑證、AI 結果、快取資料，以及匯出內容和路徑；EML 匯出包含原始郵件標頭和附件。輔助程式負責服務商登入和 HTTPS 請求、憑證保護、本機快取和檔案匯出、開啟桌面應用程式。相關文字會傳送至使用者設定的 AI 或翻譯服務商；本機匯出本身不呼叫 AI。Windows 使用 DPAPI，macOS 使用基於鑰匙圈的加密；快取和匯出檔案可在本機讀取。服務資格與費用依服務商而定。
 

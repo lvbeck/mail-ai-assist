@@ -44,7 +44,7 @@ async function mailRequest(action, data = {}) {
 }
 function reportError(error) {
   const code = error.message;
-  const key = ({ translation_unsafe_markup: 'translation_unsafe_markup', translation_access: 'translation_access', translation_quota: 'translation_quota', translation_failed: 'translation_failed', google_access: 'google_access', google_quota: 'google_quota', google_failed: 'google_failed', sign_in_required: '请在设置页配置所选提供商及模型。', sharing_not_enabled: '请在设置页配置所选提供商及模型。', api_key_required: '请在设置页填写所选提供商的 API Key。', helper_unavailable: '本地辅助程序未连接', helper_update_required: '请安装新版辅助程序 MSI，然后重启 Thunderbird。', cancelled: '请求已取消，原文未修改。', invalid_tags: 'invalid_tags', incomplete_response: '生成未完整结束，结果不会用于替换。请重试。' })[code];
+  const key = ({ invalid_ollama_server: 'ollamaInvalid', translation_unsafe_markup: 'translation_unsafe_markup', translation_access: 'translation_access', translation_quota: 'translation_quota', translation_failed: 'translation_failed', google_access: 'google_access', google_quota: 'google_quota', google_failed: 'google_failed', sign_in_required: '请在设置页配置所选提供商及模型。', sharing_not_enabled: '请在设置页配置所选提供商及模型。', api_key_required: '请在设置页填写所选提供商的 API Key。', helper_unavailable: '本地辅助程序未连接', helper_update_required: '请安装新版辅助程序 MSI，然后重启 Thunderbird。', cancelled: '请求已取消，原文未修改。', invalid_tags: 'invalid_tags', incomplete_response: '生成未完整结束，结果不会用于替换。请重试。' })[code];
   status(key || (['empty_mail', 'mail_too_long', 'expired_mail', 'mail_operation_failed', 'model_required'].includes(code) ? code : 'mail_operation_failed'), true);
   if (!key && /^[a-z0-9_]{1,100}$/.test(code)) el('status').textContent += ` (${code})`;
 }
@@ -61,12 +61,12 @@ async function run(force = false) {
     const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_openai', 'model_gemini', 'model_claude', 'model_ollama', 'ollamaServer', 'translationLanguage', 'translationSourceLanguage', 'tagLanguage', 'translationService', 'summaryLanguage']);
     const provider = saved.provider || 'chatgpt';
     if (!['chatgpt', 'openai', 'gemini', 'claude', 'ollama'].includes(provider)) throw new Error('invalid_provider');
-    const endpoint = provider === 'ollama' ? { ollamaServer: saved.ollamaServer ?? 'http://localhost:11434' } : {};
     const model = saved['model_' + provider] || (provider === 'chatgpt' ? saved.taskModel : '');
     connectMail();
     const service = ['google', 'azure', 'deepl'].includes(saved.translationService) ? saved.translationService : 'none';
     const external = loaded.task === 'translate' && service !== 'none' && (await nativeRequest(provider, 'translationStatus', { service })).configured;
     if (cancelled) throw new Error('cancelled');
+    const endpoint = !external && provider === 'ollama' ? { ollamaServer: saved.ollamaServer ?? 'http://localhost:11434' } : {};
     if (!external && !model) throw new Error('model_required');
     const languageSetting = loaded.task === 'tags' ? saved.tagLanguage : saved.translationLanguage;
     const outputLanguage = loaded.task === 'summary' ? await MailSummaryLanguage(saved.summaryLanguage) :
@@ -92,6 +92,7 @@ async function run(force = false) {
     if (external) {
       result = await nativeRequest(provider, 'translationTranslate', { service, text: loaded.text, outputLanguage, sourceLanguage: saved.translationSourceLanguage || 'auto' });
     } else {
+      if (provider === 'ollama') endpoint.ollamaServer = ollamaServer(endpoint.ollamaServer);
       const session = await nativeRequest(provider, 'status');
       if (provider !== 'chatgpt' && session.provider !== provider) throw new Error('helper_update_required');
       if (!session.sharing) throw new Error('sign_in_required');

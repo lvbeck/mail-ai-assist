@@ -6,7 +6,7 @@ Mail AI Assist aiuta a elaborare le email selezionate in Thunderbird: riassunti,
 
 ## Funzionalità
 
-- **Ollama:** Nelle impostazioni seleziona Ollama. Usa `http://localhost:11434` per questo computer oppure inserisci l’indirizzo base del server, ad esempio un indirizzo HTTPS su Tailscale. Salva e scegli un modello dall’elenco. Il server selezionato elabora il contenuto delle email.
+- **Ollama:** Nelle impostazioni seleziona Ollama. Usa `http://localhost:11434` per questo computer oppure inserisci l’indirizzo base del server, ad esempio un indirizzo HTTPS su Tailscale. Salva e scegli un modello dall’elenco. Il server selezionato elabora il contenuto delle email. I server remoti, anche su LAN o VPN, richiedono HTTPS. HTTP è consentito solo su indirizzi di loopback con porta esplicita. Sostituisci ogni indirizzo HTTP remoto salvato con il relativo indirizzo HTTPS.
 - **Riassunti:** Estrai i punti principali e le attività da svolgere dal messaggio selezionato. La lingua del riassunto è indipendente da quelle dell’interfaccia e della traduzione; per impostazione predefinita segue il sistema.
 - **Traduzione:** Scegli le lingue di origine e destinazione oppure rileva automaticamente quella di origine. Configura Google Cloud Translation, Microsoft Azure Translator o DeepL con la tua chiave API. Senza un servizio configurato viene usato il modello IA selezionato.
 - **Etichette e alias:** Riutilizza preferibilmente le etichette Thunderbird esistenti per evitare duplicati simili. Modifica i suggerimenti manuali prima di confermarli. Associa, ad esempio, `Project Alpha` e `Project Beta` all’etichetta esistente `Projects`. Le regole confrontano nomi completi ignorando maiuscole, minuscole e spazi superflui.
@@ -31,12 +31,12 @@ Supporta autorizzazione ChatGPT, OpenAI API, Gemini API, Claude API e Ollama. Pe
 
 Windows e macOS usano lo stesso XPI Thunderbird e un programma ausiliario installato separatamente per il sistema operativo.
 
-### Download · v0.12.30
+### Download · v0.12.31
 
-- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.30/Mail-AI-Assist-0.12.30-x64.msi)
-- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.30/Mail-AI-Assist-0.12.30-macos-arm64-unsigned.pkg)
-- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.30/Mail-AI-Assist-0.12.30-macos-x64-unsigned.pkg)
-- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.30/Mail-AI-Assist-0.12.30.xpi)
+- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.31/Mail-AI-Assist-0.12.31-x64.msi)
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.31/Mail-AI-Assist-0.12.31-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.31/Mail-AI-Assist-0.12.31-macos-x64-unsigned.pkg)
+- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.31/Mail-AI-Assist-0.12.31.xpi)
 
 Scarica qui sotto il programma ausiliario per il tuo sistema e il file XPI di Thunderbird. Installa il programma ausiliario, poi il file XPI da Thunderbird → Componenti aggiuntivi e temi → Estensioni → menu ingranaggio → Installa componente aggiuntivo da file. Riavvia Thunderbird.
 
@@ -76,9 +76,9 @@ node installer/verify-release.mjs
 
 ## Pubblicazione
 
-Carica separatamente i file di dist/github-release/v0.12.30/ come allegati della Release, non solo un ZIP. Invia lo XPI ATN con On this site. Vedi [revisione](publication/REVIEW-NOTES.md), [descrizione](publication/LISTING.md), [procedura](publication/GITHUB-RELEASE.md). Gli script non inviano, pubblicano o installano automaticamente. Non versionare chiavi, credenziali, posta o cache; .gitignore non elimina segreti già registrati. MIT: [LICENSE](LICENSE).
+Carica separatamente i file di dist/github-release/v0.12.31/ come allegati della Release, non solo un ZIP. Invia lo XPI ATN con On this site. Vedi [revisione](publication/REVIEW-NOTES.md), [descrizione](publication/LISTING.md), [procedura](publication/GITHUB-RELEASE.md). Gli script non inviano, pubblicano o installano automaticamente. Non versionare chiavi, credenziali, posta o cache; .gitignore non elimina segreti già registrati. MIT: [LICENSE](LICENSE).
 
-## Supporto macOS · 0.12.30
+## Supporto macOS · 0.12.31
 
 I pacchetti Mac includono Mail-AI-Assist.xpi accanto a setup-guide.html in /Library/Application Support/MailAiAssist. Dopo l’installazione, la guida si apre quando possibile per l’utente connesso al desktop. Altrimenti apri questa cartella nel Finder. Installa manualmente il file XPI in Thunderbird e conferma le autorizzazioni.
 

@@ -32,7 +32,7 @@ Les résumés, traductions et étiquettes traitent l’objet et le corps du mess
 
 ## Services et confidentialité
 
-Autorisation ChatGPT, Gemini API et Claude API sont pris en charge.
+Autorisation ChatGPT, OpenAI API, Gemini API, Claude API et Ollama sont pris en charge. Dans les paramètres, sélectionnez Ollama. Conservez `http://localhost:11434` pour cet ordinateur ou saisissez l’adresse de base du serveur, par exemple une adresse HTTPS sur Tailscale. Enregistrez puis choisissez un modèle dans la liste. Le serveur sélectionné traite le contenu des courriels. Les serveurs distants, y compris sur un réseau local ou un VPN, nécessitent HTTPS. HTTP est réservé aux adresses de bouclage avec un port explicite. Remplacez toute adresse HTTP distante enregistrée par son adresse HTTPS.
 
 La permission nativeMessaging relie Thunderbird à l’assistant local installé séparément (local.mail_ai_assist). Elle échange l’objet/le corps demandé ou le texte sélectionné, les paramètres de fournisseur/modèle/langue, les identifiants saisis, les résultats IA, le cache et les contenus/chemins d’export. EML inclut les en-têtes originaux et pièces jointes. L’assistant gère l’authentification, les requêtes HTTPS, le stockage protégé des identifiants, le cache, l’export et l’ouverture d’applications. Le texte pertinent est envoyé au service IA ou de traduction choisi ; l’export local ne sollicite pas l’IA. Windows utilise DPAPI, macOS un chiffrement fondé sur le Trousseau. Cache et exports sont lisibles localement. Conditions et frais du fournisseur applicables.
 

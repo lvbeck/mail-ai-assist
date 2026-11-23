@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import { webcrypto } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
+const serverSource = await readFile(new URL('../extension/ollama-server.js', import.meta.url), 'utf8');
 const source = await readFile(new URL('../extension/auto-summary.js', import.meta.url), 'utf8');
 function fixture(saved = {}) {
   const state = { now: new Date(2026, 9, 13, 12).getTime(), saved: { provider: 'chatgpt', model_chatgpt: 'test-model', ...saved }, calls: [], applied: [], pages: {}, headers: {}, loaded: [], listeners: [] };
@@ -33,12 +34,24 @@ function fixture(saved = {}) {
   };
   function boot() {
     class Clock extends Date { constructor(...args) { super(...(args.length ? args : [state.now])); } static now() { return state.now; } }
-    const context = vm.createContext({ Date: Clock, messenger, crypto: webcrypto, TextEncoder, setTimeout, clearTimeout, MailUiLocale: 'en', MailSummaryInstructions: 'product first', loadMail: async session => { state.loaded.push(session.messageId); return 'Body'; }, applyMailTags: async session => { state.applied.push(session.messageId); } });
+    const context = vm.createContext({ URL, Date: Clock, messenger, crypto: webcrypto, TextEncoder, setTimeout, clearTimeout, MailUiLocale: 'en', MailSummaryInstructions: 'product first', loadMail: async session => { state.loaded.push(session.messageId); return 'Body'; }, applyMailTags: async session => { state.applied.push(session.messageId); } });
+    vm.runInContext(serverSource, context);
     vm.runInContext('let tagQueue = Promise.resolve();', context); vm.runInContext(summarySource, context); vm.runInContext(source, context);
   }
   boot();
   return { state, set, boot, folder, header, receive: (ids, where = folder) => state.receive(where, { messages: ids.map(header) }) };
 }
+
+test('legacy Ollama results remain readable while new HTTP requests are blocked', async () => {
+  const h = fixture({ provider: 'ollama', model_ollama: 'example', ollamaServer: 'http://192.168.1.4:11434', autoSummaryAccounts: { a: 1 } });
+  h.state.cacheHit = true;
+  await h.receive([1]);
+  assert.equal(h.state.saved.autoSummaryLast.state, 'success');
+  h.state.cacheHit = false;
+  await h.receive([2]);
+  assert.equal(h.state.saved.autoSummaryLast.code, 'invalid_ollama_server');
+  assert.deepEqual(h.state.calls.map(call => call.action), ['cacheGet', 'cacheGet']);
+});
 
 test('automatic summaries use the OpenAI provider and its own selected model', async () => {
  const h = fixture({ provider: 'openai', model_openai: 'gpt-test', autoSummaryAccounts: { a: 1 } });

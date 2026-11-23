@@ -6,7 +6,7 @@ Mail AI Assist 為 Thunderbird 中使用者選取的郵件提供摘要、翻譯�
 
 ## 功能介紹
 
-- **Ollama:** 在設定中選擇 Ollama。本機使用預設位址 `http://localhost:11434`，也可以填入自訂伺服器的基底位址，例如 Tailscale 網路內的 HTTPS 位址。儲存後從自動載入的清單中選擇模型。郵件內容由所選伺服器處理。
+- **Ollama:** 在設定中選擇 Ollama。本機使用預設位址 `http://localhost:11434`，也可以填入自訂伺服器的基底位址，例如 Tailscale 網路內的 HTTPS 位址。儲存後從自動載入的清單中選擇模型。郵件內容由所選伺服器處理。 區域網路和 VPN 中的遠端伺服器也必須使用 HTTPS。HTTP 僅限明確指定連接埠的回環位址。請將先前儲存的遠端 HTTP 位址改為該伺服器的 HTTPS 位址。
 - **郵件摘要：** 為選取的郵件整理重點與待辦事項。摘要語言獨立於介面及翻譯語言，預設跟隨系統，也可在設定中指定。
 - **郵件翻譯：** 可指定來源與目標語言，或自動偵測來源語言。支援以自己的 API Key 設定 Google Cloud Translation、Microsoft Azure Translator 或 DeepL；未設定翻譯服務時使用目前的 AI 模型。
 - **標籤建議與別名：** 優先重用 Thunderbird 既有標籤，減少建立近似標籤。手動建議可編輯，確認後才套用。可在設定中將 `Project Alpha`、`Project Beta` 等別名對應至既有的 `Projects` 標籤；依完整名稱比對，忽略大小寫與多餘空格。
@@ -31,12 +31,12 @@ Mail AI Assist 為 Thunderbird 中使用者選取的郵件提供摘要、翻譯�
 
 Windows 與 macOS 使用相同的 Thunderbird XPI，另外安裝適合作業系統的輔助程式。
 
-### 下載 · v0.12.30
+### 下載 · v0.12.31
 
-- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.30/Mail-AI-Assist-0.12.30-x64.msi)
-- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.30/Mail-AI-Assist-0.12.30-macos-arm64-unsigned.pkg)
-- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.30/Mail-AI-Assist-0.12.30-macos-x64-unsigned.pkg)
-- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.30/Mail-AI-Assist-0.12.30.xpi)
+- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.31/Mail-AI-Assist-0.12.31-x64.msi)
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.31/Mail-AI-Assist-0.12.31-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.31/Mail-AI-Assist-0.12.31-macos-x64-unsigned.pkg)
+- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.31/Mail-AI-Assist-0.12.31.xpi)
 
 下載下方與你的系統相符的輔助程式和 Thunderbird XPI。安裝輔助程式後，在 Thunderbird → 附加元件與佈景主題 → 擴充套件 → 齒輪選單 → 從檔案安裝附加元件中選擇 XPI，然後重新啟動 Thunderbird。
 
@@ -76,9 +76,9 @@ node installer/verify-release.mjs
 
 ## 發布
 
-將 dist/github-release/v0.12.30/ 內檔案逐一上傳為 Release 附件，不要只上傳 ZIP。ATN XPI 另外提交並選 On this site。參閱[審核說明](publication/REVIEW-NOTES.md)、[商店介紹](publication/LISTING.md)、[發布流程](publication/GITHUB-RELEASE.md)。腳本不會自動推送、上傳或安裝。私鑰、憑證、郵件與快取不得入庫；.gitignore 不會移除已提交秘密。MIT，見 [LICENSE](LICENSE)。
+將 dist/github-release/v0.12.31/ 內檔案逐一上傳為 Release 附件，不要只上傳 ZIP。ATN XPI 另外提交並選 On this site。參閱[審核說明](publication/REVIEW-NOTES.md)、[商店介紹](publication/LISTING.md)、[發布流程](publication/GITHUB-RELEASE.md)。腳本不會自動推送、上傳或安裝。私鑰、憑證、郵件與快取不得入庫；.gitignore 不會移除已提交秘密。MIT，見 [LICENSE](LICENSE)。
 
-## macOS 支援 · 0.12.30
+## macOS 支援 · 0.12.31
 
 Mac 安裝套件將 Mail-AI-Assist.xpi 和 setup-guide.html 放在 /Library/Application Support/MailAiAssist。安裝完成後會盡可能為目前登入的桌面使用者開啟指南；若未開啟，請在 Finder 中開啟此目錄。在 Thunderbird 中手動安裝 XPI 並確認權限。
 

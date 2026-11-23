@@ -105,6 +105,9 @@ function connect() {
 }
 function request(action, data = {}, onDelta) {
   if (!nativePort) return Promise.reject({ code: "helper_unavailable" });
+  if (currentProvider === 'ollama' && (action === 'models' || action === 'rewrite')) {
+    data = { ...data, ollamaServer: ollamaServer(data.ollamaServer ?? currentServer) };
+  }
   const id = ++sequence;
   activeRequest = id;
   const promise = new Promise((resolve, reject) => {
@@ -283,13 +286,7 @@ messenger.storage.onChanged?.addListener((changes, area) => {
 // Verify the catalog before committing a new destination for email content.
 $('ollamaSave')?.addEventListener('click', () => perform(async () => {
   const value = $('ollamaServer').value.trim() || defaultOllamaServer;
-  let url;
-  try { url = new URL(value); } catch { throw { code: 'invalid_ollama_server' }; }
-  const server = url.href.replace(/\/+$/, '');
-  const loopback = url.hostname === 'localhost' || url.hostname === '[::1]' || /^127(?:\.\d{1,3}){3}$/.test(url.hostname);
-  if (url.protocol === 'http:' && !loopback && server !== currentServer) {
-    if (!window.confirm(t('ollamaPlainHttp', { host: url.host }))) return;
-  }
+  const server = ollamaServer(value);
   const models = await request('models', { ollamaServer: server });
   if (server !== currentServer) await messenger.storage.local.set({ ollamaServer: server, model_ollama: '' });
   $('ollamaServer').value = server;

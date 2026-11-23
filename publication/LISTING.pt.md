@@ -32,7 +32,7 @@ Os resumos, traduções e etiquetas tratam o assunto e o corpo da mensagem, não
 
 ## Fornecedores e privacidade
 
-Suporta autorização ChatGPT, Gemini API e Claude API.
+Suporta autorização ChatGPT, OpenAI API, Gemini API, Claude API e Ollama. Selecione Ollama nas definições. Use `http://localhost:11434` neste computador ou introduza o endereço base do servidor, por exemplo um endereço HTTPS na rede Tailscale. Guarde e escolha um modelo da lista. O servidor selecionado processa o conteúdo das mensagens. Os servidores remotos, mesmo na rede local ou VPN, exigem HTTPS. HTTP só é aceite em endereços de loopback com porta explícita. Substitua os endereços HTTP remotos guardados pelos respetivos endereços HTTPS.
 
 A permissão nativeMessaging liga o Thunderbird ao assistente local instalado separadamente (local.mail_ai_assist). Troca assunto/corpo solicitado ou texto selecionado, definições de fornecedor/modelo/idioma, credenciais introduzidas, resultados IA, cache e conteúdo/caminhos de exportação. EML inclui cabeçalhos originais e anexos. O assistente gere autenticação, pedidos HTTPS, credenciais protegidas, cache, exportação e abertura de aplicações. O texto relevante é enviado ao serviço IA ou de tradução escolhido; a exportação local não chama a IA. Windows usa DPAPI e macOS encriptação baseada no Porta-chaves. Cache e exportações são legíveis localmente. Aplicam-se condições e custos do fornecedor.
 

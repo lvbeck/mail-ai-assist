@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "0.12.30",
+  "version": "0.12.31",
   "description": "__MSG_extensionDescription__",
   "browser_specific_settings": {
     "gecko": {
@@ -31,6 +31,7 @@
       "mail-background.js",
       "tag-instructions.js",
       "summary-instructions.js",
+      "ollama-server.js",
       "auto-tags.js",
       "auto-summary.js",
       "account-menu.js",

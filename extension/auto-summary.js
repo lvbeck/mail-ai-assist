@@ -77,6 +77,7 @@
       const descriptor = { version: 2, task: 'summary', ...endpoint, provider, model, outputLanguage, custom, text };
       const cached = await channel.request(provider, 'cacheGet', { descriptor });
       if (typeof cached.text === 'string' && cached.text.trim() && cached.text.length <= 40000 && !cached.text.includes('\u0000')) { await record(accountId, 'success'); return; }
+      if (provider === 'ollama') endpoint.ollamaServer = ollamaServer(endpoint.ollamaServer);
       const status = await channel.request(provider, 'status');
       if (provider !== 'chatgpt' && status.provider !== provider) throw new Error('helper_update_required');
       if (!status.sharing) throw new Error('sign_in_required');

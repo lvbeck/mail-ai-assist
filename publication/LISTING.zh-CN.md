@@ -32,7 +32,7 @@ Mail AI Assist 为 Thunderbird 中用户选中的邮件提供摘要、翻译、�
 
 ## 服务商与隐私
 
-支持 ChatGPT 授权、Gemini API、Claude API。
+支持 ChatGPT 订阅授权、OpenAI API、Gemini API、Claude API 和 Ollama。 在设置中选择 Ollama。本机使用默认地址 `http://localhost:11434`，也可以填写自定义服务器的基础地址，例如 Tailscale 网络内的 HTTPS 地址。保存后从自动读取的列表中选择模型。邮件内容由所选服务器处理。 局域网和 VPN 中的远程服务器也必须使用 HTTPS。HTTP 仅限带显式端口的回环地址。升级前保存过远程 HTTP 地址的用户，请改填该服务器的 HTTPS 地址。
 
 nativeMessaging 权限用于连接单独安装的本地辅助程序（local.mail_ai_assist）。交换的信息包括请求处理的邮件主题和正文或选区、服务商/模型/语言设置、用户输入的登录凭据、AI 结果、缓存数据，以及导出内容和路径；EML 导出包含原始邮件头和附件。辅助程序负责服务商登录和 HTTPS 请求、凭据保护、本地缓存和文件导出、打开桌面应用。相关文字会发送到用户配置的 AI 或翻译服务商；本地导出本身不调用 AI。Windows 使用 DPAPI，macOS 使用基于钥匙串的加密；缓存和导出文件在本机可读。服务资格和费用以服务商为准。
 

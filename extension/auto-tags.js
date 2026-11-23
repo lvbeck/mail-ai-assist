@@ -54,7 +54,7 @@
       const saved = await messenger.storage.local.get(['provider', 'taskModel', 'model_chatgpt', 'model_openai', 'model_gemini', 'model_claude', 'model_ollama', 'ollamaServer', 'tagLanguage', 'tagAliases']);
       const provider = saved.provider || 'chatgpt';
       if (!['chatgpt', 'openai', 'gemini', 'claude', 'ollama'].includes(provider)) throw new Error('invalid_provider');
-      const endpoint = provider === 'ollama' ? { ollamaServer: saved.ollamaServer ?? 'http://localhost:11434' } : {};
+      const endpoint = provider === 'ollama' ? { ollamaServer: ollamaServer(saved.ollamaServer) } : {};
       const model = saved['model_' + provider] || (provider === 'chatgpt' ? saved.taskModel : '');
       if (!model) throw new Error('model_required');
       const session = { messageId: current.id, subject: current.subject || '' };

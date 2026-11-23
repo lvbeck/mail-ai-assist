@@ -32,7 +32,7 @@ Mail AI Assist는 Thunderbird에서 선택한 메일의 요약, 번역, 태그 �
 
 ## 제공업체 및 개인정보
 
-ChatGPT 인증, Gemini API 또는 Claude API를 선택할 수 있습니다.
+ChatGPT 인증, OpenAI API, Gemini API, Claude API 또는 Ollama를 선택할 수 있습니다. 설정에서 Ollama를 선택하세요. 이 컴퓨터에서는 `http://localhost:11434`를 사용하거나 Tailscale HTTPS 주소 등 서버의 기본 주소를 입력하세요. 저장한 후 목록에서 모델을 선택하세요. 선택한 서버에서 메일 내용을 처리합니다. LAN이나 VPN에 있는 원격 서버도 HTTPS를 사용해야 합니다. HTTP는 포트가 명시된 루프백 주소에서만 허용됩니다. 저장된 원격 HTTP 주소를 서버의 HTTPS 주소로 변경하세요.
 
 nativeMessaging 권한은 별도로 설치한 로컬 도우미(local.mail_ai_assist)에 연결하는 데 사용됩니다. 요청한 제목/본문 또는 선택한 텍스트, 제공업체/모델/언어 설정, 입력한 인증 정보, AI 결과, 캐시 데이터, 내보내기 내용/경로를 교환합니다. EML에는 원본 헤더와 첨부 파일이 포함됩니다. 도우미는 인증 및 HTTPS 요청, 인증 정보 보호, 캐시, 파일 내보내기, 데스크톱 앱 실행을 담당합니다. 관련 텍스트를 설정한 AI 또는 번역 서비스에 전송하며 로컬 내보내기 자체는 AI를 호출하지 않습니다. Windows는 DPAPI를, macOS는 키체인 기반 암호화를 사용합니다. 캐시와 내보낸 파일은 로컬에서 읽을 수 있습니다. 제공업체의 이용 조건과 요금이 적용됩니다.
 

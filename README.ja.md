@@ -6,7 +6,7 @@ Mail AI Assist は、Thunderbird で選択したメールの要約、翻訳、�
 
 ## 機能
 
-- **Ollama:** 設定で Ollama を選択します。このコンピューターでは `http://localhost:11434` を使用します。別のサーバーを使う場合は Tailscale 内の HTTPS アドレスなどのベース URL を入力します。保存して一覧からモデルを選択します。メールの内容は選択したサーバーで処理されます。
+- **Ollama:** 設定で Ollama を選択します。このコンピューターでは `http://localhost:11434` を使用します。別のサーバーを使う場合は Tailscale 内の HTTPS アドレスなどのベース URL を入力します。保存して一覧からモデルを選択します。メールの内容は選択したサーバーで処理されます。 LAN や VPN 上でもリモートサーバーには HTTPS が必要です。HTTP はポートを明示したループバックアドレスに限ります。保存済みのリモート HTTP アドレスは、サーバーの HTTPS アドレスに変更してください。
 - **メール要約：** 選択したメールの要点や対応事項を整理します。要約言語は表示言語・翻訳言語とは別に設定でき、既定ではシステム言語に従います。
 - **メール翻訳：** 原文と翻訳先の言語を指定するか、原文の言語を自動検出できます。自分の API キーで Google Cloud Translation、Microsoft Azure Translator、DeepL を設定できます。翻訳サービスが未設定の場合は選択中の AI モデルを使用します。
 - **タグの提案と別名：** Thunderbird の既存タグを優先し、似たタグの重複作成を減らします。手動の提案は編集してから確定できます。例えば `Project Alpha` と `Project Beta` を既存の `Projects` タグに対応付けられます。別名は名前全体で照合し、大文字・小文字や余分な空白を区別しません。
@@ -31,12 +31,12 @@ ChatGPT 認証、OpenAI API、Gemini API、Claude API、Ollama を選択でき�
 
 Windows と macOS で同じ Thunderbird XPI を使用し、OS に対応するヘルパーを別途インストールします。
 
-### ダウンロード · v0.12.30
+### ダウンロード · v0.12.31
 
-- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.30/Mail-AI-Assist-0.12.30-x64.msi)
-- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.30/Mail-AI-Assist-0.12.30-macos-arm64-unsigned.pkg)
-- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.30/Mail-AI-Assist-0.12.30-macos-x64-unsigned.pkg)
-- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.30/Mail-AI-Assist-0.12.30.xpi)
+- [Windows x64 · MSI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.31/Mail-AI-Assist-0.12.31-x64.msi)
+- [macOS Apple Silicon (arm64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.31/Mail-AI-Assist-0.12.31-macos-arm64-unsigned.pkg)
+- [macOS Intel (x64) · PKG](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.31/Mail-AI-Assist-0.12.31-macos-x64-unsigned.pkg)
+- [Thunderbird · XPI](https://github.com/lvbeck/mail-ai-assist/releases/download/v0.12.31/Mail-AI-Assist-0.12.31.xpi)
 
 以下からお使いの OS に対応するヘルパーと Thunderbird XPI をダウンロードしてください。ヘルパーをインストール後、Thunderbird → アドオンとテーマ → 拡張機能 → 歯車メニュー → ファイルからアドオンをインストールで XPI を選択し、Thunderbird を再起動してください。
 
@@ -76,9 +76,9 @@ node installer/verify-release.mjs
 
 ## 公開
 
-単一の ZIP ではなく、dist/github-release/v0.12.30/ 内の各ファイルをリリースアセットとしてアップロードしてください。ATN XPI は「On this site」を選んで別途提出します。[審査担当者向け説明](publication/REVIEW-NOTES.md)、[掲載情報](publication/LISTING.md)、[リリース手順](publication/GITHUB-RELEASE.md)を確認してください。スクリプトは自動で push、アップロード、インストールを行いません。鍵、認証情報、メール、キャッシュを Git に含めないでください。.gitignore はすでにコミットされた機密情報を削除しません。MIT ライセンス：[LICENSE](LICENSE)。
+単一の ZIP ではなく、dist/github-release/v0.12.31/ 内の各ファイルをリリースアセットとしてアップロードしてください。ATN XPI は「On this site」を選んで別途提出します。[審査担当者向け説明](publication/REVIEW-NOTES.md)、[掲載情報](publication/LISTING.md)、[リリース手順](publication/GITHUB-RELEASE.md)を確認してください。スクリプトは自動で push、アップロード、インストールを行いません。鍵、認証情報、メール、キャッシュを Git に含めないでください。.gitignore はすでにコミットされた機密情報を削除しません。MIT ライセンス：[LICENSE](LICENSE)。
 
-## macOS 対応 · 0.12.30
+## macOS 対応 · 0.12.31
 
 Mac パッケージは /Library/Application Support/MailAiAssist に Mail-AI-Assist.xpi と setup-guide.html を配置します。インストール後、可能な場合はログイン中のデスクトップユーザー向けにガイドを開きます。開かない場合は Finder でこのフォルダーを開いてください。Thunderbird で XPI を手動インストールし、権限を確認してください。
 

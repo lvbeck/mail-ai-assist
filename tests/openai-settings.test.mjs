@@ -32,6 +32,7 @@ test('OpenAI settings isolate model selection, key controls and subscription sta
       } }) }
     }
   });
+  vm.runInContext(await readFile(new URL('ollama-server.js', root), 'utf8'), context);
   vm.runInContext(source, context);
   vm.runInContext('busy = false;', context);
   await vm.runInContext('connect(); loadAccount()', context);
@@ -62,11 +63,14 @@ test('OpenAI settings isolate model selection, key controls and subscription sta
   assert.equal(saved.ollamaServer, 'https://mail.example.test');
   assert.equal(saved.model_ollama, '');
   assert.equal(elements.get('model').options.at(-1).value, 'subscription-test');
-  context.window.confirm = () => false;
+  context.window.confirm = () => true;
   elements.get('ollamaServer').value = 'http://other.example.test';
   await elements.get('ollamaSave').listeners.click();
   assert.equal(saved.ollamaServer, 'https://mail.example.test');
   assert.ok(!requests.some(item => item.ollamaServer === 'http://other.example.test'));
+  saved.ollamaServer = 'http://legacy.example.test:11434';
+  await assert.rejects(vm.runInContext('loadAccount()', context), { code: 'invalid_ollama_server' });
+  assert.ok(!requests.some(item => item.action === 'models' && item.ollamaServer === saved.ollamaServer));
   assert.equal(requests.filter(item => item.action === 'helperUpdateStatus').at(-1).provider, 'chatgpt');
 
 });

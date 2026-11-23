@@ -32,7 +32,7 @@ Riassunti, traduzioni ed etichette elaborano oggetto e corpo del messaggio, non 
 
 ## Fornitori e privacy
 
-Supporta autorizzazione ChatGPT, Gemini API e Claude API.
+Supporta autorizzazione ChatGPT, OpenAI API, Gemini API, Claude API e Ollama. Nelle impostazioni seleziona Ollama. Usa `http://localhost:11434` per questo computer oppure inserisci l’indirizzo base del server, ad esempio un indirizzo HTTPS su Tailscale. Salva e scegli un modello dall’elenco. Il server selezionato elabora il contenuto delle email. I server remoti, anche su LAN o VPN, richiedono HTTPS. HTTP è consentito solo su indirizzi di loopback con porta esplicita. Sostituisci ogni indirizzo HTTP remoto salvato con il relativo indirizzo HTTPS.
 
 Il permesso nativeMessaging collega Thunderbird al programma locale installato separatamente (local.mail_ai_assist). Scambia oggetto/corpo richiesto o testo selezionato, impostazioni di fornitore/modello/lingua, credenziali inserite, risultati IA, cache e contenuti/percorsi di esportazione. EML include intestazioni originali e allegati. Il programma gestisce autenticazione, richieste HTTPS, credenziali protette, cache, esportazione e apertura di applicazioni. Il testo pertinente viene inviato al servizio IA o di traduzione scelto; l’esportazione locale non chiama l’IA. Windows usa DPAPI, macOS la crittografia basata sul Portachiavi. Cache ed esportazioni sono leggibili localmente. Si applicano condizioni e costi del fornitore.
 
